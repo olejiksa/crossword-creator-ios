@@ -16,7 +16,7 @@ final class ListViewController: UIViewController {
     
     private enum Constants {
         
-        static let title = "List Editor"
+        static let title = "List"
     }
     
     
@@ -28,6 +28,7 @@ final class ListViewController: UIViewController {
     // MARK: Private Properties
     
     private let dataSource: WordsListDataSource
+    private let xmlService: XmlServiceProtocol
     
     @IBOutlet private weak var tableView: UITableView!
     
@@ -36,8 +37,10 @@ final class ListViewController: UIViewController {
     
     // MARK: Lifecycle
     
-    init(dataSource: WordsListDataSource) {
+    init(dataSource: WordsListDataSource,
+         xmlService: XmlServiceProtocol) {
         self.dataSource = dataSource
+        self.xmlService = xmlService
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -56,21 +59,73 @@ final class ListViewController: UIViewController {
     // MARK: Private
     
     private func setupView() {
+        dataSource.setup(with: tableView)
+        setupNavigationBar()
+    }
+    
+    private func setupNavigationBar() {
         title = Constants.title
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let saveBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
-                                                target: self,
-                                                action: nil)
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                           target: self,
+                                           action: #selector(willCancel))
         
-        navigationItem.setRightBarButton(saveBarButtonItem, animated: true)
+        let shareButton = UIBarButtonItem(barButtonSystemItem: .action,
+                                          target: self,
+                                          action: #selector(willShare))
         
-        dataSource.setup(with: tableView)
+        let saveButton = UIBarButtonItem(barButtonSystemItem: .save,
+                                         target: self,
+                                         action: #selector(willSave))
+        
+        shareButton.isEnabled = !dataSource.words.isEmpty
+        saveButton.isEnabled = !dataSource.words.isEmpty
+        
+        navigationItem.leftBarButtonItem = cancelButton
+        navigationItem.rightBarButtonItems = [shareButton, saveButton]
     }
     
     @IBAction private func openWordAlertController(_ sender: UIBarButtonItem) {
         router?.wantsToOpenWordEditor(with: .new)
     }
+    
+    @objc private func willShare() {
+        let xml = xmlService.writeList(with: dataSource.words)
+        let filename = "untitled.cwtf"
+        
+        do {
+            let fileURL = URL(fileURLWithPath: getDocumentsDirectory()).appendingPathComponent(filename)
+            try xml.write(to: fileURL, atomically: true, encoding: .utf8)
+            
+            let activityVC = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
+            
+            activityVC.popoverPresentationController?.sourceView = view
+            present(activityVC, animated: true)
+            
+        } catch {
+            print(error)
+        }
+    }
+    
+    @objc private func willCancel() {
+        router?.wantsToGoBack()
+    }
+    
+    @objc private func willSave() {
+        router?.wantsToGoBack()
+    }
+    
+    private func getDocumentsDirectory() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+}
+
+protocol ListViewControllerDelegate: class {
+    
+    func updateVisibility(with isEmpty: Bool)
 }
 
 
@@ -119,5 +174,17 @@ extension ListViewController: WordAlertControllerDelegate {
         tableView.reloadRows(at: [indexPath], with: .automatic)
         
         tableView.endUpdates()
+    }
+}
+
+
+
+
+// MARK: - ListViewControllerDelegate
+
+extension ListViewController: ListViewControllerDelegate {
+    
+    func updateVisibility(with isEmpty: Bool) {
+        navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = !isEmpty }
     }
 }

@@ -8,12 +8,16 @@
 
 final class ListBuilder {
     
-    class func viewController() -> ListViewController {
-        let dataSource = ListDataSource()
-        let viewController = ListViewController(dataSource: dataSource)
-       
+    static func viewController() -> ListViewController {
+        let interactor = ListInteractor()
+        let dataSource = ListDataSource(interactor: interactor)
+        let xmlService = XmlService()
+        
+        let viewController = ListViewController(dataSource: dataSource,
+                                                xmlService: xmlService)
         let router = ListRouter(transitionHandler: viewController)
         viewController.router = router
+        dataSource.vc = viewController
         
         return viewController
     }

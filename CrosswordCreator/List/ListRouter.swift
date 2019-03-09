@@ -11,6 +11,7 @@ import UIKit
 protocol ListRouterProtocol {
     
     func wantsToOpenWordEditor(with: WordBuilder.Mode)
+    func wantsToGoBack()
 }
 
 final class ListRouter: ListRouterProtocol {
@@ -28,5 +29,9 @@ final class ListRouter: ListRouterProtocol {
         wordAlertController.delegate = transitionHandler
         
         transitionHandler?.present(wordAlertController)
+    }
+    
+    func wantsToGoBack() {
+        transitionHandler?.dismiss()
     }
 }

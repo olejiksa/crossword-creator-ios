@@ -10,7 +10,9 @@ import UIKit
 
 protocol ListDataSourceProtocol {
     
+    var words: [Word] { get }
     var lastIndex: Int { get }
+    
     func setup(with: UITableView)
 }
 
@@ -26,13 +28,22 @@ final class ListDataSource: NSObject, ListDataSourceProtocol {
     }
     
     private let cellIdentifier = "\(ListViewCell.self)"
-    private var words: [Word] = []
+    private let interactor: ListInteractorProtocol
+    private(set) var words: [Word] = []
+    
+    weak var vc: ListViewControllerDelegate?
+    
+    init(interactor: ListInteractorProtocol) {
+        self.interactor = interactor
+    }
     
     func setup(with tableView: UITableView) {
         tableView.dataSource = self
         
         let nib = UINib(nibName: cellIdentifier, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
+        
+        words = interactor.getWords()
     }
     
     private func setupEmptyView(in tableView: UITableView) {
@@ -101,11 +112,20 @@ extension ListDataSource: UITableViewDataSource {
                    forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
     
-        words.remove(at: indexPath.row)
+        let index = indexPath.row
+        words.remove(at: index)
+        interactor.removeWord(at: index)
         
         tableView.beginUpdates()
         tableView.deleteRows(at: [indexPath], with: .automatic)
         tableView.endUpdates()
+        
+        vc?.updateVisibility(with: words.isEmpty)
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   titleForHeaderInSection section: Int) -> String? {
+        return interactor.getCrosswordName()
     }
 }
 
@@ -118,9 +138,13 @@ extension ListDataSource: WordAlertControllerDelegate {
     
     func addWord(_ word: Word) {
         words.append(word)
+        interactor.updateWord((word, lastIndex))
+        
+        vc?.updateVisibility(with: false)
     }
     
     func replaceWord(by newWord: Word, at index: Int) {
         words[index] = newWord
+        interactor.updateWord((newWord, index))
     }
 }

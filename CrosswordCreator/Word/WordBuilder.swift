@@ -8,7 +8,7 @@
 
 final class WordBuilder {
     
-    class func alertController(with mode: Mode) -> WordAlertController {
+    static func alertController(with mode: Mode) -> WordAlertController {
         let alertController: WordAlertController
         
         switch mode {

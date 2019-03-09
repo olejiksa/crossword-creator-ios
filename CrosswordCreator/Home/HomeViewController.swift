@@ -40,8 +40,4 @@ final class HomeViewController: UIViewController {
         title = Constants.title
         navigationController?.navigationBar.prefersLargeTitles = true
     }
-    
-    @IBAction private func didListEditorButtonTap() {
-        router?.wantsToOpenListEditor()
-    }
 }

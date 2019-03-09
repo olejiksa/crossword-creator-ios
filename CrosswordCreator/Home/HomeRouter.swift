@@ -23,6 +23,8 @@ final class HomeRouter: HomeRouterProtocol {
     
     func wantsToOpenListEditor() {
         let listViewController = ListBuilder.viewController()
+        listViewController.hidesBottomBarWhenPushed = true
+        
         transitionHandler?.push(listViewController)
     }
 }

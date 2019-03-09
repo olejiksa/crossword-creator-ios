@@ -13,11 +13,19 @@ extension UINavigationController: NavigationTransitionHandler {
     func push(_ viewController: UIViewController) {
         pushViewController(viewController, animated: true)
     }
+    
+    func pop() {
+        _ = popViewController(animated: true)
+    }
 }
 
 extension UIViewController: ViewTransitionHandler {
     
     func present(_ viewController: UIViewController) {
         present(viewController, animated: true)
+    }
+    
+   func dismiss() {
+        dismiss(animated: true)
     }
 }

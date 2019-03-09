@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18D109" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Crossword" representedClassName="Crossword" syncable="YES" codeGenerationType="class">
+        <attribute name="createdOn" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedOn" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="author" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="crosswords" inverseEntity="User" syncable="YES"/>
+        <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Record" inverseName="crossword" inverseEntity="Record" syncable="YES"/>
+        <relationship name="words" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ListWord" inverseName="crossword" inverseEntity="ListWord" syncable="YES"/>
+    </entity>
+    <entity name="GridWord" representedClassName="GridWord" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isHorizontal" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="x" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="y" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="listWord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ListWord" inverseName="gridWord" inverseEntity="ListWord" syncable="YES"/>
+    </entity>
+    <entity name="ListWord" representedClassName="ListWord" syncable="YES" codeGenerationType="class">
+        <attribute name="answer" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="question" attributeType="String" syncable="YES"/>
+        <relationship name="crossword" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Crossword" inverseName="words" inverseEntity="Crossword" syncable="YES"/>
+        <relationship name="gridWord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GridWord" inverseName="listWord" inverseEntity="GridWord" syncable="YES"/>
+    </entity>
+    <entity name="Record" representedClassName="Record" syncable="YES" codeGenerationType="class">
+        <attribute name="solvingTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="crossword" maxCount="1" deletionRule="Nullify" destinationEntity="Crossword" inverseName="records" inverseEntity="Crossword" syncable="YES"/>
+        <relationship name="solver" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="records" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="surname" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="crosswords" toMany="YES" deletionRule="Nullify" destinationEntity="Crossword" inverseName="author" inverseEntity="Crossword" syncable="YES"/>
+        <relationship name="records" toMany="YES" deletionRule="Nullify" destinationEntity="Record" inverseName="solver" inverseEntity="Record" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Crossword" positionX="-8.36328125" positionY="215.515625" width="128" height="148"/>
+        <element name="GridWord" positionX="-462.47265625" positionY="15.55078125" width="128" height="118"/>
+        <element name="ListWord" positionX="-307.72265625" positionY="162.1484375" width="128" height="120"/>
+        <element name="Record" positionX="44.15625" positionY="35.7421875" width="128" height="90"/>
+        <element name="User" positionX="-204.12890625" positionY="-38.7578125" width="128" height="120"/>
+    </elements>
+</model>

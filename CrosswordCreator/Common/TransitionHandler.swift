@@ -11,9 +11,11 @@ import UIKit
 protocol NavigationTransitionHandler: class {
     
     func push(_ viewController: UIViewController)
+    func pop()
 }
 
 protocol ViewTransitionHandler: class {
     
     func present(_ viewController: UIViewController)
+    func dismiss()
 }

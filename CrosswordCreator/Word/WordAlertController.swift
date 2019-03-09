@@ -41,7 +41,7 @@ final class WordAlertController: UIAlertController {
     
     // MARK: Public
     
-    class func create(with word: OrderedWord? = nil) -> WordAlertController {
+    static func create(with word: OrderedWord? = nil) -> WordAlertController {
         let message = word == nil ? Constants.Messages.new : Constants.Messages.existing
         
         let wordAlertController = WordAlertController(title: Constants.title,
