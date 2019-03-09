@@ -10,7 +10,7 @@ import UIKit
 
 protocol GridDataSourceProtocol {
     
-    var words: [CrosswordsGenerator.Word] { get }
+    var words: [LayoutWord] { get }
     
     func setup(with: UICollectionView)
     func save(with title: String)
@@ -29,7 +29,7 @@ final class GridDataSource: NSObject, GridDataSourceProtocol {
     private let size: (columns: Int, rows: Int)
     
     private var charGrid: [[Character]]
-    var words: [CrosswordsGenerator.Word] = []
+    var words: [LayoutWord] = []
     
     
     

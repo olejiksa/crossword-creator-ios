@@ -78,9 +78,9 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UTExportedTypeDeclarations</key>
-	<array>
-		<dict/>
-	</array>
+	<array/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -121,7 +121,6 @@
 				</array>
 			</dict>
 		</dict>
-		<dict/>
 	</array>
 </dict>
 </plist>

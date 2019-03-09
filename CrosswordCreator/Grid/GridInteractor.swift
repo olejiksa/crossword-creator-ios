@@ -10,7 +10,7 @@ import UIKit
 
 protocol GridInteractorProtocol: class {
     
-    func saveGrid(_ words: [CrosswordsGenerator.Word], with title: String)
+    func saveGrid(_ words: [LayoutWord], with title: String)
 }
 
 final class GridInteractor: GridInteractorProtocol {
@@ -29,7 +29,7 @@ final class GridInteractor: GridInteractorProtocol {
         persistanceManager = appDelegate.persistanceManager
     }
     
-    func saveGrid(_ words: [CrosswordsGenerator.Word], with title: String) {
+    func saveGrid(_ words: [LayoutWord], with title: String) {
         let crossword: Crossword? = persistanceManager.findOrInsert(by: 0, entityName: Constants.crosswordName)
         
         let date = Date()

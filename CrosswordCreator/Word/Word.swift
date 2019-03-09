@@ -13,3 +13,30 @@ struct Word {
 }
 
 typealias OrderedWord = (word: Word, index: Int)
+
+struct LayoutWord {
+    
+    enum Direction: String {
+        
+        case vertical = "Vertical"
+        case horizontal = "Horizontal"
+    }
+    
+    var question = ""
+    var answer = ""
+    var column = 0
+    var row = 0
+    var direction: Direction = .horizontal
+    
+    init(question: String,
+         answer: String,
+         column: Int,
+         row: Int,
+         direction: Direction) {
+        self.question = question
+        self.answer = answer
+        self.column = column
+        self.row = row
+        self.direction = direction
+    }
+}

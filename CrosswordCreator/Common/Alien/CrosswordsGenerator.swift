@@ -12,27 +12,12 @@ protocol CrosswordsGeneratorProtocol: class {
     
     var columns: Int { get }
     var rows: Int { get }
-    var result: [CrosswordsGenerator.Word] { get }
+    var result: [LayoutWord] { get }
     
     func generate()
 }
 
 open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
-
-	// MARK: - Additional types
-	
-	public struct Word {
-        public var question = ""
-		public var answer = ""
-		public var column = 0
-		public var row = 0
-		public var direction: WordDirection = .vertical
-	}
-	
-	public enum WordDirection {
-		case vertical
-		case horizontal
-	}
 	
 	// MARK: - Public properties
 	
@@ -41,7 +26,7 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
 	open var maxLoops: Int = 2000
 	open var words: Array<(String, String)> = Array()
 	
-	open var result: Array<Word> {
+	var result: Array<LayoutWord> {
 		get {
 			return resultData
 		}
@@ -58,7 +43,7 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
 	
 	fileprivate var grid: Array2D<String>?
 	fileprivate var currentWords: Array<(String, String)> = Array()
-	fileprivate var resultData: Array<Word> = Array()
+	fileprivate var resultData: Array<LayoutWord> = Array()
 	
 	// MARK: - Initialization
 	
@@ -388,11 +373,11 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
     fileprivate func setWord(_ column: Int, row: Int, direction: Int, question: String, answer: String, force: Bool = false) {
 		
 		if force {
-            let w = Word(question: question,
-                         answer: answer,
-                         column: column,
-                         row: row,
-                         direction: (direction == 0 ? .horizontal : .vertical))
+            let w = LayoutWord(question: question,
+                               answer: answer,
+                               column: column,
+                               row: row,
+                               direction: (direction == 0 ? .horizontal : .vertical))
 			resultData.append(w)
 			
 			currentWords.append((question, answer))

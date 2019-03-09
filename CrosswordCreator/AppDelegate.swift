@@ -11,32 +11,15 @@ import UIKit
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    private enum ShortcutIdentifier: String {
-        
-        case new
-        
-        init?(fullNameForType: String) {
-            guard let last = fullNameForType.components(separatedBy: ".").last else {
-                return nil
-            }
-            
-            self.init(rawValue: last)
-        }
-        
-        var type: String {
-            return Bundle.main.bundleIdentifier! + ".\(self.rawValue)"
-        }
-    }
-    
-    
     // MARK: Public Properties
     
     var window: UIWindow?
-    var persistanceManager = PersistanceManager()
+    let persistanceManager = PersistanceManager()
     
     
     // MARK: Private Properties
     
+    private let xmlService = XmlService()
     private var launchedShortcutItem: UIApplicationShortcutItem?
     
     
@@ -77,21 +60,36 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         launchedShortcutItem = nil
     }
     
+    func application(_ app: UIApplication,
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        switch url.pathExtension {
+        case "cwtf":
+            let words = xmlService.readList(from: url)
+            print(words)
+            return true
+            
+        case "cwgf":
+            let layoutWords = xmlService.readGrid(from: url)
+            print(layoutWords)
+            return true
+            
+        default:
+            return false
+        }
+    }
+    
     
     // MARK: Private
     
     private func handleShortcutItem(item: UIApplicationShortcutItem) -> Bool {
-        var handled = false
-        
         guard ShortcutIdentifier(fullNameForType: item.type) != nil else { return false }
         
         if let mainVC = window?.rootViewController as? MainViewController {
             mainVC.selectedIndex = 1
-            handled = true
+            return true
         } else {
-            handled = false
+            return false
         }
-        
-        return handled
     }
 }

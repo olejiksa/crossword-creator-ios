@@ -6,10 +6,15 @@
 //  Copyright © 2019 Oleg Samoylov. All rights reserved.
 //
 
+import Foundation
+
 protocol XmlServiceProtocol {
     
+    func readList(from url: URL) -> [Word]
+    func readGrid(from url: URL) -> [LayoutWord]
+    
     func writeList(with words: [Word]) -> String
-    func writeGrid(with words: [CrosswordsGenerator.Word]) -> String
+    func writeGrid(with words: [LayoutWord]) -> String
 }
 
 final class XmlService {
@@ -38,7 +43,7 @@ final class XmlService {
         case index(Int)
         case position(Int)
         case string(String)
-        case orientation(CrosswordsGenerator.WordDirection)
+        case orientation(LayoutWord.Direction)
     }
     
     
@@ -56,7 +61,7 @@ final class XmlService {
             return AEXMLElement(name: key.rawValue, value: string)
             
         case .orientation(let orientation):
-            return AEXMLElement(name: key.rawValue, value: orientation.description)
+            return AEXMLElement(name: key.rawValue, value: orientation.rawValue)
         }
     }
 }
@@ -67,6 +72,38 @@ final class XmlService {
 // MARK: - XmlServiceProtocol
 
 extension XmlService: XmlServiceProtocol {
+    
+    func readList(from url: URL) -> [Word] {
+        let decoder = XMLDecoder()
+        
+        do {
+            let data = try Data(contentsOf: url)
+            let file = try decoder.decode(RAWListFile.self, from: data)
+            let sortedRaws = file.word.sorted { $0.id < $1.id }
+            return sortedRaws.map { Word(question: $0.question, answer: $0.answer) }
+        } catch {
+            return []
+        }
+    }
+    
+    func readGrid(from url: URL) -> [LayoutWord] {
+        let decoder = XMLDecoder()
+        
+        do {
+            let data = try Data(contentsOf: url)
+            let file = try decoder.decode(RAWGridFile.self, from: data)
+            let sortedRaws = file.gridWord.sorted { $0.id < $1.id }
+            return sortedRaws.map {
+                return LayoutWord(question: $0.question,
+                                  answer: $0.answer,
+                                  column: ($0.y / Constants.cellSize) - 1,
+                                  row: ($0.x / Constants.cellSize) - 1,
+                                  direction: $0.orientation == LayoutWord.Direction.vertical.rawValue ? .vertical : .horizontal)
+            }
+        } catch {
+            return []
+        }
+    }
     
     func writeList(with words: [Word]) -> String {
         let document = AEXMLDocument()
@@ -88,7 +125,7 @@ extension XmlService: XmlServiceProtocol {
         return document.xml
     }
     
-    func writeGrid(with words: [CrosswordsGenerator.Word]) -> String {
+    func writeGrid(with words: [LayoutWord]) -> String {
         let document = AEXMLDocument()
         let head = AEXMLElement(name: Constants.head)
         document.addChild(head)
@@ -109,23 +146,5 @@ extension XmlService: XmlServiceProtocol {
         }
         
         return document.xml
-    }
-}
-
-
-
-
-// MARK: - CustomStringConvertible
-
-extension CrosswordsGenerator.WordDirection: CustomStringConvertible {
-    
-    public var description: String {
-        switch self {
-        case .horizontal:
-            return "Horizontal"
-            
-        case .vertical:
-            return "Vertical"
-        }
     }
 }

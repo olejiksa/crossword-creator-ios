@@ -10,5 +10,4 @@ import CoreData
 
 final class CoreDataCoreSpotlightDelegate: NSCoreDataCoreSpotlightDelegate {
     
-    
 }
