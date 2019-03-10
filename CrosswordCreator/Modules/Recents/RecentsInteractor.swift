@@ -15,6 +15,10 @@ protocol RecentsInteractorProtocol: class {
     func getCrosswords() -> [String]
     func getCrosswordWithDates() -> [(String, Date)]
     func setupSearchableContent()
+    
+    func getWords(at index: Int) -> [LayoutWord]
+    
+    func removeCrossword(at index: Int)
 }
 
 final class RecentsInteractor: RecentsInteractorProtocol {
@@ -29,24 +33,27 @@ final class RecentsInteractor: RecentsInteractorProtocol {
     
     func getCrosswords() -> [String] {
         let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
-        return crosswords.compactMap { $0.name }
+        return crosswords.map { $0.name ?? "Untitled" }
     }
     
     func getCrosswordWithDates() -> [(String, Date)] {
         let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
-        return crosswords.compactMap {
-            guard
-                let title = $0.name,
-                let date = $0.createdOn
-            else { return nil }
-            
-            return (title, date)
-        }
+        return crosswords.map { ($0.name ?? "Untitled", $0.createdOn ?? Date()) }
+    }
+    
+    func getWords(at index: Int) -> [LayoutWord] {
+        let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
+        guard let casted = crosswords[index].words else { return [] }
+        guard let array = casted.array as? [ListWord] else { return [] }
+        
+        return array.map { LayoutWord(question: $0.question!, answer: $0.answer!, column: Int(($0.gridWord!.x / 25) - 1), row: Int(($0.gridWord!.y / 25) - 1), direction: $0.gridWord!.isHorizontal ? .horizontal : .vertical) }
     }
     
     func setupSearchableContent() {
-        var searchableItems = [CSSearchableItem]()
         let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
+        guard !crosswords.isEmpty else { return }
+        
+        var searchableItems = [CSSearchableItem]()
         let dateFormatter = DateFormatter()
         
         for i in 0...(crosswords.count - 1) {
@@ -73,5 +80,10 @@ final class RecentsInteractor: RecentsInteractorProtocol {
         }
         
         CSSearchableIndex.default().indexSearchableItems(searchableItems)
+    }
+    
+    func removeCrossword(at index: Int) {
+        persistanceManager.remove(by: index, entityName: crosswordName)
+        persistanceManager.save()
     }
 }

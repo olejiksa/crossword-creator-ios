@@ -28,7 +28,7 @@ final class ListInteractor: ListInteractorProtocol {
     }
     
     func getWords() -> [Word] {
-        let crossword: Crossword? = persistanceManager.findOrInsert(by: 1, entityName: crosswordName)
+        let crossword: Crossword? = persistanceManager.findOrInsert(by: 0, entityName: crosswordName)
         
         let words: [ListWord] = persistanceManager.fetchThatSatisfies(entityName: listWordName,
                                                                       predicate: { $0.crossword == crossword })

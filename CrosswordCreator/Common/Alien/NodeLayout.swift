@@ -37,14 +37,14 @@ final class NodeLayout : UICollectionViewFlowLayout {
     
     override var collectionViewContentSize: CGSize{
         let w : CGFloat = CGFloat(columns) * (itemWidth + space) - space
-        let h : CGFloat = CGFloat(rows) * (itemHeight + space) + 12
+        let h : CGFloat = CGFloat(rows) * (itemHeight + space)
         return CGSize(width: w, height: h)
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
         let x : CGFloat = CGFloat(indexPath.row) * (itemWidth + space)
-        let y : CGFloat = CGFloat(indexPath.section) + CGFloat(indexPath.section) * (itemHeight + space)
+        let y : CGFloat = CGFloat(indexPath.section) * (itemHeight + space)
         attributes.frame = CGRect(x: x, y: y, width: itemWidth, height: itemHeight)
         return attributes
     }

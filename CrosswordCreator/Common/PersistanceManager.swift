@@ -95,6 +95,39 @@ final class PersistanceManager {
         }
     }
     
+    func appendNewCrossword(name: String, words: [LayoutWord]) {
+        let index = fetch(entityName: "Crossword").count
+        let crossword: Crossword = insert()
+        crossword.id = Int16(index)
+        crossword.updatedOn = Date()
+        crossword.createdOn = Date()
+        crossword.name = name
+        
+        let gridWords: [GridWord] = words.enumerated().map {
+            let gridWord = GridWord(context: managedContext)
+            gridWord.id = Int16($0)
+            gridWord.y = Int16(($1.row + 1) * 25)
+            gridWord.x = Int16(($1.column + 1) * 25)
+            gridWord.isHorizontal = $1.direction == .horizontal
+            
+            return gridWord
+        }
+        
+        let listWords: [ListWord] = words.enumerated().map {
+            let listWord = ListWord(context: managedContext)
+            listWord.id = Int16($0)
+            listWord.answer = $1.answer
+            listWord.question = $1.question
+            listWord.gridWord = gridWords.first { $0.id == listWord.id }
+            
+            return listWord
+        }
+        
+        crossword.words = NSOrderedSet(array: listWords)
+        
+        save()
+    }
+    
     
     // MARK: Private
     

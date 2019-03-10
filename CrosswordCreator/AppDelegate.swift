@@ -37,6 +37,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = MainBuilder.mainViewController()
         window?.makeKeyAndVisible()
         
+        UIApplication.shared.windows.first?.backgroundColor = .white
+        
         return true
     }
     
@@ -63,20 +65,30 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication,
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        let isHandled: Bool
+        
         switch url.pathExtension {
         case "cwtf":
             let words = xmlService.readList(from: url)
             print(words)
-            return true
+            isHandled = true
             
         case "cwgf":
             let layoutWords = xmlService.readGrid(from: url)
             print(layoutWords)
-            return true
+            
+            var url2 = url
+            url2.deletePathExtension()
+            
+            persistanceManager.appendNewCrossword(name: url2.lastPathComponent, words: layoutWords)
+            
+            isHandled = true
             
         default:
-            return false
+            isHandled = false
         }
+        
+        return isHandled
     }
     
     

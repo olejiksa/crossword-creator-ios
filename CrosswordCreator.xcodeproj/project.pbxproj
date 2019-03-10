@@ -68,6 +68,15 @@
 		EB3CBF672233F0250043E8FB /* XMLEncodingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF662233F0250043E8FB /* XMLEncodingStorage.swift */; };
 		EB3CBF692233F0290043E8FB /* XMLReferencingEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF682233F0290043E8FB /* XMLReferencingEncoder.swift */; };
 		EB3CBF6B2233F02D0043E8FB /* EncodingErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF6A2233F02D0043E8FB /* EncodingErrorExtension.swift */; };
+		EB3CBF6F223425A10043E8FB /* FillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF6D223425A10043E8FB /* FillViewController.swift */; };
+		EB3CBF70223425A10043E8FB /* FillView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3CBF6E223425A10043E8FB /* FillView.xib */; };
+		EB3CBF72223427380043E8FB /* FillRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF71223427380043E8FB /* FillRouter.swift */; };
+		EB3CBF742234274C0043E8FB /* FillBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF732234274C0043E8FB /* FillBuilder.swift */; };
+		EB3CBF762234275E0043E8FB /* FillDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF752234275E0043E8FB /* FillDataSource.swift */; };
+		EB3CBF792234311A0043E8FB /* AlertsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF782234311A0043E8FB /* AlertsFactory.swift */; };
+		EB3CBF7D223478020043E8FB /* RollBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF7C223478020043E8FB /* RollBuilder.swift */; };
+		EB3CBF802234785F0043E8FB /* RollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF7E2234785F0043E8FB /* RollViewController.swift */; };
+		EB3CBF812234785F0043E8FB /* RollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3CBF7F2234785F0043E8FB /* RollView.xib */; };
 		EB7817D9217A1FFF00BA9D50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7817D8217A1FFF00BA9D50 /* AppDelegate.swift */; };
 		EB7817DB217A1FFF00BA9D50 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7817DA217A1FFF00BA9D50 /* ListViewController.swift */; };
 		EB7817E0217A200000BA9D50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB7817DF217A200000BA9D50 /* Assets.xcassets */; };
@@ -146,6 +155,15 @@
 		EB3CBF662233F0250043E8FB /* XMLEncodingStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLEncodingStorage.swift; sourceTree = "<group>"; };
 		EB3CBF682233F0290043E8FB /* XMLReferencingEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLReferencingEncoder.swift; sourceTree = "<group>"; };
 		EB3CBF6A2233F02D0043E8FB /* EncodingErrorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncodingErrorExtension.swift; sourceTree = "<group>"; };
+		EB3CBF6D223425A10043E8FB /* FillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillViewController.swift; sourceTree = "<group>"; };
+		EB3CBF6E223425A10043E8FB /* FillView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FillView.xib; sourceTree = "<group>"; };
+		EB3CBF71223427380043E8FB /* FillRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillRouter.swift; sourceTree = "<group>"; };
+		EB3CBF732234274C0043E8FB /* FillBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillBuilder.swift; sourceTree = "<group>"; };
+		EB3CBF752234275E0043E8FB /* FillDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillDataSource.swift; sourceTree = "<group>"; };
+		EB3CBF782234311A0043E8FB /* AlertsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsFactory.swift; sourceTree = "<group>"; };
+		EB3CBF7C223478020043E8FB /* RollBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollBuilder.swift; sourceTree = "<group>"; };
+		EB3CBF7E2234785F0043E8FB /* RollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollViewController.swift; sourceTree = "<group>"; };
+		EB3CBF7F2234785F0043E8FB /* RollView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RollView.xib; sourceTree = "<group>"; };
 		EB7817D5217A1FFF00BA9D50 /* CrosswordCreator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrosswordCreator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB7817D8217A1FFF00BA9D50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB7817DA217A1FFF00BA9D50 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -190,11 +208,12 @@
 			isa = PBXGroup;
 			children = (
 				EB214F2B2218D80800D1C3A0 /* Alien */,
+				EB3CBF782234311A0043E8FB /* AlertsFactory.swift */,
 				EB8FBBE32217CB2300F92DDE /* CoreDataCoreSpotlightDelegate.swift */,
 				EBE6B8672194D6CC00B59EE5 /* PersistanceManager.swift */,
-				EB002D28218CC34100A89806 /* TransitionHandler.swift */,
 				EB214F292218D7FE00D1C3A0 /* RoundButton.swift */,
 				EB3CBF492233DB130043E8FB /* ShortcutIdentifier.swift */,
+				EB002D28218CC34100A89806 /* TransitionHandler.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -246,28 +265,28 @@
 		EB214F2B2218D80800D1C3A0 /* Alien */ = {
 			isa = PBXGroup;
 			children = (
-				EB3CBF6A2233F02D0043E8FB /* EncodingErrorExtension.swift */,
-				EB3CBF682233F0290043E8FB /* XMLReferencingEncoder.swift */,
-				EB3CBF662233F0250043E8FB /* XMLEncodingStorage.swift */,
-				EB3CBF642233F0210043E8FB /* XMLEncoder.swift */,
-				EB3CBF5F2233EC3B0043E8FB /* XMLUnkeyedDecodingContainer.swift */,
-				EB3CBF5D2233EC380043E8FB /* XMLKeyedDecodingContainer.swift */,
-				EB3CBF572233EC300043E8FB /* DecodingErrorExtension.swift */,
-				EB3CBF592233EC330043E8FB /* XMLDecoder.swift */,
-				EB3CBF5B2233EC350043E8FB /* XMLDecodingStorage.swift */,
-				EB3CBF4D2233EBF80043E8FB /* XMLKey.swift */,
-				EB3CBF4F2233EC010043E8FB /* XMLStackParser.swift */,
-				EB3CBF4B2233EBF10043E8FB /* ISO8601DateFormatter.swift */,
 				EB2734242206E6B700ABAC20 /* Array2D.swift */,
 				EB2734262206E6BE00ABAC20 /* ArrayShuffle.swift */,
 				EB2734282206E6C300ABAC20 /* CrosswordsGenerator.swift */,
+				EB3CBF572233EC300043E8FB /* DecodingErrorExtension.swift */,
 				EB214F1F2218C21400D1C3A0 /* Document.swift */,
 				EB214F212218C24000D1C3A0 /* Element.swift */,
-				EB30560421F8F1B700E9F6EE /* NodeLayout.swift */,
-				EB27342E2206FCBB00ABAC20 /* ScrollViewImager.swift */,
+				EB3CBF6A2233F02D0043E8FB /* EncodingErrorExtension.swift */,
 				EB214F232218C25800D1C3A0 /* Error.swift */,
+				EB3CBF4B2233EBF10043E8FB /* ISO8601DateFormatter.swift */,
+				EB30560421F8F1B700E9F6EE /* NodeLayout.swift */,
 				EB214F252218C26B00D1C3A0 /* Options.swift */,
 				EB214F272218C28100D1C3A0 /* Parser.swift */,
+				EB27342E2206FCBB00ABAC20 /* ScrollViewImager.swift */,
+				EB3CBF592233EC330043E8FB /* XMLDecoder.swift */,
+				EB3CBF5B2233EC350043E8FB /* XMLDecodingStorage.swift */,
+				EB3CBF642233F0210043E8FB /* XMLEncoder.swift */,
+				EB3CBF662233F0250043E8FB /* XMLEncodingStorage.swift */,
+				EB3CBF4D2233EBF80043E8FB /* XMLKey.swift */,
+				EB3CBF5D2233EC380043E8FB /* XMLKeyedDecodingContainer.swift */,
+				EB3CBF682233F0290043E8FB /* XMLReferencingEncoder.swift */,
+				EB3CBF4F2233EC010043E8FB /* XMLStackParser.swift */,
+				EB3CBF5F2233EC3B0043E8FB /* XMLUnkeyedDecodingContainer.swift */,
 			);
 			path = Alien;
 			sourceTree = "<group>";
@@ -333,6 +352,45 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		EB3CBF6C223425910043E8FB /* Fill */ = {
+			isa = PBXGroup;
+			children = (
+				EB3CBF732234274C0043E8FB /* FillBuilder.swift */,
+				EB3CBF752234275E0043E8FB /* FillDataSource.swift */,
+				EB3CBF71223427380043E8FB /* FillRouter.swift */,
+				EB3CBF6D223425A10043E8FB /* FillViewController.swift */,
+				EB3CBF6E223425A10043E8FB /* FillView.xib */,
+			);
+			path = Fill;
+			sourceTree = "<group>";
+		};
+		EB3CBF772234308A0043E8FB /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				EB3CBF6C223425910043E8FB /* Fill */,
+				EB1CD99321A0860A005E9BB8 /* Grid */,
+				EB214F33221983EF00D1C3A0 /* Help */,
+				EB002D18218B957000A89806 /* Home */,
+				EB7817EB217A241400BA9D50 /* List */,
+				EB1CD98121962484005E9BB8 /* Main */,
+				EB214F2C221980A000D1C3A0 /* New */,
+				EB3CBF7A223477690043E8FB /* Roll */,
+				EB1CD98C21A07EBD005E9BB8 /* Recents */,
+				EB21C4FC218775490074A21B /* Word */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		EB3CBF7A223477690043E8FB /* Roll */ = {
+			isa = PBXGroup;
+			children = (
+				EB3CBF7C223478020043E8FB /* RollBuilder.swift */,
+				EB3CBF7E2234785F0043E8FB /* RollViewController.swift */,
+				EB3CBF7F2234785F0043E8FB /* RollView.xib */,
+			);
+			path = Roll;
+			sourceTree = "<group>";
+		};
 		EB7817CC217A1FFF00BA9D50 = {
 			isa = PBXGroup;
 			children = (
@@ -352,22 +410,15 @@
 		EB7817D7217A1FFF00BA9D50 /* CrosswordCreator */ = {
 			isa = PBXGroup;
 			children = (
+				EB3CBF772234308A0043E8FB /* Modules */,
+				EB7817E4217A200000BA9D50 /* Info.plist */,
 				EB7817D8217A1FFF00BA9D50 /* AppDelegate.swift */,
 				EB7817DF217A200000BA9D50 /* Assets.xcassets */,
 				EB002D27218CC32300A89806 /* Common */,
 				EB21C4F621876E710074A21B /* Extensions */,
-				EB1CD99321A0860A005E9BB8 /* Grid */,
-				EB214F33221983EF00D1C3A0 /* Help */,
-				EB002D18218B957000A89806 /* Home */,
-				EB7817E4217A200000BA9D50 /* Info.plist */,
 				EB7817E1217A200000BA9D50 /* LaunchScreen.storyboard */,
-				EB7817EB217A241400BA9D50 /* List */,
-				EB1CD98121962484005E9BB8 /* Main */,
 				EBD4D884218CDEAB009028B5 /* Model.xcdatamodeld */,
-				EB214F2C221980A000D1C3A0 /* New */,
-				EB1CD98C21A07EBD005E9BB8 /* Recents */,
 				EB214F1C2218BC0100D1C3A0 /* Services */,
-				EB21C4FC218775490074A21B /* Word */,
 			);
 			path = CrosswordCreator;
 			sourceTree = "<group>";
@@ -451,7 +502,9 @@
 				EB002D1C218B958C00A89806 /* HomeView.xib in Resources */,
 				EB7817E0217A200000BA9D50 /* Assets.xcassets in Resources */,
 				EB7817ED217A244C00BA9D50 /* ListView.xib in Resources */,
+				EB3CBF812234785F0043E8FB /* RollView.xib in Resources */,
 				EB1CD99521A08642005E9BB8 /* GridView.xib in Resources */,
+				EB3CBF70223425A10043E8FB /* FillView.xib in Resources */,
 				EB214F32221980F700D1C3A0 /* NewView.xib in Resources */,
 				EB1CD99221A08089005E9BB8 /* RecentsView.xib in Resources */,
 			);
@@ -476,12 +529,15 @@
 				EB21C4F92187705C0074A21B /* WordAlertController.swift in Sources */,
 				EB002D2B218CC46B00A89806 /* Controller+TransitionHandler.swift in Sources */,
 				EB3CBF582233EC300043E8FB /* DecodingErrorExtension.swift in Sources */,
+				EB3CBF7D223478020043E8FB /* RollBuilder.swift in Sources */,
 				EB3CBF672233F0250043E8FB /* XMLEncodingStorage.swift in Sources */,
 				EB1CD98721962579005E9BB8 /* MainBuilder.swift in Sources */,
 				EB3CBF4C2233EBF10043E8FB /* ISO8601DateFormatter.swift in Sources */,
 				EB3CBF692233F0290043E8FB /* XMLReferencingEncoder.swift in Sources */,
 				EB8FBBE22217B6C000F92DDE /* RecentsInteractor.swift in Sources */,
+				EB3CBF792234311A0043E8FB /* AlertsFactory.swift in Sources */,
 				EB30560021F8ECEA00E9F6EE /* GridViewCell.swift in Sources */,
+				EB3CBF72223427380043E8FB /* FillRouter.swift in Sources */,
 				EB3CBF4E2233EBF80043E8FB /* XMLKey.swift in Sources */,
 				EB3CBF4A2233DB130043E8FB /* ShortcutIdentifier.swift in Sources */,
 				EB214F282218C28100D1C3A0 /* Parser.swift in Sources */,
@@ -513,18 +569,22 @@
 				EB002D29218CC34100A89806 /* TransitionHandler.swift in Sources */,
 				EB3CBF632233ED3C0043E8FB /* RAWWord.swift in Sources */,
 				EB3CBF5C2233EC350043E8FB /* XMLDecodingStorage.swift in Sources */,
+				EB3CBF762234275E0043E8FB /* FillDataSource.swift in Sources */,
 				EB2734252206E6B700ABAC20 /* Array2D.swift in Sources */,
 				EB7A57B521E87CAD001E72D2 /* GridDataSource.swift in Sources */,
 				EB214F2A2218D7FE00D1C3A0 /* RoundButton.swift in Sources */,
 				EB21C4FB218771A30074A21B /* Word.swift in Sources */,
+				EB3CBF742234274C0043E8FB /* FillBuilder.swift in Sources */,
 				EB214F2E221980AB00D1C3A0 /* NewBuilder.swift in Sources */,
 				EB3CBF502233EC010043E8FB /* XMLStackParser.swift in Sources */,
 				EB3CBF652233F0210043E8FB /* XMLEncoder.swift in Sources */,
 				EBE9B013222C57800007FA91 /* GridRouter.swift in Sources */,
 				EB1CD99721A0865B005E9BB8 /* GridBuilder.swift in Sources */,
 				EB8FBBE02217AAE900F92DDE /* GridInteractor.swift in Sources */,
+				EB3CBF6F223425A10043E8FB /* FillViewController.swift in Sources */,
 				EB214F202218C21400D1C3A0 /* Document.swift in Sources */,
 				EB002D22218CB85900A89806 /* HomeRouter.swift in Sources */,
+				EB3CBF802234785F0043E8FB /* RollViewController.swift in Sources */,
 				EB214F352219840100D1C3A0 /* HelpBuilder.swift in Sources */,
 				EB002D26218CC05C00A89806 /* WordBuilder.swift in Sources */,
 				EB214F242218C25800D1C3A0 /* Error.swift in Sources */,

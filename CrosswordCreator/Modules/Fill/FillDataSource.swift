@@ -1,50 +1,42 @@
 //
-//  GridDataSource.swift
+//  FillDataSource.swift
 //  CrosswordCreator
 //
-//  Created by Oleg Samoylov on 11/01/2019.
+//  Created by Oleg Samoylov on 09/03/2019.
 //  Copyright © 2019 Oleg Samoylov. All rights reserved.
 //
 
 import UIKit
 
-protocol GridDataSourceProtocol {
+protocol FillDataSourceProtocol {
     
     var words: [LayoutWord] { get }
     
     func setup(with: UICollectionView)
-    func save(with title: String)
 }
 
-final class GridDataSource: NSObject, GridDataSourceProtocol {
+final class FillDataSource: NSObject, FillDataSourceProtocol {
     
     private enum Constants {
         
-        static let noWords = "You don't have any words yet"
         static let cellIdentifier = "GridViewCell"
     }
     
-    private let generator: CrosswordsGeneratorProtocol
-    private let interactor: GridInteractorProtocol
     private let size: (columns: Int, rows: Int)
     
-    private var charGrid: [[Character]]
-    var words: [LayoutWord] = []
+    private var charGrid: [[String]]
+    let words: [LayoutWord]
     
     
     
     
     // MARK: Lifecycle
     
-    init(generator: CrosswordsGeneratorProtocol,
-         interactor: GridInteractorProtocol) {
-        self.generator = generator
-        self.interactor = interactor
+    init(words: [LayoutWord]) {
+        self.words = words
         
-        generator.generate()
-        
-        size = (generator.columns, generator.rows)
-        charGrid = Array(repeating: Array(repeating: Character("\0"), count: 16), count: 16)
+        size = (16, 16)
+        charGrid = Array(repeating: Array(repeating: "", count: 16), count: 16)
         
         super.init()
         
@@ -63,23 +55,19 @@ final class GridDataSource: NSObject, GridDataSourceProtocol {
         collectionView.reloadData()
     }
     
-    func save(with title: String) {
-        interactor.saveGrid(words, with: title)
-    }
-    
     
     // MARK: Private
     
     private func setupCharGrid() {
-        words = generator.result
-        
-        for item in generator.result {
+        for (index, item) in words.enumerated() {
             switch item.direction {
             case .horizontal:
-                (0..<item.answer.count).forEach { charGrid[item.row][item.column + $0] = item.answer[$0] }
+                charGrid[item.row][item.column - 1] = "\(index + 1) "
+                (0..<item.answer.count).forEach { charGrid[item.row][item.column + $0] = String(item.answer[$0]) }
                 
             case .vertical:
-                (0..<item.answer.count).forEach { charGrid[item.row + $0][item.column] = item.answer[$0] }
+                charGrid[item.row - 1][item.column] = "\(index + 1) "
+                (0..<item.answer.count).forEach { charGrid[item.row + $0][item.column] = String(item.answer[$0]) }
             }
         }
     }
@@ -90,7 +78,7 @@ final class GridDataSource: NSObject, GridDataSourceProtocol {
 
 // MARK: - UICollectionViewDataSource
 
-extension GridDataSource: UICollectionViewDataSource {
+extension FillDataSource: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return size.rows
@@ -106,15 +94,17 @@ extension GridDataSource: UICollectionViewDataSource {
         if let dequeuedCell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.cellIdentifier,
                                                                  for: indexPath) as? GridViewCell {
             cell = dequeuedCell
+            
+            let character = charGrid[indexPath.section][indexPath.row]
+            if character.last == " " {
+                cell.setup(with: .indexed(character))
+            } else if character == "" {
+                cell.setup(with: .white)
+            } else {
+                cell.setup(with: .black(character))
+            }
         } else {
             cell = GridViewCell()
-        }
-        
-        let character = charGrid[indexPath.section][indexPath.row]
-        if character != Character("\0") {
-            cell.setup(with: .black(character))
-        } else {
-            cell.setup(with: .white)
         }
         
         return cell

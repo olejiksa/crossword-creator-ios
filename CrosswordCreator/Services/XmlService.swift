@@ -93,7 +93,7 @@ extension XmlService: XmlServiceProtocol {
             let data = try Data(contentsOf: url)
             let file = try decoder.decode(RAWGridFile.self, from: data)
             let sortedRaws = file.gridWord.sorted { $0.id < $1.id }
-            return sortedRaws.map {
+            return sortedRaws.map { // refactor!
                 return LayoutWord(question: $0.question,
                                   answer: $0.answer,
                                   column: ($0.y / Constants.cellSize) - 1,

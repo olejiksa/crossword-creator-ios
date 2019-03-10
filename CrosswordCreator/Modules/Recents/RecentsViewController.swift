@@ -15,6 +15,7 @@ final class RecentsViewController: UIViewController {
     private enum Constants {
         
         static let title = "Recents"
+        static let noCrosswords = "You don't have any terms list\nand crosswords yet"
     }
     
     // MARK: Outlets
@@ -58,6 +59,29 @@ final class RecentsViewController: UIViewController {
         tableView.register(SubtitleTableViewCell.self,
                            forCellReuseIdentifier: "\(SubtitleTableViewCell.self)")
     }
+    
+    private func setupEmptyView(in tableView: UITableView) {
+        let origin = CGPoint(x: 0, y: 0)
+        let width = tableView.bounds.size.width
+        let height = tableView.bounds.size.height
+        let size = CGSize(width: width, height: height)
+        let rectangle = CGRect(origin: origin, size: size)
+        
+        let noItemsLabel = UILabel(frame: rectangle)
+        noItemsLabel.text = Constants.noCrosswords
+        noItemsLabel.textColor = .gray
+        noItemsLabel.numberOfLines = 0
+        noItemsLabel.textAlignment = .center
+        noItemsLabel.sizeToFit()
+        
+        tableView.backgroundView = noItemsLabel
+        tableView.separatorStyle = .none
+    }
+    
+    private func restore(in tableView: UITableView) {
+        tableView.backgroundView = nil
+        tableView.separatorStyle = .singleLine
+    }
 }
 
 
@@ -68,7 +92,15 @@ final class RecentsViewController: UIViewController {
 extension RecentsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return interactor.getCrosswords().count
+        let count = interactor.getCrosswords().count
+        
+        if count == 0 {
+            setupEmptyView(in: tableView)
+        } else {
+            restore(in: tableView)
+        }
+        
+        return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,7 +109,12 @@ extension RecentsViewController: UITableViewDataSource {
                                                  for: indexPath)
         
         cell.textLabel?.text = title
-        cell.detailTextLabel?.text = date.description
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .medium
+        
+        cell.detailTextLabel?.text = dateFormatter.string(from: date)
         return cell
     }
 }
@@ -91,5 +128,24 @@ extension RecentsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let words = interactor.getWords(at: indexPath.row)
+        
+        let vc = FillBuilder.viewController(words: words)
+        let navigationController = UINavigationController(rootViewController: vc)
+        present(navigationController)
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        
+        let index = indexPath.row
+        interactor.removeCrossword(at: index)
+        
+        tableView.beginUpdates()
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.endUpdates()
     }
 }
