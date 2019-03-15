@@ -12,15 +12,16 @@ protocol ListRouterProtocol {
     
     func wantsToOpenWordEditor(with: WordBuilder.Mode)
     func wantsToGoBack()
+    func wantsToSave()
 }
 
 final class ListRouter: ListRouterProtocol {
     
-    typealias WordTransitionHandler = ViewTransitionHandler & WordAlertControllerDelegate
+    typealias ListTransitionHandler = ViewTransitionHandler & WordAlertControllerDelegate & SaveAlertControllerDelegate
     
-    private weak var transitionHandler: WordTransitionHandler?
+    private weak var transitionHandler: ListTransitionHandler?
     
-    init(transitionHandler: WordTransitionHandler) {
+    init(transitionHandler: ListTransitionHandler) {
         self.transitionHandler = transitionHandler
     }
     
@@ -33,5 +34,11 @@ final class ListRouter: ListRouterProtocol {
     
     func wantsToGoBack() {
         transitionHandler?.dismiss()
+    }
+    
+    func wantsToSave() {
+        let saveAlertController = SaveAlertController.create(with: .list)
+        saveAlertController.delegate = transitionHandler
+        transitionHandler?.present(saveAlertController)
     }
 }

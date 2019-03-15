@@ -49,6 +49,12 @@ final class RecentsViewController: UIViewController {
         interactor.setupSearchableContent()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
     
     // MARK: Private
     
@@ -56,8 +62,7 @@ final class RecentsViewController: UIViewController {
         title = Constants.title
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        tableView.register(SubtitleTableViewCell.self,
-                           forCellReuseIdentifier: "\(SubtitleTableViewCell.self)")
+        tableView.register(UINib(nibName: "\(RecentsCell.self)", bundle: Bundle.main), forCellReuseIdentifier: "\(RecentsCell.self)")
     }
     
     private func setupEmptyView(in tableView: UITableView) {
@@ -104,17 +109,19 @@ extension RecentsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let (title, date) = interactor.getCrosswordWithDates()[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "\(SubtitleTableViewCell.self)",
-                                                 for: indexPath)
+        let (title, date, isTermsList) = interactor.getCrosswordWithDates()[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(RecentsCell.self)", for: indexPath) as? RecentsCell else {
+            return UITableViewCell(style: .default, reuseIdentifier: "\(UITableViewCell.self)")
+        }
         
-        cell.textLabel?.text = title
+        cell.titleLabel?.text = title
+        cell.secondSubtitle?.text = isTermsList ? "Terms List" : "Crossword"
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .medium
         
-        cell.detailTextLabel?.text = dateFormatter.string(from: date)
+        cell.firstSubtitle?.text = dateFormatter.string(from: date)
         return cell
     }
 }
@@ -129,11 +136,18 @@ extension RecentsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let words = interactor.getWords(at: indexPath.row)
+        let isTermsList = interactor.isTermsList(at: indexPath.row)
         
-        let vc = FillBuilder.viewController(words: words)
-        let navigationController = UINavigationController(rootViewController: vc)
-        present(navigationController)
+        if !isTermsList {
+            let words = interactor.getWords(at: indexPath.row)
+            let vc = FillBuilder.viewController(words: words)
+            let navigationController = UINavigationController(rootViewController: vc)
+            present(navigationController)
+        } else {
+            let vc = ListBuilder.viewController()
+            let navigationVC = UINavigationController(rootViewController: vc)
+            present(navigationVC)
+        }
     }
     
     func tableView(_ tableView: UITableView,

@@ -14,6 +14,7 @@ protocol ListDataSourceProtocol {
     var lastIndex: Int { get }
     
     func setup(with: UITableView)
+    func save(with title: String)
 }
 
 final class ListDataSource: NSObject, ListDataSourceProtocol {
@@ -37,14 +38,22 @@ final class ListDataSource: NSObject, ListDataSourceProtocol {
         self.interactor = interactor
     }
     
+    
+    // MARK: Public
+    
     func setup(with tableView: UITableView) {
         tableView.dataSource = self
         
         let nib = UINib(nibName: cellIdentifier, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
-        
-        words = interactor.getWords()
     }
+    
+    func save(with title: String) {
+        interactor.save(words, with: title)
+    }
+    
+    
+    // MARK: Private
     
     private func setupEmptyView(in tableView: UITableView) {
         let origin = CGPoint(x: 0, y: 0)

@@ -95,6 +95,29 @@ final class PersistanceManager {
         }
     }
     
+    func appendNewTermsList(name: String, words: [Word]) {
+        let index = fetch(entityName: "Crossword").count
+        let crossword: Crossword = insert()
+        crossword.id = Int16(index)
+        crossword.updatedOn = Date()
+        crossword.createdOn = Date()
+        crossword.name = name
+        crossword.isTermsList = true
+        
+        let listWords: [ListWord] = words.enumerated().map {
+            let listWord = ListWord(context: managedContext)
+            listWord.id = Int16($0)
+            listWord.answer = $1.answer
+            listWord.question = $1.question
+            
+            return listWord
+        }
+        
+        crossword.words = NSOrderedSet(array: listWords)
+        
+        save()
+    }
+    
     func appendNewCrossword(name: String, words: [LayoutWord]) {
         let index = fetch(entityName: "Crossword").count
         let crossword: Crossword = insert()
@@ -102,6 +125,7 @@ final class PersistanceManager {
         crossword.updatedOn = Date()
         crossword.createdOn = Date()
         crossword.name = name
+        crossword.isTermsList = false
         
         let gridWords: [GridWord] = words.enumerated().map {
             let gridWord = GridWord(context: managedContext)

@@ -113,7 +113,7 @@ final class ListViewController: UIViewController {
     }
     
     @objc private func willSave() {
-        router?.wantsToGoBack()
+        router?.wantsToSave()
     }
     
     private func getDocumentsDirectory() -> String {
@@ -186,5 +186,18 @@ extension ListViewController: ListViewControllerDelegate {
     
     func updateVisibility(with isEmpty: Bool) {
         navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = !isEmpty }
+    }
+}
+
+
+
+
+// MARK: - SaveAlertControllerDelegate
+
+extension ListViewController: SaveAlertControllerDelegate {
+    
+    func save(with title: String) {
+        dataSource.save(with: title)
+        router?.wantsToGoBack()
     }
 }

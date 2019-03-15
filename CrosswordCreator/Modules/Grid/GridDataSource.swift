@@ -64,7 +64,7 @@ final class GridDataSource: NSObject, GridDataSourceProtocol {
     }
     
     func save(with title: String) {
-        interactor.saveGrid(words, with: title)
+        interactor.save(words, with: title)
     }
     
     

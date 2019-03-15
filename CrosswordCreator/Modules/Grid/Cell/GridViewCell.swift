@@ -8,20 +8,14 @@
 
 import UIKit
 
-class GridViewCell: UICollectionViewCell {
+final class GridViewCell: UICollectionViewCell {
 
     enum CellType {
-        
         case white, black(String), indexed(String)
     }
     
-    @IBOutlet weak var view: UIView!
-    @IBOutlet weak var letter: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    @IBOutlet private weak var view: UIView!
+    @IBOutlet private weak var letter: UILabel!
     
     func setup(with type: CellType) {
         switch type {

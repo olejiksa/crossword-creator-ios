@@ -50,9 +50,6 @@ final class RollViewController: UIViewController {
         
         title = mode == .questions ? Constants.questions : Constants.words
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-        //let nib = UINib(nibName: cellIdentifier, bundle: nil)
-        //tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
     }
 }
 

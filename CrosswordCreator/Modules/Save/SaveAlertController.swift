@@ -10,17 +10,33 @@ import UIKit
 
 protocol SaveAlertControllerDelegate: class {
     
-    func saveCrossword(with title: String)
+    func save(with title: String)
 }
 
 final class SaveAlertController: UIAlertController {
+    
+    // MARK: Public Data Structures
+    
+    enum Mode {
+        
+        case list
+        case grid
+    }
     
     // MARK: Private Data Structures
     
     private enum Constants {
         
-        static let title = "Crossword"
-        static let new = "Enter the title for a new crossword."
+        enum List {
+            static let title = "Terms List"
+            static let message = "Enter the title for a new terms list."
+        }
+        
+        enum Grid {
+            static let title = "Crossword"
+            static let message = "Enter the title for a new crossword."
+        }
+        
         static let ok = "OK"
         static let cancel = "Cancel"
     }
@@ -33,22 +49,35 @@ final class SaveAlertController: UIAlertController {
     
     // MARK: Public
     
-    static func create() -> SaveAlertController {
-        let saveAlertController = SaveAlertController(title: Constants.title,
-                                                      message: Constants.new,
+    static func create(with mode: Mode) -> SaveAlertController {
+        let title: String
+        let message: String
+        
+        switch mode {
+        case .list:
+            title = Constants.List.title
+            message = Constants.List.message
+            
+        case .grid:
+            title = Constants.Grid.title
+            message = Constants.Grid.message
+        }
+        
+        let saveAlertController = SaveAlertController(title: title,
+                                                      message: message,
                                                       preferredStyle: .alert)
-        saveAlertController.setup()
+        saveAlertController.setup(with: title)
         return saveAlertController
     }
     
     
     // MARK: Private
     
-    private func setup() {
+    private func setup(with placeholder: String) {
         addTextField { [weak self] questionTextField in
             guard let strongSelf = self else { return }
             
-            questionTextField.placeholder = Constants.title
+            questionTextField.placeholder = placeholder
             questionTextField.addTarget(self,
                                         action: #selector(strongSelf.textFieldDidChange),
                                         for: .editingChanged)
@@ -62,7 +91,7 @@ final class SaveAlertController: UIAlertController {
             else { return }
             
             let trimmedTitle = title.trimmingCharacters(in: .whitespaces)
-            strongSelf.delegate?.saveCrossword(with: trimmedTitle)
+            strongSelf.delegate?.save(with: trimmedTitle)
         }
         addAction(okAction)
         

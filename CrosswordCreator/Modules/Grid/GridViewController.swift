@@ -142,7 +142,7 @@ final class GridViewController: UIViewController {
 
 extension GridViewController: SaveAlertControllerDelegate {
     
-    func saveCrossword(with title: String) {
+    func save(with title: String) {
         dataSource.save(with: title)
     }
 }

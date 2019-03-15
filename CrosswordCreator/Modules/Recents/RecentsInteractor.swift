@@ -13,9 +13,10 @@ import MobileCoreServices
 protocol RecentsInteractorProtocol: class {
     
     func getCrosswords() -> [String]
-    func getCrosswordWithDates() -> [(String, Date)]
+    func getCrosswordWithDates() -> [(String, Date, Bool)]
     func setupSearchableContent()
     
+    func isTermsList(at index: Int) -> Bool
     func getWords(at index: Int) -> [LayoutWord]
     
     func removeCrossword(at index: Int)
@@ -36,9 +37,9 @@ final class RecentsInteractor: RecentsInteractorProtocol {
         return crosswords.map { $0.name ?? "Untitled" }
     }
     
-    func getCrosswordWithDates() -> [(String, Date)] {
+    func getCrosswordWithDates() -> [(String, Date, Bool)] {
         let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
-        return crosswords.map { ($0.name ?? "Untitled", $0.createdOn ?? Date()) }
+        return crosswords.map { ($0.name ?? "Untitled", $0.createdOn ?? Date(), $0.isTermsList) }
     }
     
     func getWords(at index: Int) -> [LayoutWord] {
@@ -85,5 +86,10 @@ final class RecentsInteractor: RecentsInteractorProtocol {
     func removeCrossword(at index: Int) {
         persistanceManager.remove(by: index, entityName: crosswordName)
         persistanceManager.save()
+    }
+    
+    func isTermsList(at index: Int) -> Bool {
+        let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
+        return crosswords[index].isTermsList
     }
 }

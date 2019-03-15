@@ -77,6 +77,8 @@
 		EB3CBF7D223478020043E8FB /* RollBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF7C223478020043E8FB /* RollBuilder.swift */; };
 		EB3CBF802234785F0043E8FB /* RollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF7E2234785F0043E8FB /* RollViewController.swift */; };
 		EB3CBF812234785F0043E8FB /* RollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3CBF7F2234785F0043E8FB /* RollView.xib */; };
+		EB3CBF88223B32250043E8FB /* RecentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF86223B32250043E8FB /* RecentsCell.swift */; };
+		EB3CBF89223B32250043E8FB /* RecentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3CBF87223B32250043E8FB /* RecentsCell.xib */; };
 		EB7817D9217A1FFF00BA9D50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7817D8217A1FFF00BA9D50 /* AppDelegate.swift */; };
 		EB7817DB217A1FFF00BA9D50 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7817DA217A1FFF00BA9D50 /* ListViewController.swift */; };
 		EB7817E0217A200000BA9D50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB7817DF217A200000BA9D50 /* Assets.xcassets */; };
@@ -164,6 +166,8 @@
 		EB3CBF7C223478020043E8FB /* RollBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollBuilder.swift; sourceTree = "<group>"; };
 		EB3CBF7E2234785F0043E8FB /* RollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollViewController.swift; sourceTree = "<group>"; };
 		EB3CBF7F2234785F0043E8FB /* RollView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RollView.xib; sourceTree = "<group>"; };
+		EB3CBF86223B32250043E8FB /* RecentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsCell.swift; sourceTree = "<group>"; };
+		EB3CBF87223B32250043E8FB /* RecentsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentsCell.xib; sourceTree = "<group>"; };
 		EB7817D5217A1FFF00BA9D50 /* CrosswordCreator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrosswordCreator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB7817D8217A1FFF00BA9D50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB7817DA217A1FFF00BA9D50 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -230,11 +234,11 @@
 		EB1CD98C21A07EBD005E9BB8 /* Recents */ = {
 			isa = PBXGroup;
 			children = (
+				EB3CBF83223B31D20043E8FB /* Cell */,
 				EB1CD98D21A07ED8005E9BB8 /* RecentsBuilder.swift */,
 				EB8FBBE12217B6C000F92DDE /* RecentsInteractor.swift */,
 				EB1CD98F21A07EED005E9BB8 /* RecentsViewController.swift */,
 				EB1CD99121A08089005E9BB8 /* RecentsView.xib */,
-				EB214F1822182A6B00D1C3A0 /* SaveAlertController.swift */,
 				EB214F1A2218317600D1C3A0 /* SubtitleTableViewCell.swift */,
 			);
 			path = Recents;
@@ -367,6 +371,7 @@
 		EB3CBF772234308A0043E8FB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				EB3CBF82223B29EC0043E8FB /* Save */,
 				EB3CBF6C223425910043E8FB /* Fill */,
 				EB1CD99321A0860A005E9BB8 /* Grid */,
 				EB214F33221983EF00D1C3A0 /* Help */,
@@ -389,6 +394,23 @@
 				EB3CBF7F2234785F0043E8FB /* RollView.xib */,
 			);
 			path = Roll;
+			sourceTree = "<group>";
+		};
+		EB3CBF82223B29EC0043E8FB /* Save */ = {
+			isa = PBXGroup;
+			children = (
+				EB214F1822182A6B00D1C3A0 /* SaveAlertController.swift */,
+			);
+			path = Save;
+			sourceTree = "<group>";
+		};
+		EB3CBF83223B31D20043E8FB /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				EB3CBF86223B32250043E8FB /* RecentsCell.swift */,
+				EB3CBF87223B32250043E8FB /* RecentsCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		EB7817CC217A1FFF00BA9D50 = {
@@ -501,6 +523,7 @@
 				EB30560121F8ECEA00E9F6EE /* GridViewCell.xib in Resources */,
 				EB002D1C218B958C00A89806 /* HomeView.xib in Resources */,
 				EB7817E0217A200000BA9D50 /* Assets.xcassets in Resources */,
+				EB3CBF89223B32250043E8FB /* RecentsCell.xib in Resources */,
 				EB7817ED217A244C00BA9D50 /* ListView.xib in Resources */,
 				EB3CBF812234785F0043E8FB /* RollView.xib in Resources */,
 				EB1CD99521A08642005E9BB8 /* GridView.xib in Resources */,
@@ -588,6 +611,7 @@
 				EB214F352219840100D1C3A0 /* HelpBuilder.swift in Sources */,
 				EB002D26218CC05C00A89806 /* WordBuilder.swift in Sources */,
 				EB214F242218C25800D1C3A0 /* Error.swift in Sources */,
+				EB3CBF88223B32250043E8FB /* RecentsCell.swift in Sources */,
 				EB1CD98B219F2FF3005E9BB8 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
