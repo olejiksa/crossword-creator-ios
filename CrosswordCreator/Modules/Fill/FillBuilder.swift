@@ -6,6 +6,8 @@
 //  Copyright © 2019 Oleg Samoylov. All rights reserved.
 //
 
+import UIKit
+
 final class FillBuilder {
     
     static func alertController(with filledWord: FilledWord) -> FillAlertController {
@@ -16,8 +18,10 @@ final class FillBuilder {
         let fillDataSource = FillDataSource(words: words)
         
         let viewController = FillViewController(dataSource: fillDataSource, title: title)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        
         let router = FillRouter(transitionHandler: viewController,
-                                navigationTransitionHandler: viewController.navigationController)
+                                navigationTransitionHandler: navigationController)
         viewController.router = router
         
         return viewController

@@ -30,7 +30,8 @@ final class RecentsRouter: RecentsRouterProtocol {
     
     func wantsToFill(with title: String, words: [LayoutWord]) {
         let vc = FillBuilder.viewController(with: title, words: words)
-        let navigationVC = UINavigationController(rootViewController: vc)
-        transitionHandler?.present(navigationVC)
+        
+        guard let nvc = vc.navigationController else { return }
+        transitionHandler?.present(nvc)
     }
 }
