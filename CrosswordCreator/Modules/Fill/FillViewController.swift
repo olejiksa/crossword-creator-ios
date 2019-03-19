@@ -22,6 +22,7 @@ final class FillViewController: UIViewController {
     
     private let dataSource: FillDataSource
     private let xmlService: XmlServiceProtocol
+    private let gridTitle: String
     
     
     // MARK: Outlets
@@ -39,9 +40,11 @@ final class FillViewController: UIViewController {
     
     // MARK: Lifecycle
     
-    init(dataSource: FillDataSource) {
+    init(dataSource: FillDataSource,
+         title: String) {
         self.dataSource = dataSource
         self.xmlService = XmlService()
+        self.gridTitle = title
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -64,6 +67,8 @@ final class FillViewController: UIViewController {
         dataSource.setup(with: collectionView)
         
         setupNavigationBar()
+        
+        collectionView.delegate = self
     }
     
     private func setupNavigationBar() {
@@ -88,7 +93,7 @@ final class FillViewController: UIViewController {
     
     @objc private func willShare() {
         let xml = xmlService.writeGrid(with: dataSource.words)
-        let filename = "untitled.cwgf"
+        let filename = "\(gridTitle).\(FileExtension.grid.rawValue)"
         
         do {
             let fileURL = URL(fileURLWithPath: getDocumentsDirectory()).appendingPathComponent(filename)
@@ -110,14 +115,30 @@ final class FillViewController: UIViewController {
         return documentsDirectory
     }
     
-    @IBAction func seeQuestions(_ sender: UIBarButtonItem) {
+    @IBAction private func seeQuestions(_ sender: UIBarButtonItem) {
         let words: [Word] = dataSource.words.map { Word(question: $0.question, answer: $0.answer) }
         let vc = RollBuilder.viewController(with: words, mode: .questions)
         
         navigationController?.push(vc)
     }
     
-    @IBAction func check(_ sender: UIBarButtonItem) {
+    @IBAction private func check(_ sender: UIBarButtonItem) {
         AlertsFactory.crosswordIsFilledIncorrectly(self)
+    }
+}
+
+
+
+
+// MARK: - UICollectionViewDelegate
+
+extension FillViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let char = dataSource.charGrid[indexPath.section][indexPath.row]
+        
+        if char == " " {
+            print("enter")
+        }
     }
 }

@@ -18,9 +18,16 @@ final class RecentsViewController: UIViewController {
         static let noCrosswords = "You don't have any terms list\nand crosswords yet"
     }
     
+    
+    // MARK: Public Properties
+    
+    var router: RecentsRouterProtocol?
+    
+    
     // MARK: Outlets
     
     @IBOutlet weak var tableView: UITableView!
+    
     
     // MARK: Private Properties
     
@@ -136,17 +143,15 @@ extension RecentsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let isTermsList = interactor.isTermsList(at: indexPath.row)
+        let index = indexPath.row
+        let title = interactor.getCrosswords()[index]
         
-        if !isTermsList {
-            let words = interactor.getWords(at: indexPath.row)
-            let vc = FillBuilder.viewController(words: words)
-            let navigationController = UINavigationController(rootViewController: vc)
-            present(navigationController)
+        if interactor.isTermsList(at: index) {
+            let words = interactor.getWords(at: index)
+            router?.wantsToOpenListEditor(with: title, words: words)
         } else {
-            let vc = ListBuilder.viewController()
-            let navigationVC = UINavigationController(rootViewController: vc)
-            present(navigationVC)
+            let layoutWords = interactor.getLayoutWords(at: index)
+            router?.wantsToFill(with: title, words: layoutWords)
         }
     }
     

@@ -26,7 +26,6 @@
 		EB1CD99721A0865B005E9BB8 /* GridBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CD99621A0865B005E9BB8 /* GridBuilder.swift */; };
 		EB1CD99921A0868E005E9BB8 /* GridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CD99821A0868E005E9BB8 /* GridViewController.swift */; };
 		EB214F1922182A6B00D1C3A0 /* SaveAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB214F1822182A6B00D1C3A0 /* SaveAlertController.swift */; };
-		EB214F1B2218317600D1C3A0 /* SubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB214F1A2218317600D1C3A0 /* SubtitleTableViewCell.swift */; };
 		EB214F1E2218BD3300D1C3A0 /* XmlService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB214F1D2218BD3300D1C3A0 /* XmlService.swift */; };
 		EB214F202218C21400D1C3A0 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB214F1F2218C21400D1C3A0 /* Document.swift */; };
 		EB214F222218C24000D1C3A0 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB214F212218C24000D1C3A0 /* Element.swift */; };
@@ -79,6 +78,8 @@
 		EB3CBF812234785F0043E8FB /* RollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3CBF7F2234785F0043E8FB /* RollView.xib */; };
 		EB3CBF88223B32250043E8FB /* RecentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF86223B32250043E8FB /* RecentsCell.swift */; };
 		EB3CBF89223B32250043E8FB /* RecentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3CBF87223B32250043E8FB /* RecentsCell.xib */; };
+		EB3CBF8B223B389E0043E8FB /* RecentsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF8A223B389E0043E8FB /* RecentsRouter.swift */; };
+		EB3CBF8D223B3DA70043E8FB /* FileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF8C223B3DA70043E8FB /* FileExtension.swift */; };
 		EB7817D9217A1FFF00BA9D50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7817D8217A1FFF00BA9D50 /* AppDelegate.swift */; };
 		EB7817DB217A1FFF00BA9D50 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7817DA217A1FFF00BA9D50 /* ListViewController.swift */; };
 		EB7817E0217A200000BA9D50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB7817DF217A200000BA9D50 /* Assets.xcassets */; };
@@ -115,7 +116,6 @@
 		EB1CD99621A0865B005E9BB8 /* GridBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridBuilder.swift; sourceTree = "<group>"; };
 		EB1CD99821A0868E005E9BB8 /* GridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewController.swift; sourceTree = "<group>"; };
 		EB214F1822182A6B00D1C3A0 /* SaveAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveAlertController.swift; sourceTree = "<group>"; };
-		EB214F1A2218317600D1C3A0 /* SubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleTableViewCell.swift; sourceTree = "<group>"; };
 		EB214F1D2218BD3300D1C3A0 /* XmlService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmlService.swift; sourceTree = "<group>"; };
 		EB214F1F2218C21400D1C3A0 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		EB214F212218C24000D1C3A0 /* Element.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
@@ -168,6 +168,8 @@
 		EB3CBF7F2234785F0043E8FB /* RollView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RollView.xib; sourceTree = "<group>"; };
 		EB3CBF86223B32250043E8FB /* RecentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsCell.swift; sourceTree = "<group>"; };
 		EB3CBF87223B32250043E8FB /* RecentsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentsCell.xib; sourceTree = "<group>"; };
+		EB3CBF8A223B389E0043E8FB /* RecentsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsRouter.swift; sourceTree = "<group>"; };
+		EB3CBF8C223B3DA70043E8FB /* FileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExtension.swift; sourceTree = "<group>"; };
 		EB7817D5217A1FFF00BA9D50 /* CrosswordCreator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrosswordCreator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB7817D8217A1FFF00BA9D50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB7817DA217A1FFF00BA9D50 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				EB214F292218D7FE00D1C3A0 /* RoundButton.swift */,
 				EB3CBF492233DB130043E8FB /* ShortcutIdentifier.swift */,
 				EB002D28218CC34100A89806 /* TransitionHandler.swift */,
+				EB3CBF8C223B3DA70043E8FB /* FileExtension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -237,9 +240,9 @@
 				EB3CBF83223B31D20043E8FB /* Cell */,
 				EB1CD98D21A07ED8005E9BB8 /* RecentsBuilder.swift */,
 				EB8FBBE12217B6C000F92DDE /* RecentsInteractor.swift */,
+				EB3CBF8A223B389E0043E8FB /* RecentsRouter.swift */,
 				EB1CD98F21A07EED005E9BB8 /* RecentsViewController.swift */,
 				EB1CD99121A08089005E9BB8 /* RecentsView.xib */,
-				EB214F1A2218317600D1C3A0 /* SubtitleTableViewCell.swift */,
 			);
 			path = Recents;
 			sourceTree = "<group>";
@@ -371,7 +374,6 @@
 		EB3CBF772234308A0043E8FB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				EB3CBF82223B29EC0043E8FB /* Save */,
 				EB3CBF6C223425910043E8FB /* Fill */,
 				EB1CD99321A0860A005E9BB8 /* Grid */,
 				EB214F33221983EF00D1C3A0 /* Help */,
@@ -379,8 +381,9 @@
 				EB7817EB217A241400BA9D50 /* List */,
 				EB1CD98121962484005E9BB8 /* Main */,
 				EB214F2C221980A000D1C3A0 /* New */,
-				EB3CBF7A223477690043E8FB /* Roll */,
 				EB1CD98C21A07EBD005E9BB8 /* Recents */,
+				EB3CBF7A223477690043E8FB /* Roll */,
+				EB3CBF82223B29EC0043E8FB /* Save */,
 				EB21C4FC218775490074A21B /* Word */,
 			);
 			path = Modules;
@@ -557,6 +560,7 @@
 				EB1CD98721962579005E9BB8 /* MainBuilder.swift in Sources */,
 				EB3CBF4C2233EBF10043E8FB /* ISO8601DateFormatter.swift in Sources */,
 				EB3CBF692233F0290043E8FB /* XMLReferencingEncoder.swift in Sources */,
+				EB3CBF8D223B3DA70043E8FB /* FileExtension.swift in Sources */,
 				EB8FBBE22217B6C000F92DDE /* RecentsInteractor.swift in Sources */,
 				EB3CBF792234311A0043E8FB /* AlertsFactory.swift in Sources */,
 				EB30560021F8ECEA00E9F6EE /* GridViewCell.swift in Sources */,
@@ -586,7 +590,6 @@
 				EB27342D2206FA4200ABAC20 /* View+Image.swift in Sources */,
 				EB002D20218CB83700A89806 /* ListBuilder.swift in Sources */,
 				EBE6B86A2194D94D00B59EE5 /* ListInteractor.swift in Sources */,
-				EB214F1B2218317600D1C3A0 /* SubtitleTableViewCell.swift in Sources */,
 				EBD4D886218CDEAB009028B5 /* Model.xcdatamodeld in Sources */,
 				EB3CBF5A2233EC330043E8FB /* XMLDecoder.swift in Sources */,
 				EB002D29218CC34100A89806 /* TransitionHandler.swift in Sources */,
@@ -603,6 +606,7 @@
 				EB3CBF652233F0210043E8FB /* XMLEncoder.swift in Sources */,
 				EBE9B013222C57800007FA91 /* GridRouter.swift in Sources */,
 				EB1CD99721A0865B005E9BB8 /* GridBuilder.swift in Sources */,
+				EB3CBF8B223B389E0043E8FB /* RecentsRouter.swift in Sources */,
 				EB8FBBE02217AAE900F92DDE /* GridInteractor.swift in Sources */,
 				EB3CBF6F223425A10043E8FB /* FillViewController.swift in Sources */,
 				EB214F202218C21400D1C3A0 /* Document.swift in Sources */,

@@ -25,13 +25,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRO-NW-ibc">
-                        <rect key="frame" x="16" y="36" width="288" height="14.5"/>
+                        <rect key="frame" x="16" y="35" width="288" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D18-9F-M8e">
-                        <rect key="frame" x="16" y="54.5" width="288" height="14.5"/>
+                        <rect key="frame" x="16" y="52.5" width="288" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -39,11 +39,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="kRO-NW-ibc" secondAttribute="trailing" id="0Ec-10-Fr6"/>
-                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="D18-9F-M8e" secondAttribute="bottom" constant="4" id="CjV-Jh-Eie"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="D18-9F-M8e" secondAttribute="bottom" constant="3" id="CjV-Jh-Eie"/>
                     <constraint firstItem="kRO-NW-ibc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Jwf-Ph-6Lh"/>
                     <constraint firstItem="D18-9F-M8e" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="OZC-12-xt3"/>
-                    <constraint firstItem="kRO-NW-ibc" firstAttribute="top" secondItem="fAy-Ig-Fbp" secondAttribute="bottom" constant="4" id="RcZ-he-8z0"/>
-                    <constraint firstItem="D18-9F-M8e" firstAttribute="top" secondItem="kRO-NW-ibc" secondAttribute="bottom" constant="4" id="WuZ-Ts-QsH"/>
+                    <constraint firstItem="kRO-NW-ibc" firstAttribute="top" secondItem="fAy-Ig-Fbp" secondAttribute="bottom" constant="3" id="RcZ-he-8z0"/>
+                    <constraint firstItem="D18-9F-M8e" firstAttribute="top" secondItem="kRO-NW-ibc" secondAttribute="bottom" constant="3" id="WuZ-Ts-QsH"/>
                     <constraint firstItem="fAy-Ig-Fbp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="aA6-p6-quh"/>
                     <constraint firstItem="fAy-Ig-Fbp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="i1c-ba-zTK"/>
                     <constraint firstAttribute="trailingMargin" secondItem="fAy-Ig-Fbp" secondAttribute="trailing" id="nHP-of-hbz"/>

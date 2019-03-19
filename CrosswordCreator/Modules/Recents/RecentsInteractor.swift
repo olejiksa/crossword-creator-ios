@@ -17,7 +17,8 @@ protocol RecentsInteractorProtocol: class {
     func setupSearchableContent()
     
     func isTermsList(at index: Int) -> Bool
-    func getWords(at index: Int) -> [LayoutWord]
+    func getLayoutWords(at index: Int) -> [LayoutWord]
+    func getWords(at index: Int) -> [Word]
     
     func removeCrossword(at index: Int)
 }
@@ -42,12 +43,20 @@ final class RecentsInteractor: RecentsInteractorProtocol {
         return crosswords.map { ($0.name ?? "Untitled", $0.createdOn ?? Date(), $0.isTermsList) }
     }
     
-    func getWords(at index: Int) -> [LayoutWord] {
+    func getLayoutWords(at index: Int) -> [LayoutWord] {
         let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
         guard let casted = crosswords[index].words else { return [] }
         guard let array = casted.array as? [ListWord] else { return [] }
         
         return array.map { LayoutWord(question: $0.question!, answer: $0.answer!, column: Int(($0.gridWord!.x / 25) - 1), row: Int(($0.gridWord!.y / 25) - 1), direction: $0.gridWord!.isHorizontal ? .horizontal : .vertical) }
+    }
+    
+    func getWords(at index: Int) -> [Word] {
+        let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
+        guard let casted = crosswords[index].words else { return [] }
+        guard let array = casted.array as? [ListWord] else { return [] }
+        
+        return array.map { Word(question: $0.question!, answer: $0.answer!) }
     }
     
     func setupSearchableContent() {

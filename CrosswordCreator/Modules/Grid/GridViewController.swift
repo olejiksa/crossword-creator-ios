@@ -92,7 +92,7 @@ final class GridViewController: UIViewController {
     
     @objc private func willShare() {
         let xml = xmlService.writeGrid(with: dataSource.words)
-        let filename = "untitled.cwgf"
+        let filename = "untitled.\(FileExtension.grid.rawValue)"
         
         do {
             let fileURL = URL(fileURLWithPath: getDocumentsDirectory()).appendingPathComponent(filename)

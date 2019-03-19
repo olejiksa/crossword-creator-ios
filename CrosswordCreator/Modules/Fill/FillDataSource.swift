@@ -10,6 +10,7 @@ import UIKit
 
 protocol FillDataSourceProtocol {
     
+    var charGrid: [[String]] { get }
     var words: [LayoutWord] { get }
     
     func setup(with: UICollectionView)
@@ -24,7 +25,7 @@ final class FillDataSource: NSObject, FillDataSourceProtocol {
     
     private let size: (columns: Int, rows: Int)
     
-    private var charGrid: [[String]]
+    var charGrid: [[String]]
     let words: [LayoutWord]
     
     
@@ -63,11 +64,11 @@ final class FillDataSource: NSObject, FillDataSourceProtocol {
             switch item.direction {
             case .horizontal:
                 charGrid[item.row][item.column - 1] = "\(index + 1) "
-                (0..<item.answer.count).forEach { charGrid[item.row][item.column + $0] = String(item.answer[$0]) }
+                (0..<item.answer.count).forEach { charGrid[item.row][item.column + $0] = " " }
                 
             case .vertical:
                 charGrid[item.row - 1][item.column] = "\(index + 1) "
-                (0..<item.answer.count).forEach { charGrid[item.row + $0][item.column] = String(item.answer[$0]) }
+                (0..<item.answer.count).forEach { charGrid[item.row + $0][item.column] = " " }
             }
         }
     }

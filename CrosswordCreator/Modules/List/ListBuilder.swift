@@ -8,9 +8,19 @@
 
 final class ListBuilder {
     
+    private enum Constants {
+        static let untitled = "Untitled"
+    }
+    
     static func viewController() -> ListViewController {
+        return viewController(with: Constants.untitled, words: [])
+    }
+    
+    static func viewController(with title: String, words: [Word]) -> ListViewController {
         let interactor = ListInteractor()
-        let dataSource = ListDataSource(interactor: interactor)
+        let dataSource = ListDataSource(interactor: interactor,
+                                        words: words,
+                                        title: title)
         let xmlService = XmlService()
         
         let viewController = ListViewController(dataSource: dataSource,

@@ -68,12 +68,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let isHandled: Bool
         
         switch url.pathExtension {
-        case "cwtf":
+        case FileExtension.list.rawValue:
             let words = xmlService.readList(from: url)
             print(words)
             isHandled = true
             
-        case "cwgf":
+        case FileExtension.grid.rawValue:
             let layoutWords = xmlService.readGrid(from: url)
             print(layoutWords)
             

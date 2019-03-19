@@ -17,7 +17,11 @@ final class GridViewCell: UICollectionViewCell {
     @IBOutlet private weak var view: UIView!
     @IBOutlet private weak var letter: UILabel!
     
+    var cellType: CellType = .white
+    
     func setup(with type: CellType) {
+        cellType = type
+        
         switch type {
         case .white:
             letter.font = UIFont.systemFont(ofSize: 15, weight: .regular)

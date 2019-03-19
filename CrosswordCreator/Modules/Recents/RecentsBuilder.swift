@@ -13,9 +13,12 @@ final class RecentsBuilder {
     static func viewController() -> RecentsViewController {
         let interactor = RecentsInteractor()
         
-        let viewController = RecentsViewController(interactor: interactor)
-        _ = UINavigationController(rootViewController: viewController)
+        let vc = RecentsViewController(interactor: interactor)
+        let navigationVC = UINavigationController(rootViewController: vc)
         
-        return viewController
+        let router = RecentsRouter(transitionHandler: navigationVC)
+        vc.router = router
+        
+        return vc
     }
 }

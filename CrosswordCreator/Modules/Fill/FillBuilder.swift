@@ -8,10 +8,10 @@
 
 final class FillBuilder {
     
-    static func viewController(words: [LayoutWord] = []) -> FillViewController {
+    static func viewController(with title: String, words: [LayoutWord]) -> FillViewController {
         let fillDataSource = FillDataSource(words: words)
         
-        let viewController = FillViewController(dataSource: fillDataSource)
+        let viewController = FillViewController(dataSource: fillDataSource, title: title)
         let router = FillRouter(transitionHandler: viewController)
         viewController.router = router
         

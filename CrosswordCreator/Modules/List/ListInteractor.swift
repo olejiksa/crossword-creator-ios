@@ -11,7 +11,6 @@ import UIKit
 protocol ListInteractorProtocol: class {
     
     func getWords() -> [Word]
-    func getCrosswordName() -> String
     func updateWord(_ orderedWord: OrderedWord)
     func removeWord(at index: Int)
     func save(_ words: [Word], with title: String)
@@ -44,11 +43,6 @@ final class ListInteractor: ListInteractorProtocol {
             
             return Word(question: question, answer: answer)
         }
-    }
-    
-    func getCrosswordName() -> String {
-        // let crossword: Crossword? = persistanceManager.fetch(entityName: Constants.crosswordName).first
-        return "Untitled" // crossword?.name ?? "Untitled"
     }
     
     private func getOrderedWords(startIndex: Int) -> [OrderedWord] {

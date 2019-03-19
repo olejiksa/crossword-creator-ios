@@ -92,7 +92,7 @@ final class ListViewController: UIViewController {
     
     @objc private func willShare() {
         let xml = xmlService.writeList(with: dataSource.words)
-        let filename = "untitled.cwtf"
+        let filename = "\(dataSource.title).\(FileExtension.list.rawValue)"
         
         do {
             let fileURL = URL(fileURLWithPath: getDocumentsDirectory()).appendingPathComponent(filename)

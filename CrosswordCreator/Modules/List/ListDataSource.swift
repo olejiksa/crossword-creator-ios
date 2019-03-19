@@ -10,6 +10,7 @@ import UIKit
 
 protocol ListDataSourceProtocol {
     
+    var title: String { get }
     var words: [Word] { get }
     var lastIndex: Int { get }
     
@@ -31,11 +32,16 @@ final class ListDataSource: NSObject, ListDataSourceProtocol {
     private let cellIdentifier = "\(ListViewCell.self)"
     private let interactor: ListInteractorProtocol
     private(set) var words: [Word] = []
+    let title: String
     
     weak var vc: ListViewControllerDelegate?
     
-    init(interactor: ListInteractorProtocol) {
+    init(interactor: ListInteractorProtocol,
+         words: [Word],
+         title: String) {
         self.interactor = interactor
+        self.words = words
+        self.title = title
     }
     
     
@@ -134,7 +140,7 @@ extension ListDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    titleForHeaderInSection section: Int) -> String? {
-        return interactor.getCrosswordName()
+        return title
     }
 }
 
