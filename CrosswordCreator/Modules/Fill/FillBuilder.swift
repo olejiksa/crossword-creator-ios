@@ -16,7 +16,8 @@ final class FillBuilder {
         let fillDataSource = FillDataSource(words: words)
         
         let viewController = FillViewController(dataSource: fillDataSource, title: title)
-        let router = FillRouter(transitionHandler: viewController)
+        let router = FillRouter(transitionHandler: viewController,
+                                navigationTransitionHandler: viewController.navigationController)
         viewController.router = router
         
         return viewController

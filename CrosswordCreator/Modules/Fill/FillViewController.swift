@@ -96,10 +96,8 @@ final class FillViewController: UIViewController {
     }
     
     @IBAction private func seeQuestions(_ sender: UIBarButtonItem) {
-        let words: [Word] = dataSource.words.map { Word(question: $0.question, answer: $0.answer) }
-        let vc = RollBuilder.viewController(with: words, mode: .questions)
-        
-        navigationController?.push(vc)
+        let words = dataSource.words.map { Word(question: $0.question, answer: $0.answer) }
+        router?.wantsToSeeQuestions(with: words)
     }
     
     @IBAction private func check(_ sender: UIBarButtonItem) {
@@ -123,8 +121,7 @@ extension FillViewController: UICollectionViewDelegate {
             filledWord.word = Word(question: "Vanity cases?", answer: "egos")
             filledWord.enteredAnswer = nil
             
-            let alert = FillBuilder.alertController(with: filledWord)
-            present(alert)
+            router?.wantsToFill(with: filledWord)
         }
     }
 }
