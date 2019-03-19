@@ -23,8 +23,10 @@ final class ListBuilder {
                                         title: title)
         let xmlService = XmlService()
         
+        let mode = !words.isEmpty
         let viewController = ListViewController(dataSource: dataSource,
-                                                xmlService: xmlService)
+                                                xmlService: xmlService,
+                                                mode: mode)
         let router = ListRouter(transitionHandler: viewController)
         viewController.router = router
         dataSource.vc = viewController

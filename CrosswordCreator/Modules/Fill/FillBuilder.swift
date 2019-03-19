@@ -8,6 +8,10 @@
 
 final class FillBuilder {
     
+    static func alertController(with filledWord: FilledWord) -> FillAlertController {
+        return FillAlertController.create(with: filledWord)
+    }
+    
     static func viewController(with title: String, words: [LayoutWord]) -> FillViewController {
         let fillDataSource = FillDataSource(words: words)
         

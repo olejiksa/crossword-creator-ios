@@ -13,7 +13,7 @@ protocol ListInteractorProtocol: class {
     func getWords() -> [Word]
     func updateWord(_ orderedWord: OrderedWord)
     func removeWord(at index: Int)
-    func save(_ words: [Word], with title: String)
+    func save(_ words: [Word], with title: String, mode: Bool)
 }
 
 final class ListInteractor: ListInteractorProtocol {
@@ -81,7 +81,11 @@ final class ListInteractor: ListInteractorProtocol {
         persistanceManager.save()
     }
     
-    func save(_ words: [Word], with title: String) {
-        persistanceManager.appendNewTermsList(name: title, words: words)
+    func save(_ words: [Word], with title: String, mode: Bool) {
+        if !mode {
+            persistanceManager.appendNewTermsList(name: title, words: words)
+        } else {
+            
+        }
     }
 }

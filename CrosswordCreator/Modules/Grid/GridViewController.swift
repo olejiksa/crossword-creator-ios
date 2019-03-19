@@ -123,8 +123,8 @@ final class GridViewController: UIViewController {
             
             printController.printingItem = image
             printController.present(from: strongSelf.view.frame,
-                                    in: strongSelf.view, animated: true,
-                                    completionHandler: nil)
+                                    in: strongSelf.view,
+                                    animated: true)
         })
     }
     

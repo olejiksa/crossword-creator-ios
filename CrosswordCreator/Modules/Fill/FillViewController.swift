@@ -138,7 +138,13 @@ extension FillViewController: UICollectionViewDelegate {
         let char = dataSource.charGrid[indexPath.section][indexPath.row]
         
         if char == " " {
-            print("enter")
+            let filledWord: FilledWord
+            filledWord.index = 0
+            filledWord.word = Word(question: "Vanity cases?", answer: "egos")
+            filledWord.enteredAnswer = nil
+            
+            let alert = FillBuilder.alertController(with: filledWord)
+            present(alert)
         }
     }
 }

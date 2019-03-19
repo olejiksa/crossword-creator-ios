@@ -15,7 +15,7 @@ protocol ListDataSourceProtocol {
     var lastIndex: Int { get }
     
     func setup(with: UITableView)
-    func save(with title: String)
+    func save(with title: String, mode: Bool)
 }
 
 final class ListDataSource: NSObject, ListDataSourceProtocol {
@@ -54,8 +54,8 @@ final class ListDataSource: NSObject, ListDataSourceProtocol {
         tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
     }
     
-    func save(with title: String) {
-        interactor.save(words, with: title)
+    func save(with title: String, mode: Bool) {
+        interactor.save(words, with: title, mode: mode)
     }
     
     

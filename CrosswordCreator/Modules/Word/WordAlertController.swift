@@ -103,14 +103,13 @@ final class WordAlertController: UIAlertController {
         }
         addAction(okAction)
         
-        let cancelAction = UIAlertAction(title: Constants.cancel, style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: Constants.cancel, style: .cancel)
         addAction(cancelAction)
         
         okAction.isEnabled = oldWord != nil
     }
     
     @objc private func textFieldDidChange() {
-        // TODO: Answer mustn't contain whitespace at all
         guard
             let questionTextField = textFields?[0],
             let answerTextField = textFields?[1],

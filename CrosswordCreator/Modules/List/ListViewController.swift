@@ -29,6 +29,9 @@ final class ListViewController: UIViewController {
     
     private let dataSource: WordsListDataSource
     private let xmlService: XmlServiceProtocol
+    private let mode: Bool
+    
+    private var saveButton: UIBarButtonItem?
     
     @IBOutlet private weak var tableView: UITableView!
     
@@ -38,9 +41,11 @@ final class ListViewController: UIViewController {
     // MARK: Lifecycle
     
     init(dataSource: WordsListDataSource,
-         xmlService: XmlServiceProtocol) {
+         xmlService: XmlServiceProtocol,
+         mode: Bool) {
         self.dataSource = dataSource
         self.xmlService = xmlService
+        self.mode = mode
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -78,6 +83,7 @@ final class ListViewController: UIViewController {
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save,
                                          target: self,
                                          action: #selector(willSave))
+        self.saveButton = saveButton
         
         shareButton.isEnabled = !dataSource.words.isEmpty
         saveButton.isEnabled = !dataSource.words.isEmpty
@@ -113,7 +119,13 @@ final class ListViewController: UIViewController {
     }
     
     @objc private func willSave() {
-        router?.wantsToSave()
+        if !mode {
+            router?.wantsToSave()
+        } else {
+            guard let title = title else { return }
+            dataSource.save(with: title, mode: mode)
+            self.saveButton?.isEnabled = false
+        }
     }
     
     private func getDocumentsDirectory() -> String {
@@ -197,7 +209,7 @@ extension ListViewController: ListViewControllerDelegate {
 extension ListViewController: SaveAlertControllerDelegate {
     
     func save(with title: String) {
-        dataSource.save(with: title)
+        dataSource.save(with: title, mode: mode)
         router?.wantsToGoBack()
     }
 }

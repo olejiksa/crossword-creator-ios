@@ -95,14 +95,13 @@ final class SaveAlertController: UIAlertController {
         }
         addAction(okAction)
         
-        let cancelAction = UIAlertAction(title: Constants.cancel, style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: Constants.cancel, style: .cancel)
         addAction(cancelAction)
         
         okAction.isEnabled = false
     }
     
     @objc private func textFieldDidChange() {
-        // TODO: Answer mustn't contain whitespace at all
         guard
             let titleTextField = textFields?[0],
             let isTitleEmpty = titleTextField.text?.isEmptyOrWhitespace

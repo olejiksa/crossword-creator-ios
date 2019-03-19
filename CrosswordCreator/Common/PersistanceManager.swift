@@ -118,6 +118,10 @@ final class PersistanceManager {
         save()
     }
     
+    func updateTermsList(name: String, words: [Word]) {
+        // unused
+    }
+    
     func appendNewCrossword(name: String, words: [LayoutWord]) {
         let index = fetch(entityName: "Crossword").count
         let crossword: Crossword = insert()
