@@ -27,7 +27,8 @@ final class FillRouter: FillRouterProtocol {
     }
     
     func wantsToShare(with title: String, view: UIView, layoutWords: [LayoutWord]) {
-        guard let shareViewController = ShareBuilder.viewController(with: title, layoutWords: layoutWords) else { return }
+        let wordType = ShareBuilder.WordType.gridWords(layoutWords)
+        guard let shareViewController = ShareBuilder.viewController(with: title, wordType: wordType) else { return }
         
         shareViewController.popoverPresentationController?.sourceView = view
         transitionHandler?.present(shareViewController)

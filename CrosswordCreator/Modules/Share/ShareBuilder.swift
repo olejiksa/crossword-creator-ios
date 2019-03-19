@@ -10,6 +10,12 @@ import UIKit
 
 final class ShareBuilder {
     
+    enum WordType {
+        
+        case listWords([Word])
+        case gridWords([LayoutWord])
+    }
+    
     private static let xmlService: XmlServiceProtocol = XmlService()
     
     private static var documentsDirectory: String {
@@ -19,36 +25,32 @@ final class ShareBuilder {
     }
     
     static func viewController(with title: String,
-                               words: [Word]) -> UIActivityViewController? {
-        let fileExtension = FileExtension.list.rawValue
-        let name = "\(title).\(fileExtension)"
+                               wordType: WordType) -> UIActivityViewController? {
+        let fileExtension: FileExtension
+        switch wordType {
+        case .listWords(_):
+            fileExtension = .list
+            
+        case .gridWords(_):
+            fileExtension = .grid
+        }
+        
+        let name = "\(title).\(fileExtension.rawValue)"
+        let fileURL = URL(fileURLWithPath: documentsDirectory).appendingPathComponent(name)
+        
+        let xml: String
+        switch wordType {
+        case .listWords(let words):
+            xml = xmlService.writeList(with: words)
+        
+        case .gridWords(let layoutWords):
+            xml = xmlService.writeGrid(with: layoutWords)
+        }
         
         do {
-            let fileURL = URL(fileURLWithPath: documentsDirectory).appendingPathComponent(name)
-            let xml = xmlService.writeList(with: words)
             try xml.write(to: fileURL, atomically: true, encoding: .utf8)
-            
             let activityViewController = UIActivityViewController(activityItems: [fileURL],
                                                                   applicationActivities: nil)
-            
-            return activityViewController
-        } catch {
-            return nil
-        }
-    }
-    
-    static func viewController(with title: String,
-                               layoutWords: [LayoutWord]) -> UIActivityViewController? {
-        let fileExtension = FileExtension.grid.rawValue
-        let name = "\(title).\(fileExtension)"
-        
-        do {
-            let fileURL = URL(fileURLWithPath: documentsDirectory).appendingPathComponent(name)
-            let xml = xmlService.writeGrid(with: layoutWords)
-            try xml.write(to: fileURL, atomically: true, encoding: .utf8)
-            
-            let activityViewController = UIActivityViewController(activityItems: [fileURL],
-                                                      applicationActivities: nil)
             
             return activityViewController
         } catch {

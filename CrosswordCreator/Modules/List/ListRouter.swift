@@ -44,7 +44,9 @@ final class ListRouter: ListRouterProtocol {
     }
     
     func wantsToShare(with title: String, view: UIView, words: [Word]) {
-        if let shareViewController = ShareBuilder.viewController(with: title, words: words) {
+        let wordType = ShareBuilder.WordType.listWords(words)
+
+        if let shareViewController = ShareBuilder.viewController(with: title, wordType: wordType) {
             shareViewController.popoverPresentationController?.sourceView = view
             transitionHandler?.present(shareViewController)
         }
