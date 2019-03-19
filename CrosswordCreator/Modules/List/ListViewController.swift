@@ -97,21 +97,7 @@ final class ListViewController: UIViewController {
     }
     
     @objc private func willShare() {
-        let xml = xmlService.writeList(with: dataSource.words)
-        let filename = "\(dataSource.title).\(FileExtension.list.rawValue)"
-        
-        do {
-            let fileURL = URL(fileURLWithPath: getDocumentsDirectory()).appendingPathComponent(filename)
-            try xml.write(to: fileURL, atomically: true, encoding: .utf8)
-            
-            let activityVC = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
-            
-            activityVC.popoverPresentationController?.sourceView = view
-            present(activityVC, animated: true)
-            
-        } catch {
-            print(error)
-        }
+        router?.wantsToShare(with: dataSource.title, view: view, words: dataSource.words)
     }
     
     @objc private func willCancel() {
@@ -126,12 +112,6 @@ final class ListViewController: UIViewController {
             dataSource.save(with: title, mode: mode)
             self.saveButton?.isEnabled = false
         }
-    }
-    
-    private func getDocumentsDirectory() -> String {
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
     }
 }
 

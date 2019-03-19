@@ -12,6 +12,7 @@ protocol GridRouterProtocol {
     
     func wantsToSave()
     func wantsToGoBack()
+    func wantsToShare(with title: String, view: UIView, layoutWords: [LayoutWord])
 }
 
 final class GridRouter: GridRouterProtocol {
@@ -32,5 +33,12 @@ final class GridRouter: GridRouterProtocol {
     
     func wantsToGoBack() {
         transitionHandler?.dismiss()
+    }
+    
+    func wantsToShare(with title: String, view: UIView, layoutWords: [LayoutWord]) {
+        guard let shareViewController = ShareBuilder.viewController(with: title, layoutWords: layoutWords) else { return }
+        
+        shareViewController.popoverPresentationController?.sourceView = view
+        transitionHandler?.present(shareViewController)
     }
 }

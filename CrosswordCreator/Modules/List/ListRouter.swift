@@ -13,6 +13,7 @@ protocol ListRouterProtocol {
     func wantsToOpenWordEditor(with: WordBuilder.Mode)
     func wantsToGoBack()
     func wantsToSave()
+    func wantsToShare(with title: String, view: UIView, words: [Word])
 }
 
 final class ListRouter: ListRouterProtocol {
@@ -40,5 +41,12 @@ final class ListRouter: ListRouterProtocol {
         let saveAlertController = SaveAlertController.create(with: .list)
         saveAlertController.delegate = transitionHandler
         transitionHandler?.present(saveAlertController)
+    }
+    
+    func wantsToShare(with title: String, view: UIView, words: [Word]) {
+        if let shareViewController = ShareBuilder.viewController(with: title, words: words) {
+            shareViewController.popoverPresentationController?.sourceView = view
+            transitionHandler?.present(shareViewController)
+        }
     }
 }

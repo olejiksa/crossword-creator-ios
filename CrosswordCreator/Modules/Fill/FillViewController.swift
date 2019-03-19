@@ -92,27 +92,7 @@ final class FillViewController: UIViewController {
     }
     
     @objc private func willShare() {
-        let xml = xmlService.writeGrid(with: dataSource.words)
-        let filename = "\(gridTitle).\(FileExtension.grid.rawValue)"
-        
-        do {
-            let fileURL = URL(fileURLWithPath: getDocumentsDirectory()).appendingPathComponent(filename)
-            try xml.write(to: fileURL, atomically: true, encoding: .utf8)
-            
-            let activityVC = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
-            
-            activityVC.popoverPresentationController?.sourceView = view
-            present(activityVC, animated: true)
-            
-        } catch {
-            print("cannot write file")
-        }
-    }
-    
-    private func getDocumentsDirectory() -> String {
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
+        router?.wantsToShare(with: gridTitle, view: view, layoutWords: dataSource.words)
     }
     
     @IBAction private func seeQuestions(_ sender: UIBarButtonItem) {

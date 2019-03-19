@@ -91,22 +91,7 @@ final class GridViewController: UIViewController {
     }
     
     @objc private func willShare() {
-        let xml = xmlService.writeGrid(with: dataSource.words)
-        let filename = "untitled.\(FileExtension.grid.rawValue)"
-        
-        do {
-            let fileURL = URL(fileURLWithPath: getDocumentsDirectory()).appendingPathComponent(filename)
-            try xml.write(to: fileURL, atomically: true, encoding: .utf8)
-            
-            let activityVC = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
-            
-            activityVC.popoverPresentationController?.sourceView = view
-            present(activityVC, animated: true)
-            
-        } catch {
-            print("cannot write file")
-            // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
-        }
+        router?.wantsToShare(with: "untitled", view: view, layoutWords: dataSource.words)
     }
     
     @objc private func willPrintGrid() {
@@ -126,12 +111,6 @@ final class GridViewController: UIViewController {
                                     in: strongSelf.view,
                                     animated: true)
         })
-    }
-    
-    private func getDocumentsDirectory() -> String {
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        let documentsDirectory = paths[0]
-        return documentsDirectory
     }
 }
 

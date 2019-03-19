@@ -11,6 +11,7 @@ import UIKit
 protocol FillRouterProtocol {
     
     func wantsToGoBack()
+    func wantsToShare(with title: String, view: UIView, layoutWords: [LayoutWord])
 }
 
 final class FillRouter: FillRouterProtocol {
@@ -23,5 +24,12 @@ final class FillRouter: FillRouterProtocol {
     
     func wantsToGoBack() {
         transitionHandler?.dismiss()
+    }
+    
+    func wantsToShare(with title: String, view: UIView, layoutWords: [LayoutWord]) {
+        guard let shareViewController = ShareBuilder.viewController(with: title, layoutWords: layoutWords) else { return }
+        
+        shareViewController.popoverPresentationController?.sourceView = view
+        transitionHandler?.present(shareViewController)
     }
 }

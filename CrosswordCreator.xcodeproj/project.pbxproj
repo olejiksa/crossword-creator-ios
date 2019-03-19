@@ -93,6 +93,7 @@
 		EBE6B8682194D6CC00B59EE5 /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE6B8672194D6CC00B59EE5 /* PersistanceManager.swift */; };
 		EBE6B86A2194D94D00B59EE5 /* ListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE6B8692194D94D00B59EE5 /* ListInteractor.swift */; };
 		EBE867F822416D0E004531E5 /* FillAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE867F722416D0E004531E5 /* FillAlertController.swift */; };
+		EBE8680322417BDF004531E5 /* ShareBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE8680222417BDF004531E5 /* ShareBuilder.swift */; };
 		EBE9B011222C4EC60007FA91 /* NewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE9B010222C4EC60007FA91 /* NewRouter.swift */; };
 		EBE9B013222C57800007FA91 /* GridRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE9B012222C57800007FA91 /* GridRouter.swift */; };
 /* End PBXBuildFile section */
@@ -186,6 +187,7 @@
 		EBE6B8672194D6CC00B59EE5 /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		EBE6B8692194D94D00B59EE5 /* ListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInteractor.swift; sourceTree = "<group>"; };
 		EBE867F722416D0E004531E5 /* FillAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillAlertController.swift; sourceTree = "<group>"; };
+		EBE8680222417BDF004531E5 /* ShareBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareBuilder.swift; sourceTree = "<group>"; };
 		EBE9B010222C4EC60007FA91 /* NewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRouter.swift; sourceTree = "<group>"; };
 		EBE9B012222C57800007FA91 /* GridRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -387,6 +389,7 @@
 				EB1CD98C21A07EBD005E9BB8 /* Recents */,
 				EB3CBF7A223477690043E8FB /* Roll */,
 				EB3CBF82223B29EC0043E8FB /* Save */,
+				EBE8680122417BD0004531E5 /* Share */,
 				EB21C4FC218775490074A21B /* Word */,
 			);
 			path = Modules;
@@ -438,7 +441,6 @@
 		EB7817D7217A1FFF00BA9D50 /* CrosswordCreator */ = {
 			isa = PBXGroup;
 			children = (
-				EB3CBF772234308A0043E8FB /* Modules */,
 				EB7817E4217A200000BA9D50 /* Info.plist */,
 				EB7817D8217A1FFF00BA9D50 /* AppDelegate.swift */,
 				EB7817DF217A200000BA9D50 /* Assets.xcassets */,
@@ -446,6 +448,7 @@
 				EB21C4F621876E710074A21B /* Extensions */,
 				EB7817E1217A200000BA9D50 /* LaunchScreen.storyboard */,
 				EBD4D884218CDEAB009028B5 /* Model.xcdatamodeld */,
+				EB3CBF772234308A0043E8FB /* Modules */,
 				EB214F1C2218BC0100D1C3A0 /* Services */,
 			);
 			path = CrosswordCreator;
@@ -463,6 +466,14 @@
 				EB7817EC217A244C00BA9D50 /* ListView.xib */,
 			);
 			path = List;
+			sourceTree = "<group>";
+		};
+		EBE8680122417BD0004531E5 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				EBE8680222417BDF004531E5 /* ShareBuilder.swift */,
+			);
+			path = Share;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -575,6 +586,7 @@
 				EB8FBBE42217CB2300F92DDE /* CoreDataCoreSpotlightDelegate.swift in Sources */,
 				EB7817DB217A1FFF00BA9D50 /* ListViewController.swift in Sources */,
 				EBE9B011222C4EC60007FA91 /* NewRouter.swift in Sources */,
+				EBE8680322417BDF004531E5 /* ShareBuilder.swift in Sources */,
 				EB3CBF602233EC3B0043E8FB /* XMLUnkeyedDecodingContainer.swift in Sources */,
 				EBE6B8682194D6CC00B59EE5 /* PersistanceManager.swift in Sources */,
 				EB1CD99921A0868E005E9BB8 /* GridViewController.swift in Sources */,
