@@ -17,6 +17,13 @@ final class AlertsFactory {
         case yesNoCancel
     }
     
+    static func damagedFile(_ vc: UIViewController) {
+        let title = "Damaged file"
+        let message = "Unfortunately, we can't show you this file"
+        
+        show(vc, title: title, message: message)
+    }
+    
     static func crosswordIsFilledCorrectly(_ vc: UIViewController) {
         let title = "Filled correctly"
         let message = "Wonderful! You've filled the crossword puzzle is absolutely true"

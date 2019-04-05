@@ -113,12 +113,12 @@ final class FillViewController: UIViewController {
 extension FillViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let char = dataSource.charGrid[indexPath.section][indexPath.row]
+        let letter = dataSource.charGrid[indexPath.section][indexPath.row]
         
-        if char == " " {
+        if let word = letter.word, let index = letter.index {
             let filledWord: FilledWord
-            filledWord.index = 0
-            filledWord.word = Word(question: "Vanity cases?", answer: "egos")
+            filledWord.index = index
+            filledWord.word = Word(question: word.question, answer: word.answer)
             filledWord.enteredAnswer = nil
             
             router?.wantsToFill(with: filledWord)

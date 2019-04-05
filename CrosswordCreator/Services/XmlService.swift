@@ -96,8 +96,8 @@ extension XmlService: XmlServiceProtocol {
             return sortedRaws.map { // refactor!
                 return LayoutWord(question: $0.question,
                                   answer: $0.answer,
-                                  column: ($0.y / Constants.cellSize) - 1,
-                                  row: ($0.x / Constants.cellSize) - 1,
+                                  column: ($0.x / Constants.cellSize) - 1,
+                                  row: ($0.y / Constants.cellSize) - 1,
                                   direction: $0.orientation == LayoutWord.Direction.vertical.rawValue ? .vertical : .horizontal)
             }
         } catch {

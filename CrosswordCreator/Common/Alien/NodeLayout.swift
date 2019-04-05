@@ -53,11 +53,15 @@ final class NodeLayout : UICollectionViewFlowLayout {
         let minRow : Int = (rect.origin.x > 0) ? Int(floor(rect.origin.x/(itemWidth + space))) : 0
         let maxRow : Int = min(columns - 1, Int(ceil(rect.size.width / (itemWidth + space)) + CGFloat(minRow)))
         var attributes : Array<UICollectionViewLayoutAttributes> = [UICollectionViewLayoutAttributes]()
-        for i in 0 ..< rows {
-            for j in minRow ... maxRow {
-                attributes.append(self.layoutAttributesForItem(at: IndexPath(item: j, section: i))!)
+        
+        if maxRow >= 0 {
+            for i in 0 ..< rows {
+                for j in minRow ... maxRow {
+                    attributes.append(self.layoutAttributesForItem(at: IndexPath(item: j, section: i))!)
+                }
             }
         }
+        
         return attributes
     }
 }

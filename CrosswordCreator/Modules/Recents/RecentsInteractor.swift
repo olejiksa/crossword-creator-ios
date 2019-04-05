@@ -48,7 +48,11 @@ final class RecentsInteractor: RecentsInteractorProtocol {
         guard let casted = crosswords[index].words else { return [] }
         guard let array = casted.array as? [ListWord] else { return [] }
         
-        return array.map { LayoutWord(question: $0.question!, answer: $0.answer!, column: Int(($0.gridWord!.x / 25) - 1), row: Int(($0.gridWord!.y / 25) - 1), direction: $0.gridWord!.isHorizontal ? .horizontal : .vertical) }
+        return array.map { LayoutWord(question: $0.question!,
+                                      answer: $0.answer!,
+                                      column: Int($0.gridWord!.x / 25),
+                                      row: Int($0.gridWord!.y / 25),
+                                      direction: $0.gridWord!.isHorizontal ? .horizontal : .vertical) }
     }
     
     func getWords(at index: Int) -> [Word] {
