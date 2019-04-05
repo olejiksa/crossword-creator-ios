@@ -85,7 +85,7 @@ final class ListInteractor: ListInteractorProtocol {
         if !mode {
             persistanceManager.appendNewTermsList(name: title, words: words)
         } else {
-            
+            persistanceManager.updateTermsList(name: title, words: words)
         }
     }
 }

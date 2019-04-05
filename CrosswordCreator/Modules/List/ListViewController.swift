@@ -86,7 +86,7 @@ final class ListViewController: UIViewController {
         self.saveButton = saveButton
         
         shareButton.isEnabled = !dataSource.words.isEmpty
-        saveButton.isEnabled = !dataSource.words.isEmpty
+        saveButton.isEnabled = false
         
         navigationItem.leftBarButtonItem = cancelButton
         navigationItem.rightBarButtonItems = [shareButton, saveButton]
@@ -108,8 +108,7 @@ final class ListViewController: UIViewController {
         if !mode {
             router?.wantsToSave()
         } else {
-            guard let title = title else { return }
-            dataSource.save(with: title, mode: mode)
+            dataSource.save(with: dataSource.title, mode: mode)
             self.saveButton?.isEnabled = false
         }
     }
@@ -155,6 +154,8 @@ extension ListViewController: WordAlertControllerDelegate {
         tableView.insertRows(at: [indexPath], with: .automatic)
         
         tableView.endUpdates()
+        
+        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
     }
     
     func replaceWord(by newWord: Word, at index: Int) {

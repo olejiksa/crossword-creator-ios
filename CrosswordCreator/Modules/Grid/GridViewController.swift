@@ -73,10 +73,12 @@ final class GridViewController: UIViewController {
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save,
                                          target: self,
                                          action: #selector(willSave))
+        saveButton.isEnabled = false
         
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action,
                                           target: self,
                                           action: #selector(willShare))
+        shareButton.isEnabled = false
         
         navigationItem.leftBarButtonItem = cancelButton
         navigationItem.rightBarButtonItems = [shareButton, saveButton]

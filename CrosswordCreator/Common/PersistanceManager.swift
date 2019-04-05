@@ -85,6 +85,10 @@ final class PersistanceManager {
         }
     }
     
+    func remove(_ managedObject: NSManagedObject) {
+        managedContext.delete(managedObject)
+    }
+    
     func save() {
         guard managedContext.hasChanges else { return }
         
@@ -119,7 +123,23 @@ final class PersistanceManager {
     }
     
     func updateTermsList(name: String, words: [Word]) {
-        // unused
+        let crosswords: [Crossword] = fetch(entityName: "Crossword")
+        let crossword = crosswords.first { $0.name == name && $0.isTermsList }
+        
+        crossword?.updatedOn = Date()
+        
+        let listWords: [ListWord] = words.enumerated().map {
+            let listWord = ListWord(context: managedContext)
+            listWord.id = Int16($0)
+            listWord.answer = $1.answer
+            listWord.question = $1.question
+            
+            return listWord
+        }
+        
+        crossword?.words = NSOrderedSet(array: listWords)
+        
+        save()
     }
     
     func appendNewCrossword(name: String, words: [LayoutWord]) {

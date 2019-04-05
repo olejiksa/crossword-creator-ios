@@ -97,7 +97,8 @@ final class RecentsInteractor: RecentsInteractorProtocol {
     }
     
     func removeCrossword(at index: Int) {
-        persistanceManager.remove(by: index, entityName: crosswordName)
+        let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
+        persistanceManager.remove(crosswords[index])
         persistanceManager.save()
     }
     
