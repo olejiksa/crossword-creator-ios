@@ -114,10 +114,12 @@ final class WordAlertController: UIAlertController {
             let questionTextField = textFields?[0],
             let answerTextField = textFields?[1],
             let isQuestionEmpty = questionTextField.text?.isEmptyOrWhitespace,
-            let isAnswerEmpty = answerTextField.text?.isEmptyOrWhitespace
+            let answer = answerTextField.text
         else { return }
         
+        let answerIsValid = !answer.isEmpty && !answer.contains(" ")
+        
         let okAction = actions[0]
-        okAction.isEnabled = !isQuestionEmpty && !isAnswerEmpty
+        okAction.isEnabled = !isQuestionEmpty && answerIsValid
     }
 }

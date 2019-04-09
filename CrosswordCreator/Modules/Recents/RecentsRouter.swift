@@ -12,6 +12,7 @@ protocol RecentsRouterProtocol {
     
     func wantsToOpenListEditor(with title: String, words: [Word])
     func wantsToFill(with title: String, words: [LayoutWord])
+    func wantsToCreate(with viewController: UIViewController)
 }
 
 final class RecentsRouter: RecentsRouterProtocol {
@@ -24,14 +25,19 @@ final class RecentsRouter: RecentsRouterProtocol {
     
     func wantsToOpenListEditor(with title: String, words: [Word]) {
         let vc = ListBuilder.viewController(with: title, words: words)
-        let navigationVC = UINavigationController(rootViewController: vc)
-        transitionHandler?.present(navigationVC)
+        let nvc = UINavigationController(rootViewController: vc)
+        transitionHandler?.present(nvc)
     }
     
     func wantsToFill(with title: String, words: [LayoutWord]) {
         let vc = FillBuilder.viewController(with: title, words: words)
-        
-        guard let nvc = vc.navigationController else { return }
-        transitionHandler?.present(nvc)
+        if let nvc = vc.navigationController {
+            transitionHandler?.present(nvc)
+        }
+    }
+    
+    func wantsToCreate(with viewController: UIViewController) {
+        let ac = NewBuilder.alertController(with: viewController)
+        transitionHandler?.present(ac)
     }
 }

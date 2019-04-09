@@ -104,27 +104,7 @@ final class RecentsViewController: UIViewController {
     }
     
     @objc private func willAdd() {
-        let alert = UIAlertController(title: "New",
-                                      message: "Create new terms list or crossword",
-                                      preferredStyle: .actionSheet)
-        
-        alert.addAction(UIAlertAction(title: "Terms List", style: .default) { [weak self] _ in
-            let listViewController = ListBuilder.viewController()
-            let navigationController = UINavigationController(rootViewController: listViewController)
-            
-            self?.present(navigationController)
-        })
-        
-        alert.addAction(UIAlertAction(title: "Crossword", style: .default) { [weak self] _ in
-            let gridViewController = GridBuilder.viewController(words: [])
-            let navigationController = UINavigationController(rootViewController: gridViewController)
-            
-            self?.present(navigationController)
-        })
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-
-        present(alert)
+        router?.wantsToCreate(with: self)
     }
 }
 

@@ -116,7 +116,7 @@ final class ListViewController: UIViewController {
 
 protocol ListViewControllerDelegate: class {
     
-    func updateVisibility(with isEmpty: Bool)
+    func updateVisibility()
 }
 
 
@@ -177,8 +177,8 @@ extension ListViewController: WordAlertControllerDelegate {
 
 extension ListViewController: ListViewControllerDelegate {
     
-    func updateVisibility(with isEmpty: Bool) {
-        navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = !isEmpty }
+    func updateVisibility() {
+        navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = true }
     }
 }
 

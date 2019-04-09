@@ -25,7 +25,7 @@ final class ShareBuilder {
     }
     
     static func viewController(with title: String,
-                               wordType: WordType) -> UIActivityViewController? {
+                               wordType: WordType) -> UIActivityViewController {
         let fileExtension: FileExtension
         switch wordType {
         case .listWords(_):
@@ -47,14 +47,10 @@ final class ShareBuilder {
             xml = xmlService.writeGrid(with: layoutWords)
         }
         
-        do {
-            try xml.write(to: fileURL, atomically: true, encoding: .utf8)
-            let activityViewController = UIActivityViewController(activityItems: [fileURL],
-                                                                  applicationActivities: nil)
-            
-            return activityViewController
-        } catch {
-            return nil
-        }
+        try? xml.write(to: fileURL, atomically: true, encoding: .utf8)
+        let activityViewController = UIActivityViewController(activityItems: [fileURL],
+                                                              applicationActivities: nil)
+        
+        return activityViewController
     }
 }

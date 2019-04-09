@@ -40,15 +40,14 @@ final class ListRouter: ListRouterProtocol {
     func wantsToSave() {
         let saveAlertController = SaveAlertController.create(with: .list)
         saveAlertController.delegate = transitionHandler
+        
         transitionHandler?.present(saveAlertController)
     }
     
     func wantsToShare(with title: String, view: UIView, words: [Word]) {
         let wordType = ShareBuilder.WordType.listWords(words)
-
-        if let shareViewController = ShareBuilder.viewController(with: title, wordType: wordType) {
-            shareViewController.popoverPresentationController?.sourceView = view
-            transitionHandler?.present(shareViewController)
-        }
+        let shareViewController = ShareBuilder.viewController(with: title, wordType: wordType)
+        shareViewController.popoverPresentationController?.sourceView = view
+        transitionHandler?.present(shareViewController)
     }
 }

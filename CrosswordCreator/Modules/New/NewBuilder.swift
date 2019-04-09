@@ -10,14 +10,9 @@ import UIKit
 
 final class NewBuilder {
     
-    static func viewController() -> NewViewController {
-        let viewController = NewViewController()
-        let navigationController = UINavigationController(rootViewController: viewController)
-
-        let router = NewRouter(transitionHandler: viewController,
-                               navigationTransitionHandler: navigationController)
-        viewController.router = router
-        
-        return viewController
+    static func alertController(with transitionHandler: ViewTransitionHandler) -> NewAlertController {
+        let router = NewRouter(transitionHandler: transitionHandler)
+        let alertController = NewAlertController.create(with: router)
+        return alertController
     }
 }

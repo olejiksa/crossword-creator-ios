@@ -34,8 +34,6 @@
 		EB214F282218C28100D1C3A0 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB214F272218C28100D1C3A0 /* Parser.swift */; };
 		EB214F2A2218D7FE00D1C3A0 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB214F292218D7FE00D1C3A0 /* RoundButton.swift */; };
 		EB214F2E221980AB00D1C3A0 /* NewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB214F2D221980AB00D1C3A0 /* NewBuilder.swift */; };
-		EB214F31221980F700D1C3A0 /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB214F2F221980F700D1C3A0 /* NewViewController.swift */; };
-		EB214F32221980F700D1C3A0 /* NewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB214F30221980F700D1C3A0 /* NewView.xib */; };
 		EB214F352219840100D1C3A0 /* HelpBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB214F342219840100D1C3A0 /* HelpBuilder.swift */; };
 		EB214F382219840F00D1C3A0 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB214F362219840F00D1C3A0 /* HelpViewController.swift */; };
 		EB214F392219840F00D1C3A0 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB214F372219840F00D1C3A0 /* HelpViewController.xib */; };
@@ -48,7 +46,6 @@
 		EB2734272206E6BE00ABAC20 /* ArrayShuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2734262206E6BE00ABAC20 /* ArrayShuffle.swift */; };
 		EB2734292206E6C300ABAC20 /* CrosswordsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2734282206E6C300ABAC20 /* CrosswordsGenerator.swift */; };
 		EB27342B2206F58A00ABAC20 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB27342A2206F58A00ABAC20 /* String+Subscript.swift */; };
-		EB27342D2206FA4200ABAC20 /* View+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB27342C2206FA4200ABAC20 /* View+Image.swift */; };
 		EB27342F2206FCBB00ABAC20 /* ScrollViewImager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB27342E2206FCBB00ABAC20 /* ScrollViewImager.swift */; };
 		EB30560021F8ECEA00E9F6EE /* GridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3055FE21F8ECEA00E9F6EE /* GridViewCell.swift */; };
 		EB30560121F8ECEA00E9F6EE /* GridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3055FF21F8ECEA00E9F6EE /* GridViewCell.xib */; };
@@ -98,6 +95,7 @@
 		EBE8680322417BDF004531E5 /* ShareBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE8680222417BDF004531E5 /* ShareBuilder.swift */; };
 		EBE9B011222C4EC60007FA91 /* NewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE9B010222C4EC60007FA91 /* NewRouter.swift */; };
 		EBE9B013222C57800007FA91 /* GridRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE9B012222C57800007FA91 /* GridRouter.swift */; };
+		EBF1EBCD225D214200BBA28D /* NewAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF1EBCC225D214200BBA28D /* NewAlertController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,8 +126,6 @@
 		EB214F272218C28100D1C3A0 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		EB214F292218D7FE00D1C3A0 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		EB214F2D221980AB00D1C3A0 /* NewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBuilder.swift; sourceTree = "<group>"; };
-		EB214F2F221980F700D1C3A0 /* NewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
-		EB214F30221980F700D1C3A0 /* NewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewView.xib; sourceTree = "<group>"; };
 		EB214F342219840100D1C3A0 /* HelpBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpBuilder.swift; sourceTree = "<group>"; };
 		EB214F362219840F00D1C3A0 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		EB214F372219840F00D1C3A0 /* HelpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
@@ -142,7 +138,6 @@
 		EB2734262206E6BE00ABAC20 /* ArrayShuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayShuffle.swift; sourceTree = "<group>"; };
 		EB2734282206E6C300ABAC20 /* CrosswordsGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrosswordsGenerator.swift; sourceTree = "<group>"; };
 		EB27342A2206F58A00ABAC20 /* String+Subscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Subscript.swift"; sourceTree = "<group>"; };
-		EB27342C2206FA4200ABAC20 /* View+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Image.swift"; sourceTree = "<group>"; };
 		EB27342E2206FCBB00ABAC20 /* ScrollViewImager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewImager.swift; sourceTree = "<group>"; };
 		EB3055FE21F8ECEA00E9F6EE /* GridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewCell.swift; sourceTree = "<group>"; };
 		EB3055FF21F8ECEA00E9F6EE /* GridViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GridViewCell.xib; sourceTree = "<group>"; };
@@ -194,6 +189,7 @@
 		EBE8680222417BDF004531E5 /* ShareBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareBuilder.swift; sourceTree = "<group>"; };
 		EBE9B010222C4EC60007FA91 /* NewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRouter.swift; sourceTree = "<group>"; };
 		EBE9B012222C57800007FA91 /* GridRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridRouter.swift; sourceTree = "<group>"; };
+		EBF1EBCC225D214200BBA28D /* NewAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAlertController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,8 +307,7 @@
 			children = (
 				EB214F2D221980AB00D1C3A0 /* NewBuilder.swift */,
 				EBE9B010222C4EC60007FA91 /* NewRouter.swift */,
-				EB214F2F221980F700D1C3A0 /* NewViewController.swift */,
-				EB214F30221980F700D1C3A0 /* NewView.xib */,
+				EBF1EBCC225D214200BBA28D /* NewAlertController.swift */,
 			);
 			path = New;
 			sourceTree = "<group>";
@@ -333,7 +328,6 @@
 				EB21C4F421876DBF0074A21B /* String+IsEmptyOrWhitespace.swift */,
 				EB27342A2206F58A00ABAC20 /* String+Subscript.swift */,
 				EB002D2A218CC46B00A89806 /* Controller+TransitionHandler.swift */,
-				EB27342C2206FA4200ABAC20 /* View+Image.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -553,7 +547,6 @@
 				EB3CBF812234785F0043E8FB /* RollView.xib in Resources */,
 				EB1CD99521A08642005E9BB8 /* GridView.xib in Resources */,
 				EB3CBF70223425A10043E8FB /* FillView.xib in Resources */,
-				EB214F32221980F700D1C3A0 /* NewView.xib in Resources */,
 				EB1CD99221A08089005E9BB8 /* RecentsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,7 +565,6 @@
 				EB21C4F521876DBF0074A21B /* String+IsEmptyOrWhitespace.swift in Sources */,
 				EB2734272206E6BE00ABAC20 /* ArrayShuffle.swift in Sources */,
 				EB214F222218C24000D1C3A0 /* Element.swift in Sources */,
-				EB214F31221980F700D1C3A0 /* NewViewController.swift in Sources */,
 				EB2734292206E6C300ABAC20 /* CrosswordsGenerator.swift in Sources */,
 				EB21C4F92187705C0074A21B /* WordAlertController.swift in Sources */,
 				EB002D2B218CC46B00A89806 /* Controller+TransitionHandler.swift in Sources */,
@@ -587,6 +579,7 @@
 				EB8FBBE22217B6C000F92DDE /* RecentsInteractor.swift in Sources */,
 				EB3CBF792234311A0043E8FB /* AlertsFactory.swift in Sources */,
 				EB30560021F8ECEA00E9F6EE /* GridViewCell.swift in Sources */,
+				EBF1EBCD225D214200BBA28D /* NewAlertController.swift in Sources */,
 				EB6DFD1B2257E1920058C83A /* RollCell.swift in Sources */,
 				EB3CBF72223427380043E8FB /* FillRouter.swift in Sources */,
 				EB3CBF4E2233EBF80043E8FB /* XMLKey.swift in Sources */,
@@ -612,7 +605,6 @@
 				EB21C5022187893A0074A21B /* ListViewCell.swift in Sources */,
 				EB1CD98E21A07ED8005E9BB8 /* RecentsBuilder.swift in Sources */,
 				EB002D1B218B958C00A89806 /* HomeViewController.swift in Sources */,
-				EB27342D2206FA4200ABAC20 /* View+Image.swift in Sources */,
 				EB002D20218CB83700A89806 /* ListBuilder.swift in Sources */,
 				EBE6B86A2194D94D00B59EE5 /* ListInteractor.swift in Sources */,
 				EBD4D886218CDEAB009028B5 /* Model.xcdatamodeld in Sources */,

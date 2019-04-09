@@ -135,7 +135,7 @@ extension ListDataSource: UITableViewDataSource {
         tableView.deleteRows(at: [indexPath], with: .automatic)
         tableView.endUpdates()
         
-        vc?.updateVisibility(with: words.isEmpty)
+        vc?.updateVisibility()
     }
     
     func tableView(_ tableView: UITableView,
@@ -155,11 +155,12 @@ extension ListDataSource: WordAlertControllerDelegate {
         words.append(word)
         interactor.updateWord((word, lastIndex))
         
-        vc?.updateVisibility(with: false)
+        vc?.updateVisibility()
     }
     
     func replaceWord(by newWord: Word, at index: Int) {
         words[index] = newWord
         interactor.updateWord((newWord, index))
+        vc?.updateVisibility()
     }
 }
