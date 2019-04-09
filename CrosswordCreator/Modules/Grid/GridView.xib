@@ -35,7 +35,7 @@
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="dH5-IB-5OT" secondAttribute="trailing" id="1Xg-eu-aY9"/>
                 <constraint firstItem="dH5-IB-5OT" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="KFF-gw-mAq"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="dH5-IB-5OT" secondAttribute="bottom" id="hLO-Jq-s22"/>
+                <constraint firstAttribute="bottom" secondItem="dH5-IB-5OT" secondAttribute="bottom" id="hLO-Jq-s22"/>
                 <constraint firstItem="dH5-IB-5OT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ydf-Mm-oM7"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

@@ -70,6 +70,10 @@ final class TermsViewController: UIViewController {
     @IBAction func willOpen(_ sender: UIBarButtonItem) {
         router?.wantsToOpen(with: self)
     }
+    
+    @IBAction func willNext(_ sender: UIBarButtonItem) {
+        router?.wantsToGenerate(with: words)
+    }
 }
 
 

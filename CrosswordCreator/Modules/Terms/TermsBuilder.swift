@@ -6,11 +6,15 @@
 //  Copyright © 2019 Oleg Samoylov. All rights reserved.
 //
 
+import UIKit
+
 final class TermsBuilder {
     
     static func viewController() -> TermsViewController {
         let viewController = TermsViewController()
-        let router = TermsRouter(transitionHandler: viewController)
+        let navigationController = UINavigationController(rootViewController: viewController)
+        let router = TermsRouter(transitionHandler: viewController,
+                                 navigationTransitionHandler: navigationController)
         viewController.router = router
         return viewController
     }

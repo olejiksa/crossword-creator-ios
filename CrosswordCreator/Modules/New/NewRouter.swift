@@ -36,10 +36,10 @@ final class NewRouter: NewRouterProtocol {
     }
     
     func wantsToOpenGridEditor() {
-        //let gridViewController = GridBuilder.viewController(words: [])
         let termsViewController = TermsBuilder.viewController()
-        let navigationController = UINavigationController(rootViewController: termsViewController)
-        transitionHandler?.present(navigationController)
+        if let navigationController = termsViewController.navigationController {
+            transitionHandler?.present(navigationController)
+        }
     }
     
     func wantsToOpenGridEditor(_ action: UIAlertAction) {

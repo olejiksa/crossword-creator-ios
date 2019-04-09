@@ -12,14 +12,18 @@ protocol TermsRouterProtocol {
     
     func wantsToGoBack()
     func wantsToOpen(with inputVC: RecentsModuleOutput)
+    func wantsToGenerate(with words: [Word])
 }
 
 final class TermsRouter: TermsRouterProtocol {
     
     private weak var transitionHandler: ViewTransitionHandler?
+    private weak var navigationTransitionHandler: NavigationTransitionHandler?
     
-    init(transitionHandler: ViewTransitionHandler) {
+    init(transitionHandler: ViewTransitionHandler,
+         navigationTransitionHandler: NavigationTransitionHandler?) {
         self.transitionHandler = transitionHandler
+        self.navigationTransitionHandler = navigationTransitionHandler
     }
     
     func wantsToGoBack() {
@@ -31,5 +35,10 @@ final class TermsRouter: TermsRouterProtocol {
         if let nvc = vc.navigationController {
             transitionHandler?.present(nvc)
         }
+    }
+    
+    func wantsToGenerate(with words: [Word]) {
+        let gridViewController = GridBuilder.viewController(words: words)
+        navigationTransitionHandler?.push(gridViewController)
     }
 }
