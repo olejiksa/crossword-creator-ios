@@ -57,32 +57,6 @@ final class ListDataSource: NSObject, ListDataSourceProtocol {
     func save(with title: String, mode: Bool) {
         interactor.save(words, with: title, mode: mode)
     }
-    
-    
-    // MARK: Private
-    
-    private func setupEmptyView(in tableView: UITableView) {
-        let origin = CGPoint(x: 0, y: 0)
-        let width = tableView.bounds.size.width
-        let height = tableView.bounds.size.height
-        let size = CGSize(width: width, height: height)
-        let rectangle = CGRect(origin: origin, size: size)
-        
-        let noItemsLabel = UILabel(frame: rectangle)
-        noItemsLabel.text = Constants.noWords
-        noItemsLabel.textColor = .gray
-        noItemsLabel.numberOfLines = 0
-        noItemsLabel.textAlignment = .center
-        noItemsLabel.sizeToFit()
-        
-        tableView.backgroundView = noItemsLabel
-        tableView.separatorStyle = .none
-    }
-    
-    private func restore(in tableView: UITableView) {
-        tableView.backgroundView = nil
-        tableView.separatorStyle = .singleLine
-    }
 }
 
 
@@ -98,9 +72,9 @@ extension ListDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if words.isEmpty {
-            setupEmptyView(in: tableView)
+            tableView.setupEmptyView(with: Constants.noWords)
         } else {
-            restore(in: tableView)
+            tableView.restore()
         }
         
         return words.count

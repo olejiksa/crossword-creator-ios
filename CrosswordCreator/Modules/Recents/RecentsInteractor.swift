@@ -40,7 +40,7 @@ final class RecentsInteractor: RecentsInteractorProtocol {
     
     func getCrosswordWithDates() -> [(String, Date, Bool)] {
         let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
-        return crosswords.map { ($0.name ?? "Untitled", $0.createdOn ?? Date(), $0.isTermsList) }
+        return crosswords.map { ($0.name ?? "Untitled", $0.updatedOn ?? Date(), $0.isTermsList) }
     }
     
     func getLayoutWords(at index: Int) -> [LayoutWord] {

@@ -96,6 +96,13 @@
 		EBE9B011222C4EC60007FA91 /* NewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE9B010222C4EC60007FA91 /* NewRouter.swift */; };
 		EBE9B013222C57800007FA91 /* GridRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE9B012222C57800007FA91 /* GridRouter.swift */; };
 		EBF1EBCD225D214200BBA28D /* NewAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF1EBCC225D214200BBA28D /* NewAlertController.swift */; };
+		EBF1EBD7225D2DC500BBA28D /* TermsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF1EBD6225D2DC500BBA28D /* TermsBuilder.swift */; };
+		EBF1EBDA225D2DEC00BBA28D /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF1EBD8225D2DEC00BBA28D /* TermsViewController.swift */; };
+		EBF1EBDB225D2DEC00BBA28D /* TermsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBF1EBD9225D2DEC00BBA28D /* TermsView.xib */; };
+		EBF1EBDD225D304600BBA28D /* TermsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF1EBDC225D304600BBA28D /* TermsRouter.swift */; };
+		EBF1EBDF225D32DD00BBA28D /* Table+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF1EBDE225D32DD00BBA28D /* Table+Empty.swift */; };
+		EBF1EBE1225D446D00BBA28D /* SubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF1EBE0225D446C00BBA28D /* SubtitleTableViewCell.swift */; };
+		EBF1EBE3225D4E2E00BBA28D /* RecentsModuleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF1EBE2225D4E2E00BBA28D /* RecentsModuleIO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -190,6 +197,13 @@
 		EBE9B010222C4EC60007FA91 /* NewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRouter.swift; sourceTree = "<group>"; };
 		EBE9B012222C57800007FA91 /* GridRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridRouter.swift; sourceTree = "<group>"; };
 		EBF1EBCC225D214200BBA28D /* NewAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAlertController.swift; sourceTree = "<group>"; };
+		EBF1EBD6225D2DC500BBA28D /* TermsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsBuilder.swift; sourceTree = "<group>"; };
+		EBF1EBD8225D2DEC00BBA28D /* TermsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
+		EBF1EBD9225D2DEC00BBA28D /* TermsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsView.xib; sourceTree = "<group>"; };
+		EBF1EBDC225D304600BBA28D /* TermsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsRouter.swift; sourceTree = "<group>"; };
+		EBF1EBDE225D32DD00BBA28D /* Table+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Table+Empty.swift"; sourceTree = "<group>"; };
+		EBF1EBE0225D446C00BBA28D /* SubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleTableViewCell.swift; sourceTree = "<group>"; };
+		EBF1EBE2225D4E2E00BBA28D /* RecentsModuleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsModuleIO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +239,7 @@
 				EB3CBF492233DB130043E8FB /* ShortcutIdentifier.swift */,
 				EB002D28218CC34100A89806 /* TransitionHandler.swift */,
 				EB3CBF8C223B3DA70043E8FB /* FileExtension.swift */,
+				EBF1EBE0225D446C00BBA28D /* SubtitleTableViewCell.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -247,6 +262,7 @@
 				EB3CBF8A223B389E0043E8FB /* RecentsRouter.swift */,
 				EB1CD98F21A07EED005E9BB8 /* RecentsViewController.swift */,
 				EB1CD99121A08089005E9BB8 /* RecentsView.xib */,
+				EBF1EBE2225D4E2E00BBA28D /* RecentsModuleIO.swift */,
 			);
 			path = Recents;
 			sourceTree = "<group>";
@@ -325,9 +341,10 @@
 		EB21C4F621876E710074A21B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				EB002D2A218CC46B00A89806 /* Controller+TransitionHandler.swift */,
 				EB21C4F421876DBF0074A21B /* String+IsEmptyOrWhitespace.swift */,
 				EB27342A2206F58A00ABAC20 /* String+Subscript.swift */,
-				EB002D2A218CC46B00A89806 /* Controller+TransitionHandler.swift */,
+				EBF1EBDE225D32DD00BBA28D /* Table+Empty.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -388,6 +405,7 @@
 				EB3CBF7A223477690043E8FB /* Roll */,
 				EB3CBF82223B29EC0043E8FB /* Save */,
 				EBE8680122417BD0004531E5 /* Share */,
+				EBF1EBD5225D2DB600BBA28D /* Terms */,
 				EB21C4FC218775490074A21B /* Word */,
 			);
 			path = Modules;
@@ -476,6 +494,17 @@
 			path = Share;
 			sourceTree = "<group>";
 		};
+		EBF1EBD5225D2DB600BBA28D /* Terms */ = {
+			isa = PBXGroup;
+			children = (
+				EBF1EBD6225D2DC500BBA28D /* TermsBuilder.swift */,
+				EBF1EBDC225D304600BBA28D /* TermsRouter.swift */,
+				EBF1EBD8225D2DEC00BBA28D /* TermsViewController.swift */,
+				EBF1EBD9225D2DEC00BBA28D /* TermsView.xib */,
+			);
+			path = Terms;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -541,6 +570,7 @@
 				EB30560121F8ECEA00E9F6EE /* GridViewCell.xib in Resources */,
 				EB002D1C218B958C00A89806 /* HomeView.xib in Resources */,
 				EB7817E0217A200000BA9D50 /* Assets.xcassets in Resources */,
+				EBF1EBDB225D2DEC00BBA28D /* TermsView.xib in Resources */,
 				EB6DFD1C2257E1920058C83A /* RollCell.xib in Resources */,
 				EB3CBF89223B32250043E8FB /* RecentsCell.xib in Resources */,
 				EB7817ED217A244C00BA9D50 /* ListView.xib in Resources */,
@@ -561,9 +591,11 @@
 				EB214F382219840F00D1C3A0 /* HelpViewController.swift in Sources */,
 				EB002D1E218CB7C900A89806 /* HomeBuilder.swift in Sources */,
 				EB1CD99021A07EED005E9BB8 /* RecentsViewController.swift in Sources */,
+				EBF1EBE1225D446D00BBA28D /* SubtitleTableViewCell.swift in Sources */,
 				EB27342B2206F58A00ABAC20 /* String+Subscript.swift in Sources */,
 				EB21C4F521876DBF0074A21B /* String+IsEmptyOrWhitespace.swift in Sources */,
 				EB2734272206E6BE00ABAC20 /* ArrayShuffle.swift in Sources */,
+				EBF1EBD7225D2DC500BBA28D /* TermsBuilder.swift in Sources */,
 				EB214F222218C24000D1C3A0 /* Element.swift in Sources */,
 				EB2734292206E6C300ABAC20 /* CrosswordsGenerator.swift in Sources */,
 				EB21C4F92187705C0074A21B /* WordAlertController.swift in Sources */,
@@ -573,6 +605,7 @@
 				EB3CBF672233F0250043E8FB /* XMLEncodingStorage.swift in Sources */,
 				EBE867F822416D0E004531E5 /* FillAlertController.swift in Sources */,
 				EB1CD98721962579005E9BB8 /* MainBuilder.swift in Sources */,
+				EBF1EBDA225D2DEC00BBA28D /* TermsViewController.swift in Sources */,
 				EB3CBF4C2233EBF10043E8FB /* ISO8601DateFormatter.swift in Sources */,
 				EB3CBF692233F0290043E8FB /* XMLReferencingEncoder.swift in Sources */,
 				EB3CBF8D223B3DA70043E8FB /* FileExtension.swift in Sources */,
@@ -586,6 +619,7 @@
 				EB3CBF4A2233DB130043E8FB /* ShortcutIdentifier.swift in Sources */,
 				EB214F282218C28100D1C3A0 /* Parser.swift in Sources */,
 				EB8FBBE42217CB2300F92DDE /* CoreDataCoreSpotlightDelegate.swift in Sources */,
+				EBF1EBDF225D32DD00BBA28D /* Table+Empty.swift in Sources */,
 				EB7817DB217A1FFF00BA9D50 /* ListViewController.swift in Sources */,
 				EBE9B011222C4EC60007FA91 /* NewRouter.swift in Sources */,
 				EBE8680322417BDF004531E5 /* ShareBuilder.swift in Sources */,
@@ -594,6 +628,7 @@
 				EB1CD99921A0868E005E9BB8 /* GridViewController.swift in Sources */,
 				EB214F1922182A6B00D1C3A0 /* SaveAlertController.swift in Sources */,
 				EB214F262218C26B00D1C3A0 /* Options.swift in Sources */,
+				EBF1EBDD225D304600BBA28D /* TermsRouter.swift in Sources */,
 				EB002D24218CBF9400A89806 /* ListRouter.swift in Sources */,
 				EB7817D9217A1FFF00BA9D50 /* AppDelegate.swift in Sources */,
 				EB214F1E2218BD3300D1C3A0 /* XmlService.swift in Sources */,
@@ -623,6 +658,7 @@
 				EB3CBF652233F0210043E8FB /* XMLEncoder.swift in Sources */,
 				EBE9B013222C57800007FA91 /* GridRouter.swift in Sources */,
 				EB1CD99721A0865B005E9BB8 /* GridBuilder.swift in Sources */,
+				EBF1EBE3225D4E2E00BBA28D /* RecentsModuleIO.swift in Sources */,
 				EB3CBF8B223B389E0043E8FB /* RecentsRouter.swift in Sources */,
 				EB8FBBE02217AAE900F92DDE /* GridInteractor.swift in Sources */,
 				EB3CBF6F223425A10043E8FB /* FillViewController.swift in Sources */,

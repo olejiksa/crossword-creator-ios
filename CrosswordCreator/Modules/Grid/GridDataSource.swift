@@ -20,7 +20,6 @@ final class GridDataSource: NSObject, GridDataSourceProtocol {
     
     private enum Constants {
         
-        static let noWords = "You don't have any words yet"
         static let cellIdentifier = "GridViewCell"
     }
     

@@ -10,14 +10,17 @@ import UIKit
 
 final class RecentsBuilder {
     
-    static func viewController() -> RecentsViewController {
+    static func viewController(with mode: RecentsViewController.Mode = .standard,
+                               moduleOutput: RecentsModuleOutput? = nil) -> RecentsViewController {
         let interactor = RecentsInteractor()
         
-        let vc = RecentsViewController(interactor: interactor)
+        let vc = RecentsViewController(interactor: interactor, mode: mode)
         let navigationVC = UINavigationController(rootViewController: vc)
         
         let router = RecentsRouter(transitionHandler: navigationVC)
         vc.router = router
+        
+        vc.moduleOutput = moduleOutput
         
         return vc
     }
