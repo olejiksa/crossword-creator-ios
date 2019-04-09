@@ -25,7 +25,7 @@ final class GridViewCell: UICollectionViewCell {
         switch type {
         case .white:
             letter.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-            view.backgroundColor = .lightText
+            view.backgroundColor = UIColor.lightText.withAlphaComponent(0.25)
             letter.textColor = .clear
             
         case .black(let char):
@@ -35,7 +35,7 @@ final class GridViewCell: UICollectionViewCell {
             letter.textColor = .black
             
         case .indexed(var char):
-            view.backgroundColor = .white
+            view.backgroundColor = UIColor.lightText.withAlphaComponent(0.75)
             letter.font = UIFont.systemFont(ofSize: 18, weight: .bold)
             _ = char.removeLast()
             letter.text = char

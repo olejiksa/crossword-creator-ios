@@ -12,6 +12,7 @@ protocol FillDataSourceProtocol {
     
     var charGrid: [[FillDataSource.Letter]] { get }
     var words: [LayoutWord] { get }
+    var enteredAnswers: [String] { get }
     
     func setup(with: UICollectionView)
 }
@@ -39,6 +40,8 @@ final class FillDataSource: NSObject, FillDataSourceProtocol {
     var charGrid: [[Letter]] = []
     let words: [LayoutWord]
     
+    var enteredAnswers: [String]
+    
     
     
     
@@ -46,6 +49,7 @@ final class FillDataSource: NSObject, FillDataSourceProtocol {
     
     init(words: [LayoutWord]) {
         self.words = words
+        self.enteredAnswers = Array(repeating: "", count: words.count)
         
         super.init()
         
@@ -142,7 +146,7 @@ extension FillDataSource: UICollectionViewDataSource {
             cell = dequeuedCell
             
             let letter = charGrid[indexPath.section][indexPath.row]
-            if letter.value.last == " " {
+            if letter.value.last == " " && letter.value.count > 1 {
                 cell.setup(with: .indexed(letter.value))
             } else if letter.value == "" {
                 cell.setup(with: .white)

@@ -80,6 +80,8 @@
 		EB3CBF89223B32250043E8FB /* RecentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3CBF87223B32250043E8FB /* RecentsCell.xib */; };
 		EB3CBF8B223B389E0043E8FB /* RecentsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF8A223B389E0043E8FB /* RecentsRouter.swift */; };
 		EB3CBF8D223B3DA70043E8FB /* FileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF8C223B3DA70043E8FB /* FileExtension.swift */; };
+		EB6DFD1B2257E1920058C83A /* RollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DFD192257E1920058C83A /* RollCell.swift */; };
+		EB6DFD1C2257E1920058C83A /* RollCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB6DFD1A2257E1920058C83A /* RollCell.xib */; };
 		EB7817D9217A1FFF00BA9D50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7817D8217A1FFF00BA9D50 /* AppDelegate.swift */; };
 		EB7817DB217A1FFF00BA9D50 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7817DA217A1FFF00BA9D50 /* ListViewController.swift */; };
 		EB7817E0217A200000BA9D50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB7817DF217A200000BA9D50 /* Assets.xcassets */; };
@@ -172,6 +174,8 @@
 		EB3CBF87223B32250043E8FB /* RecentsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentsCell.xib; sourceTree = "<group>"; };
 		EB3CBF8A223B389E0043E8FB /* RecentsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsRouter.swift; sourceTree = "<group>"; };
 		EB3CBF8C223B3DA70043E8FB /* FileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExtension.swift; sourceTree = "<group>"; };
+		EB6DFD192257E1920058C83A /* RollCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollCell.swift; sourceTree = "<group>"; };
+		EB6DFD1A2257E1920058C83A /* RollCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RollCell.xib; sourceTree = "<group>"; };
 		EB7817D5217A1FFF00BA9D50 /* CrosswordCreator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrosswordCreator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB7817D8217A1FFF00BA9D50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB7817DA217A1FFF00BA9D50 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -401,6 +405,8 @@
 				EB3CBF7C223478020043E8FB /* RollBuilder.swift */,
 				EB3CBF7E2234785F0043E8FB /* RollViewController.swift */,
 				EB3CBF7F2234785F0043E8FB /* RollView.xib */,
+				EB6DFD192257E1920058C83A /* RollCell.swift */,
+				EB6DFD1A2257E1920058C83A /* RollCell.xib */,
 			);
 			path = Roll;
 			sourceTree = "<group>";
@@ -541,6 +547,7 @@
 				EB30560121F8ECEA00E9F6EE /* GridViewCell.xib in Resources */,
 				EB002D1C218B958C00A89806 /* HomeView.xib in Resources */,
 				EB7817E0217A200000BA9D50 /* Assets.xcassets in Resources */,
+				EB6DFD1C2257E1920058C83A /* RollCell.xib in Resources */,
 				EB3CBF89223B32250043E8FB /* RecentsCell.xib in Resources */,
 				EB7817ED217A244C00BA9D50 /* ListView.xib in Resources */,
 				EB3CBF812234785F0043E8FB /* RollView.xib in Resources */,
@@ -580,6 +587,7 @@
 				EB8FBBE22217B6C000F92DDE /* RecentsInteractor.swift in Sources */,
 				EB3CBF792234311A0043E8FB /* AlertsFactory.swift in Sources */,
 				EB30560021F8ECEA00E9F6EE /* GridViewCell.swift in Sources */,
+				EB6DFD1B2257E1920058C83A /* RollCell.swift in Sources */,
 				EB3CBF72223427380043E8FB /* FillRouter.swift in Sources */,
 				EB3CBF4E2233EBF80043E8FB /* XMLKey.swift in Sources */,
 				EB3CBF4A2233DB130043E8FB /* ShortcutIdentifier.swift in Sources */,

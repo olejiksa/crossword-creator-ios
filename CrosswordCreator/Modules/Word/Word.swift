@@ -15,7 +15,7 @@ struct Word {
 typealias OrderedWord = (word: Word, index: Int)
 typealias FilledWord = (word: Word, index: Int, enteredAnswer: String?)
 
-struct LayoutWord {
+struct LayoutWord: Equatable {
     
     enum Direction: String {
         

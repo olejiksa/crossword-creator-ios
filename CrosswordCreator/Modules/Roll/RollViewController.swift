@@ -24,11 +24,19 @@ final class RollViewController: UIViewController {
     
     @IBOutlet private weak var tableView: UITableView!
     
-    private let words: [Word]
+    private let words: [LayoutWord]
     private let mode: Mode
-    private let cellIdentifier = "\(UITableViewCell.self)"
+    private let cellIdentifier = "\(RollCell.self)"
     
-    init(with words: [Word], mode: Mode) {
+    var across: [LayoutWord] {
+        return words.filter { $0.direction == .horizontal }
+    }
+    
+    var down: [LayoutWord] {
+        return words.filter { $0.direction == .vertical }
+    }
+    
+    init(with words: [LayoutWord], mode: Mode) {
         self.words = words
         self.mode = mode
         
@@ -45,7 +53,10 @@ final class RollViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.register(UITableViewCell.self,
+        tableView.estimatedRowHeight = 44.0
+        tableView.rowHeight = UITableView.automaticDimension
+        
+        tableView.register(UINib(nibName: "\(RollCell.self)", bundle: Bundle.main),
                            forCellReuseIdentifier: cellIdentifier)
         
         title = mode == .questions ? Constants.questions : Constants.words
@@ -60,15 +71,27 @@ final class RollViewController: UIViewController {
 
 extension RollViewController: UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return section == 0 ? "Across" : "Down"
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return words.count
+        return section == 0 ? across.count : down.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let word = words[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        cell.textLabel?.text = mode == .questions ? word.question : word.answer
-        return cell
+        let word = indexPath.section == 0 ? across[indexPath.row] : down[indexPath.row]
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? RollCell {
+            cell.nameLabel?.text = mode == .questions ? word.question : word.answer
+            cell.indexLabel?.text = String((words.enumerated().first(where: { $0.element == word })?.offset ?? 0) + 1)
+            return cell
+        } else {
+            return UITableViewCell(style: .default, reuseIdentifier: cellIdentifier)
+        }
     }
 }
 

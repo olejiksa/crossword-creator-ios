@@ -13,15 +13,17 @@ protocol FillRouterProtocol {
     func wantsToGoBack()
     func wantsToShare(with title: String, view: UIView, layoutWords: [LayoutWord])
     func wantsToFill(with filledWord: FilledWord)
-    func wantsToSeeQuestions(with words: [Word])
+    func wantsToSeeQuestions(with words: [LayoutWord])
 }
 
 final class FillRouter: FillRouterProtocol {
     
-    private weak var transitionHandler: ViewTransitionHandler?
+    typealias FillTransitionHandler = ViewTransitionHandler & FillAlertControllerDelegate
+    
+    private weak var transitionHandler: FillTransitionHandler?
     private weak var navigationTransitionHandler: NavigationTransitionHandler?
     
-    init(transitionHandler: ViewTransitionHandler?,
+    init(transitionHandler: FillTransitionHandler?,
          navigationTransitionHandler: NavigationTransitionHandler?) {
         self.transitionHandler = transitionHandler
         self.navigationTransitionHandler = navigationTransitionHandler
@@ -41,10 +43,11 @@ final class FillRouter: FillRouterProtocol {
     
     func wantsToFill(with filledWord: FilledWord) {
         let fillAlertController = FillBuilder.alertController(with: filledWord)
+        fillAlertController.delegate = transitionHandler
         transitionHandler?.present(fillAlertController)
     }
     
-    func wantsToSeeQuestions(with words: [Word]) {
+    func wantsToSeeQuestions(with words: [LayoutWord]) {
         let rollViewController = RollBuilder.viewController(with: words, mode: .questions)
         navigationTransitionHandler?.push(rollViewController)
     }

@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol FillAlertControllerDelegate: class {
+    
+    func fill(with answer: String, index: Int)
+}
+
 final class FillAlertController: UIAlertController {
     
     // MARK: Private Data Structures
@@ -21,8 +26,14 @@ final class FillAlertController: UIAlertController {
     }
     
     
+    // MARK: Public Properties
+    
+    weak var delegate: FillAlertControllerDelegate?
+    
+    
     // MARK: Private Properties
     
+    private var index: Int?
     private var maxLength: Int?
     private var enteredAnswer: String?
     
@@ -43,6 +54,7 @@ final class FillAlertController: UIAlertController {
     // MARK: Private
     
     private func setup(with filledWord: FilledWord) {
+        index = filledWord.index
         maxLength = filledWord.word.answer.count
         enteredAnswer = filledWord.enteredAnswer
         
@@ -59,7 +71,13 @@ final class FillAlertController: UIAlertController {
         }
         
         let okAction = UIAlertAction(title: Constants.ok, style: .default) { [weak self] _ in
-            // unused
+            guard
+                let strongSelf = self,
+                let answer = strongSelf.textFields?[0].text, let index = self?.index
+            else { return }
+            
+            let trimmedAnswer = answer.trimmingCharacters(in: .whitespaces)
+            self?.delegate?.fill(with: trimmedAnswer, index: index)
         }
         addAction(okAction)
         

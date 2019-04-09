@@ -96,8 +96,7 @@ final class FillViewController: UIViewController {
     }
     
     @IBAction private func seeQuestions(_ sender: UIBarButtonItem) {
-        let words = dataSource.words.map { Word(question: $0.question, answer: $0.answer) }
-        router?.wantsToSeeQuestions(with: words)
+        router?.wantsToSeeQuestions(with: dataSource.words)
     }
     
     @IBAction private func check(_ sender: UIBarButtonItem) {
@@ -119,9 +118,29 @@ extension FillViewController: UICollectionViewDelegate {
             let filledWord: FilledWord
             filledWord.index = index
             filledWord.word = Word(question: word.question, answer: word.answer)
-            filledWord.enteredAnswer = nil
+            filledWord.enteredAnswer = dataSource.enteredAnswers[index]
             
             router?.wantsToFill(with: filledWord)
         }
+    }
+}
+
+
+
+
+extension FillViewController: FillAlertControllerDelegate {
+    
+    func fill(with answer: String, index: Int) {
+        dataSource.enteredAnswers[index] = answer
+        
+        for i in 0..<dataSource.charGrid.count {
+            for j in 0..<dataSource.charGrid[i].count {
+                if dataSource.charGrid[i][j].index == index, j < answer.count {
+                    dataSource.charGrid[i][j].value = String(answer[j])
+                }
+            }
+        }
+        
+        collectionView.reloadData()
     }
 }
