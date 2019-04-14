@@ -30,6 +30,6 @@ extension UITableView {
     
     func restore() {
         backgroundView = nil
-        separatorStyle = .singleLine
+        separatorStyle = .none
     }
 }

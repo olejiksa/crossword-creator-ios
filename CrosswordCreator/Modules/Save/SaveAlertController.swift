@@ -28,8 +28,8 @@ final class SaveAlertController: UIAlertController {
     private enum Constants {
         
         enum List {
-            static let title = "Terms List"
-            static let message = "Enter the title for a new terms list."
+            static let title = "Dictionary"
+            static let message = "Enter the title for a new dictionary."
         }
         
         enum Grid {

@@ -49,6 +49,7 @@ final class ListDataSource: NSObject, ListDataSourceProtocol {
     
     func setup(with tableView: UITableView) {
         tableView.dataSource = self
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 10))
         
         let nib = UINib(nibName: cellIdentifier, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
@@ -67,10 +68,6 @@ final class ListDataSource: NSObject, ListDataSourceProtocol {
 extension ListDataSource: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if words.isEmpty {
             tableView.setupEmptyView(with: Constants.noWords)
         } else {
@@ -78,6 +75,10 @@ extension ListDataSource: UITableViewDataSource {
         }
         
         return words.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -90,8 +91,11 @@ extension ListDataSource: UITableViewDataSource {
             cell = ListViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
         }
         
-        let word = words[indexPath.row]
+        let word = words[indexPath.section]
         cell.setup(with: word)
+        
+        cell.layer.cornerRadius = 15.0
+        cell.clipsToBounds = true
         
         return cell
     }
@@ -101,20 +105,15 @@ extension ListDataSource: UITableViewDataSource {
                    forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
     
-        let index = indexPath.row
+        let index = indexPath.section
         words.remove(at: index)
         interactor.removeWord(at: index)
         
         tableView.beginUpdates()
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.deleteSections(IndexSet(arrayLiteral: indexPath.section), with: .automatic)
         tableView.endUpdates()
         
         vc?.updateVisibility()
-    }
-    
-    func tableView(_ tableView: UITableView,
-                   titleForHeaderInSection section: Int) -> String? {
-        return title
     }
 }
 

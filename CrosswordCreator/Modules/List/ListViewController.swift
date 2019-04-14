@@ -132,9 +132,19 @@ extension ListViewController: UITableViewDelegate {
             let existingWord = cell.word
         else { return }
         
-        router?.wantsToOpenWordEditor(with: .edit(existingWord, indexPath.row))
+        router?.wantsToOpenWordEditor(with: .edit(existingWord, indexPath.section))
         
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        return headerView
     }
 }
 
@@ -150,10 +160,12 @@ extension ListViewController: WordAlertControllerDelegate {
         
         tableView.beginUpdates()
         
-        let indexPath = IndexPath(row: dataSource.lastIndex, section: 0)
-        tableView.insertRows(at: [indexPath], with: .automatic)
+        let indexSet = IndexSet(arrayLiteral: dataSource.lastIndex)
+        tableView.insertSections(indexSet, with: .automatic)
         
         tableView.endUpdates()
+        
+        let indexPath = IndexPath(row: 0, section: dataSource.lastIndex)
         
         tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
     }
@@ -163,8 +175,8 @@ extension ListViewController: WordAlertControllerDelegate {
         
         tableView.beginUpdates()
         
-        let indexPath = IndexPath(row: index, section: 0)
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+        let indexSet = IndexSet(arrayLiteral: index)
+        tableView.reloadSections(indexSet, with: .automatic)
         
         tableView.endUpdates()
     }

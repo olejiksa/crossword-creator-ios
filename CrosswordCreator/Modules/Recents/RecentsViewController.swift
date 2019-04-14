@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreGraphics
 
 final class RecentsViewController: UIViewController {
     
@@ -19,9 +20,9 @@ final class RecentsViewController: UIViewController {
     private enum Constants {
         
         static let title = "Recents"
-        static let alternateTitle = "Terms Lists"
-        static let noTermsLists = "You don't have any terms lists yet"
-        static let noCrosswords = "You don't have any terms lists\nand crosswords yet"
+        static let alternateTitle = "Dictionaries"
+        static let noTermsLists = "You don't have any dictionaries yet"
+        static let noCrosswords = "You don't have any dictionaries\nand crosswords yet"
     }
     
     
@@ -38,9 +39,15 @@ final class RecentsViewController: UIViewController {
     
     // MARK: Private Properties
     
+    private let cellSpacingHeight: CGFloat = 5
+    
+    private let recentsCell = RecentsCell.self
+    private let subtitleCell = SubtitleCell.self
+    
     private let interactor: RecentsInteractorProtocol
+    
     private let mode: Mode
-    private var checkedRows: [Int] = []
+    private var checkedSections: [Int] = []
     
     
     
@@ -76,16 +83,14 @@ final class RecentsViewController: UIViewController {
     // MARK: Private
     
     private func setupView() {
+        setupTableView()
+        setupNavigationBar()
+    }
+    
+    private func setupNavigationBar() {
         title = mode == .standard ? Constants.title : Constants.alternateTitle
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        tableView.register(UINib(nibName: "\(RecentsCell.self)", bundle: Bundle.main), forCellReuseIdentifier: "\(RecentsCell.self)")
-        tableView.register(SubtitleTableViewCell.self, forCellReuseIdentifier: "\(SubtitleTableViewCell.self)")
-        tableView.allowsMultipleSelection = mode == .picker
-        setupNavBar()
-    }
-    
-    private func setupNavBar() {
         switch mode {
         case .standard:
             let addButton = UIBarButtonItem(barButtonSystemItem: .add,
@@ -107,6 +112,20 @@ final class RecentsViewController: UIViewController {
         }
     }
     
+    private func setupTableView() {
+        switch mode {
+        case .standard:
+            let nib = UINib(nibName: "\(recentsCell)", bundle: Bundle.main)
+            tableView.register(nib, forCellReuseIdentifier: "\(recentsCell)")
+            
+        case .picker:
+            tableView.register(subtitleCell, forCellReuseIdentifier: "\(subtitleCell)")
+        }
+        
+        tableView.allowsMultipleSelection = mode == .picker
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 10))
+    }
+    
     @objc private func willAdd() {
         router?.wantsToCreate(with: self)
     }
@@ -116,7 +135,7 @@ final class RecentsViewController: UIViewController {
     }
     
     @objc private func willDone() {
-        let words = checkedRows
+        let words = checkedSections
             .map(interactor.getWords)
             .flatMap { $0 }
         
@@ -136,7 +155,7 @@ final class RecentsViewController: UIViewController {
 
 extension RecentsViewController: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         let count = interactor.getCrosswords().count
         
         if count == 0 {
@@ -148,8 +167,12 @@ extension RecentsViewController: UITableViewDataSource {
         return count
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let (title, date, isTermsList) = interactor.getCrosswordWithDates()[indexPath.row]
+        let (title, date, isTermsList) = interactor.getCrosswordWithDates()[indexPath.section]
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .medium
@@ -157,26 +180,44 @@ extension RecentsViewController: UITableViewDataSource {
         
         switch mode {
         case .standard:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(RecentsCell.self)", for: indexPath) as? RecentsCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(recentsCell)", for: indexPath) as? RecentsCell else {
                 return UITableViewCell(style: .default, reuseIdentifier: "\(UITableViewCell.self)")
             }
             
             cell.titleLabel?.text = title
-            cell.secondSubtitle?.text = isTermsList ? "Terms List" : "Crossword"
+            cell.secondSubtitle?.text = isTermsList ? "Dictionary" : "Crossword"
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .medium
             dateFormatter.timeStyle = .medium
             
             cell.firstSubtitle?.text = dateString
+            
+            cell.layer.cornerRadius = 15.0
+            cell.clipsToBounds = true
+            
             return cell
             
         case .picker:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "\(SubtitleTableViewCell.self)", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "\(subtitleCell)", for: indexPath)
             cell.textLabel?.text = title
             cell.detailTextLabel?.text = dateString
+            
+            cell.layer.cornerRadius = 15.0
+            cell.clipsToBounds = true
+            
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        return headerView
     }
 }
 
@@ -191,7 +232,7 @@ extension RecentsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if mode == .standard {
-            let index = indexPath.row
+            let index = indexPath.section
             let title = interactor.getCrosswords()[index]
             
             if interactor.isTermsList(at: index) {
@@ -205,12 +246,12 @@ extension RecentsViewController: UITableViewDelegate {
             switch cell.accessoryType {
             case .none:
                 cell.accessoryType = .checkmark
-                checkedRows.append(indexPath.row)
+                checkedSections.append(indexPath.section)
                 
             case .checkmark:
                 cell.accessoryType = .none
-                if let index = checkedRows.firstIndex(where: { $0 == indexPath.row }) {
-                    checkedRows.remove(at: index)
+                if let index = checkedSections.firstIndex(where: { $0 == indexPath.section }) {
+                    checkedSections.remove(at: index)
                 }
                 
             default:
@@ -235,11 +276,11 @@ extension RecentsViewController: UITableViewDelegate {
                    forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         
-        let index = indexPath.row
+        let index = indexPath.section
         interactor.removeCrossword(at: index)
         
         tableView.beginUpdates()
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.deleteSections(IndexSet(arrayLiteral: indexPath.section), with: .automatic)
         tableView.endUpdates()
     }
 }

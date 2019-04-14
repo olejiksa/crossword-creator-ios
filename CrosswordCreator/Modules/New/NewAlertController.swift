@@ -14,9 +14,9 @@ final class NewAlertController: UIAlertController {
     
     private enum Constants {
         
-        static let title = "New"
-        static let message = "Create new terms list or crossword"
-        static let termsList = "Terms List"
+        static let title = "New dictionary or crossword"
+        static let message = "Dictionaries are used to create crossword. You can use single or multiple dictionaries for it."
+        static let termsList = "Dictionary"
         static let crossword = "Crossword"
         static let cancel = "Cancel"
     }

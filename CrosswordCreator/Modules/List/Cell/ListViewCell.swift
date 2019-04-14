@@ -15,7 +15,26 @@ final class ListViewCell: UITableViewCell {
     func setup(with word: Word) {
         self.word = word
         
-        textLabel?.text = word.question
-        detailTextLabel?.text = word.answer
+        textLabel?.text = word.answer
+        detailTextLabel?.text = word.question
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        detailTextLabel?.numberOfLines = 0
+        detailTextLabel?.lineBreakMode = .byWordWrapping
+    }
+    
+    override var frame: CGRect {
+        get {
+            return super.frame
+        }
+        set (newFrame) {
+            var frame = newFrame
+            frame.origin.x += 10
+            frame.size.width -= 2 * 10
+            super.frame = frame
+        }
     }
 }

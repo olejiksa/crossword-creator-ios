@@ -7,11 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EB002D1B218B958C00A89806 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002D19218B958C00A89806 /* HomeViewController.swift */; };
-		EB002D1C218B958C00A89806 /* HomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB002D1A218B958C00A89806 /* HomeView.xib */; };
-		EB002D1E218CB7C900A89806 /* HomeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002D1D218CB7C900A89806 /* HomeBuilder.swift */; };
 		EB002D20218CB83700A89806 /* ListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002D1F218CB83700A89806 /* ListBuilder.swift */; };
-		EB002D22218CB85900A89806 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002D21218CB85900A89806 /* HomeRouter.swift */; };
 		EB002D24218CBF9400A89806 /* ListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002D23218CBF9400A89806 /* ListRouter.swift */; };
 		EB002D26218CC05C00A89806 /* WordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002D25218CC05C00A89806 /* WordBuilder.swift */; };
 		EB002D29218CC34100A89806 /* TransitionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002D28218CC34100A89806 /* TransitionHandler.swift */; };
@@ -111,11 +107,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EB002D19218B958C00A89806 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		EB002D1A218B958C00A89806 /* HomeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeView.xib; sourceTree = "<group>"; };
-		EB002D1D218CB7C900A89806 /* HomeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBuilder.swift; sourceTree = "<group>"; };
 		EB002D1F218CB83700A89806 /* ListBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListBuilder.swift; sourceTree = "<group>"; };
-		EB002D21218CB85900A89806 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		EB002D23218CBF9400A89806 /* ListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRouter.swift; sourceTree = "<group>"; };
 		EB002D25218CC05C00A89806 /* WordBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordBuilder.swift; sourceTree = "<group>"; };
 		EB002D28218CC34100A89806 /* TransitionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionHandler.swift; sourceTree = "<group>"; };
@@ -227,17 +219,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EB002D18218B957000A89806 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				EB002D1D218CB7C900A89806 /* HomeBuilder.swift */,
-				EB002D21218CB85900A89806 /* HomeRouter.swift */,
-				EB002D19218B958C00A89806 /* HomeViewController.swift */,
-				EB002D1A218B958C00A89806 /* HomeView.xib */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
 		EB002D27218CC32300A89806 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -409,7 +390,6 @@
 				EB3CBF6C223425910043E8FB /* Fill */,
 				EB1CD99321A0860A005E9BB8 /* Grid */,
 				EB214F33221983EF00D1C3A0 /* Help */,
-				EB002D18218B957000A89806 /* Home */,
 				EB7817EB217A241400BA9D50 /* List */,
 				EB1CD98121962484005E9BB8 /* Main */,
 				EB214F2C221980A000D1C3A0 /* New */,
@@ -592,7 +572,6 @@
 				EB214F392219840F00D1C3A0 /* HelpViewController.xib in Resources */,
 				EB7817E3217A200000BA9D50 /* LaunchScreen.storyboard in Resources */,
 				EB30560121F8ECEA00E9F6EE /* GridViewCell.xib in Resources */,
-				EB002D1C218B958C00A89806 /* HomeView.xib in Resources */,
 				EB7817E0217A200000BA9D50 /* Assets.xcassets in Resources */,
 				EBF1EBDB225D2DEC00BBA28D /* TermsView.xib in Resources */,
 				EB6DFD1C2257E1920058C83A /* RollCell.xib in Resources */,
@@ -614,7 +593,6 @@
 			files = (
 				EB214F382219840F00D1C3A0 /* HelpViewController.swift in Sources */,
 				EB632E2822634037004359A1 /* CreationBuilder.swift in Sources */,
-				EB002D1E218CB7C900A89806 /* HomeBuilder.swift in Sources */,
 				EB1CD99021A07EED005E9BB8 /* RecentsViewController.swift in Sources */,
 				EBF1EBE1225D446D00BBA28D /* SubtitleTableViewCell.swift in Sources */,
 				EB27342B2206F58A00ABAC20 /* String+Subscript.swift in Sources */,
@@ -666,7 +644,6 @@
 				EB002D2D218CC8CC00A89806 /* ListDataSource.swift in Sources */,
 				EB21C5022187893A0074A21B /* ListViewCell.swift in Sources */,
 				EB1CD98E21A07ED8005E9BB8 /* RecentsBuilder.swift in Sources */,
-				EB002D1B218B958C00A89806 /* HomeViewController.swift in Sources */,
 				EB002D20218CB83700A89806 /* ListBuilder.swift in Sources */,
 				EBE6B86A2194D94D00B59EE5 /* ListInteractor.swift in Sources */,
 				EBD4D886218CDEAB009028B5 /* Model.xcdatamodeld in Sources */,
@@ -690,7 +667,6 @@
 				EB8FBBE02217AAE900F92DDE /* GridInteractor.swift in Sources */,
 				EB3CBF6F223425A10043E8FB /* FillViewController.swift in Sources */,
 				EB214F202218C21400D1C3A0 /* Document.swift in Sources */,
-				EB002D22218CB85900A89806 /* HomeRouter.swift in Sources */,
 				EB3CBF802234785F0043E8FB /* RollViewController.swift in Sources */,
 				EB214F352219840100D1C3A0 /* HelpBuilder.swift in Sources */,
 				EB002D26218CC05C00A89806 /* WordBuilder.swift in Sources */,
