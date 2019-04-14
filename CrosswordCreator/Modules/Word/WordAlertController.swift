@@ -109,7 +109,7 @@ final class WordAlertController: UIAlertController {
         okAction.isEnabled = oldWord != nil
     }
     
-    @objc private func textFieldDidChange() {
+    @objc private func textFieldDidChange(_ textField: UITextField) {
         guard
             let questionTextField = textFields?[0],
             let answerTextField = textFields?[1],

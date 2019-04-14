@@ -27,24 +27,31 @@ final class RecentsInteractor: RecentsInteractorProtocol {
     
     private let persistanceManager: PersistanceManager
     private let crosswordName = "Crossword"
+    private let onlyTerms: Bool
     
-    init() {
+    init(onlyTerms: Bool) {
+        self.onlyTerms = onlyTerms
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         persistanceManager = appDelegate.persistanceManager
     }
     
     func getCrosswords() -> [String] {
         let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
-        return crosswords.map { $0.name ?? "Untitled" }
+        let filtered = onlyTerms ? crosswords.filter { $0.isTermsList } : crosswords
+        
+        return filtered.map { $0.name ?? "Untitled" }
     }
     
     func getCrosswordWithDates() -> [(String, Date, Bool)] {
         let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
-        return crosswords.map { ($0.name ?? "Untitled", $0.updatedOn ?? Date(), $0.isTermsList) }
+        let filtered = onlyTerms ? crosswords.filter { $0.isTermsList } : crosswords
+        
+        return filtered.map { ($0.name ?? "Untitled", $0.updatedOn ?? Date(), $0.isTermsList) }
     }
     
     func getLayoutWords(at index: Int) -> [LayoutWord] {
         let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
+        guard !crosswords[index].isTermsList else { return [] }
         guard let casted = crosswords[index].words else { return [] }
         guard let array = casted.array as? [ListWord] else { return [] }
         
@@ -57,7 +64,8 @@ final class RecentsInteractor: RecentsInteractorProtocol {
     
     func getWords(at index: Int) -> [Word] {
         let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
-        guard let casted = crosswords[index].words else { return [] }
+        let filtered = onlyTerms ? crosswords.filter { $0.isTermsList } : crosswords
+        guard let casted = filtered[index].words else { return [] }
         guard let array = casted.array as? [ListWord] else { return [] }
         
         return array.map { Word(question: $0.question!, answer: $0.answer!) }
@@ -70,7 +78,7 @@ final class RecentsInteractor: RecentsInteractorProtocol {
         var searchableItems = [CSSearchableItem]()
         let dateFormatter = DateFormatter()
         
-        for i in 0...(crosswords.count - 1) {
+        for i in 0..<crosswords.count {
             let crossword = crosswords[i]
             
             let searchableItemAttributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)

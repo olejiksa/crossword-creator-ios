@@ -63,6 +63,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication,
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        let handled: Bool
+        
         switch url.pathExtension {
         case FileExtension.list.rawValue:
             let words = xmlService.readList(from: url)
@@ -73,7 +75,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             persistanceManager.appendNewTermsList(name: mutableUrl.lastPathComponent,
                                                   words: words)
             
-            return true
+            handled = true
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTheTable"), object: nil)
             
         case FileExtension.grid.rawValue:
             let layoutWords = xmlService.readGrid(from: url)
@@ -84,11 +88,16 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             persistanceManager.appendNewCrossword(name: mutableUrl.lastPathComponent,
                                                   words: layoutWords)
             
-            return true
+            handled = true
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTheTable"), object: nil)
             
         default:
-            return false
+            handled = false
         }
+        
+        clearCache()
+        return handled
     }
     
     
@@ -112,5 +121,18 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         vc.router?.wantsToCreate(with: vc)
         
         return true
+    }
+    
+    private func clearCache() {
+        let fileManager = FileManager.default
+        let tempFolderPath = NSTemporaryDirectory()
+        do {
+            let filePaths = try fileManager.contentsOfDirectory(atPath: tempFolderPath)
+            for filePath in filePaths {
+                try fileManager.removeItem(atPath: tempFolderPath + filePath)
+            }
+        } catch {
+            print("Could not clear temp folder: \(error)")
+        }
     }
 }

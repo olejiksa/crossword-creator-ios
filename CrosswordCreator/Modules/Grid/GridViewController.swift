@@ -69,12 +69,10 @@ final class GridViewController: UIViewController {
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save,
                                          target: self,
                                          action: #selector(willSave))
-        saveButton.isEnabled = false
         
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action,
                                           target: self,
                                           action: #selector(willShare))
-        shareButton.isEnabled = false
         
         navigationItem.rightBarButtonItems = [shareButton, saveButton]
     }
@@ -84,26 +82,7 @@ final class GridViewController: UIViewController {
     }
     
     @objc private func willShare() {
-        router?.wantsToShare(with: "untitled", view: view, layoutWords: dataSource.words)
-    }
-    
-    @objc private func willPrintGrid() {
-        // WARN: DOESN'T WORK at ALL!!!!
-        let printInfo = UIPrintInfo(dictionary:nil)
-        printInfo.outputType = .grayscale
-        printInfo.jobName = "My Print Job"
-        
-        let printController = UIPrintInteractionController.shared
-        printController.printInfo = printInfo
-        
-        collectionView.screenshot(completion: { [weak self] image in
-            guard let strongSelf = self else { return }
-            
-            printController.printingItem = image
-            printController.present(from: strongSelf.view.frame,
-                                    in: strongSelf.view,
-                                    animated: true)
-        })
+        router?.wantsToShare(with: "Untitled", view: view, layoutWords: dataSource.words)
     }
 }
 
@@ -116,5 +95,6 @@ extension GridViewController: SaveAlertControllerDelegate {
     
     func save(with title: String) {
         dataSource.save(with: title)
+        router?.wantsToGoBack()
     }
 }

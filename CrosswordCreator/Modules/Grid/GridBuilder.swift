@@ -9,8 +9,8 @@
 final class GridBuilder {
     
     static func viewController(words: [Word] = []) -> GridViewController {
-        let generator = CrosswordsGenerator(columns: 16,
-                                            rows: 16,
+        let generator = CrosswordsGenerator(columns: 32,
+                                            rows: 32,
                                             words: words.map { ($0.question, $0.answer) })
         
         let interactor = GridInteractor()

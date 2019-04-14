@@ -43,7 +43,7 @@ final class GridDataSource: NSObject, GridDataSourceProtocol {
         generator.generate()
         
         size = (generator.columns, generator.rows)
-        charGrid = Array(repeating: Array(repeating: String(), count: 16), count: 16)
+        charGrid = Array(repeating: Array(repeating: String(), count: 32), count: 32)
         
         super.init()
         
@@ -74,20 +74,38 @@ final class GridDataSource: NSObject, GridDataSourceProtocol {
         
         for (index, item) in words.enumerated() {
             guard
-                item.column >= 0,
-                item.row >= 0
+                item.column > 0,
+                item.row > 0
             else {
                 return // alert damaged file is needed
             }
             
             switch item.direction {
             case .horizontal:
-                charGrid[item.row][item.column - 1] = "\(index + 1) "
+                charGrid[item.row][item.column - 1] = String(index + 1) + " "
                 (0..<item.answer.count).forEach { charGrid[item.row][item.column + $0] = String(item.answer[$0]) }
                 
             case .vertical:
-                charGrid[item.row - 1][item.column] = "\(index + 1) "
+                charGrid[item.row - 1][item.column] = String(index + 1) + " "
                 (0..<item.answer.count).forEach { charGrid[item.row + $0][item.column] = String(item.answer[$0]) }
+            }
+        }
+        
+        words = words.map {
+            switch $0.direction {
+            case .horizontal:
+                return LayoutWord(question: $0.question,
+                                  answer: $0.answer,
+                                  column: $0.column - 1,
+                                  row: $0.row,
+                                  direction: $0.direction)
+                
+            case .vertical:
+                return LayoutWord(question: $0.question,
+                                  answer: $0.answer,
+                                  column: $0.column,
+                                  row: $0.row - 1,
+                                  direction: $0.direction)
             }
         }
     }

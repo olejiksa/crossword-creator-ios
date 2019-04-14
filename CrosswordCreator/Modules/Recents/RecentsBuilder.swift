@@ -12,7 +12,7 @@ final class RecentsBuilder {
     
     static func viewController(with mode: RecentsViewController.Mode = .standard,
                                moduleOutput: RecentsModuleOutput? = nil) -> RecentsViewController {
-        let interactor = RecentsInteractor()
+        let interactor = RecentsInteractor(onlyTerms: mode == .picker)
         
         let vc = RecentsViewController(interactor: interactor, mode: mode)
         let navigationVC = UINavigationController(rootViewController: vc)

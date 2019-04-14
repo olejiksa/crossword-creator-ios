@@ -19,7 +19,7 @@ final class RecentsViewController: UIViewController {
     private enum Constants {
         
         static let title = "Recents"
-        static let alternateTitle = "Files"
+        static let alternateTitle = "Terms Lists"
         static let noTermsLists = "You don't have any terms lists yet"
         static let noCrosswords = "You don't have any terms lists\nand crosswords yet"
     }
@@ -61,6 +61,7 @@ final class RecentsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: NSNotification.Name(rawValue: "reloadTheTable"), object: nil)
         setupView()
         interactor.setupSearchableContent()
     }
@@ -126,6 +127,10 @@ final class RecentsViewController: UIViewController {
     
     private func updateDoneButtonVisibility() {
         navigationItem.rightBarButtonItem?.isEnabled = !checkedRows.isEmpty
+    }
+    
+    @objc private func refresh() {
+        tableView.reloadData()
     }
 }
 
