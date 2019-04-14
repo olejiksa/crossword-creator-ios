@@ -72,15 +72,37 @@ final class GridDataSource: NSObject, GridDataSourceProtocol {
     private func setupCharGrid() {
         words = generator.result
         
-        for item in generator.result {
+        for (index, item) in words.enumerated() {
+            guard
+                item.column >= 0,
+                item.row >= 0
+            else {
+                return // alert damaged file is needed
+            }
+            
             switch item.direction {
             case .horizontal:
+                charGrid[item.row][item.column - 1] = "\(index + 1) "
                 (0..<item.answer.count).forEach { charGrid[item.row][item.column + $0] = String(item.answer[$0]) }
                 
             case .vertical:
+                charGrid[item.row - 1][item.column] = "\(index + 1) "
                 (0..<item.answer.count).forEach { charGrid[item.row + $0][item.column] = String(item.answer[$0]) }
             }
         }
+    }
+    
+    private func calculateBounds() -> (Int, Int) {
+        let rightXs = words.map { $0.column + ($0.direction == .horizontal ? $0.answer.count : 0) }
+        let bottomYs = words.map { $0.row + ($0.direction == .vertical ? $0.answer.count : 0) }
+        
+        guard
+            let x = rightXs.max(),
+            let y = bottomYs.max(),
+            x >= 0, y >= 0
+            else { return (0, 0) }
+        
+        return (x + 1, y + 1)
     }
 }
 
@@ -106,15 +128,16 @@ extension GridDataSource: UICollectionViewDataSource {
                                                                  for: indexPath) as? GridViewCell {
             cell = dequeuedCell
             
-            let character = charGrid[indexPath.section][indexPath.row]
-            if character != String() {
-                cell.setup(with: .black(character))
-            } else {
+            let letter = charGrid[indexPath.section][indexPath.row]
+            if letter.last == " " && letter.count > 1 {
+                cell.setup(with: .indexed(letter))
+            } else if letter == "" {
                 cell.setup(with: .white)
+            } else {
+                cell.setup(with: .black(letter))
             }
         } else {
             cell = GridViewCell()
-            cell.setup(with: .white)
         }
         
         return cell

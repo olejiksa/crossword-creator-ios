@@ -46,6 +46,8 @@ final class TermsViewController: UIViewController {
     
     private func setupView() {
         tableView.dataSource = self
+        tableView.delegate = self
+        
         let nib = UINib(nibName: cellIdentifier, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
         
@@ -121,7 +123,7 @@ extension TermsViewController: UITableViewDataSource {
 
 extension TermsViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

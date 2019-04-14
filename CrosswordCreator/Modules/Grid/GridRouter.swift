@@ -11,7 +11,6 @@ import UIKit
 protocol GridRouterProtocol {
     
     func wantsToSave()
-    func wantsToGoBack()
     func wantsToShare(with title: String, view: UIView, layoutWords: [LayoutWord])
 }
 
@@ -29,10 +28,6 @@ final class GridRouter: GridRouterProtocol {
         let saveAlertController = SaveAlertController.create(with: .grid)
         saveAlertController.delegate = transitionHandler
         transitionHandler?.present(saveAlertController)
-    }
-    
-    func wantsToGoBack() {
-        transitionHandler?.dismiss()
     }
     
     func wantsToShare(with title: String, view: UIView, layoutWords: [LayoutWord]) {

@@ -66,10 +66,6 @@ final class GridViewController: UIViewController {
         title = Constants.title
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel,
-                                           target: self,
-                                           action: #selector(willCancel))
-        
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save,
                                          target: self,
                                          action: #selector(willSave))
@@ -80,12 +76,7 @@ final class GridViewController: UIViewController {
                                           action: #selector(willShare))
         shareButton.isEnabled = false
         
-        navigationItem.leftBarButtonItem = cancelButton
         navigationItem.rightBarButtonItems = [shareButton, saveButton]
-    }
-    
-    @objc private func willCancel() {
-        router?.wantsToGoBack()
     }
     
     @objc private func willSave() {
