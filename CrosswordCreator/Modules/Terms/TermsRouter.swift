@@ -38,7 +38,9 @@ final class TermsRouter: TermsRouterProtocol {
     }
     
     func wantsToGenerate(with words: [Word]) {
-        let gridViewController = GridBuilder.viewController(words: words)
-        navigationTransitionHandler?.push(gridViewController)
+        // let gridViewController = GridBuilder.viewController(words: words)
+        // navigationTransitionHandler?.push(gridViewController)
+        let creationViewController = CreationBuilder.viewController(with: words, navigationTransitionHandler: navigationTransitionHandler)
+        navigationTransitionHandler?.push(creationViewController)
     }
 }

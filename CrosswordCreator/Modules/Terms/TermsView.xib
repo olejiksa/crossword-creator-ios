@@ -34,7 +34,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="6fU-6p-jVU"/>
-                        <barButtonItem enabled="NO" title="Generate" id="Kdd-CP-rJ4">
+                        <barButtonItem enabled="NO" title="Next" id="Kdd-CP-rJ4">
                             <connections>
                                 <action selector="willNext:" destination="-1" id="EXu-ls-YbK"/>
                             </connections>

@@ -23,7 +23,6 @@ final class GridDataSource: NSObject, GridDataSourceProtocol {
         static let cellIdentifier = "GridViewCell"
     }
     
-    private let generator: CrosswordsGeneratorProtocol
     private let interactor: GridInteractorProtocol
     private let size: (columns: Int, rows: Int)
     
@@ -35,14 +34,12 @@ final class GridDataSource: NSObject, GridDataSourceProtocol {
     
     // MARK: Lifecycle
     
-    init(generator: CrosswordsGeneratorProtocol,
-         interactor: GridInteractorProtocol) {
-        self.generator = generator
+    init(interactor: GridInteractorProtocol,
+         words: [LayoutWord]) {
         self.interactor = interactor
+        self.words = words
         
-        generator.generate()
-        
-        size = (generator.columns, generator.rows)
+        size = (32, 32)
         charGrid = Array(repeating: Array(repeating: String(), count: 32), count: 32)
         
         super.init()
@@ -70,8 +67,6 @@ final class GridDataSource: NSObject, GridDataSourceProtocol {
     // MARK: Private
     
     private func setupCharGrid() {
-        words = generator.result
-        
         for (index, item) in words.enumerated() {
             guard
                 item.column > 0,

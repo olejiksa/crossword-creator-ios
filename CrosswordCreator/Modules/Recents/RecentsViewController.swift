@@ -103,7 +103,6 @@ final class RecentsViewController: UIViewController {
                                              style: .plain,
                                              target: self,
                                              action: #selector(willDone))
-            doneButton.isEnabled = false
             navigationItem.rightBarButtonItem = doneButton
         }
     }
@@ -123,10 +122,6 @@ final class RecentsViewController: UIViewController {
         
         moduleOutput?.transferWords(words)
         router?.wantsToGoBack()
-    }
-    
-    private func updateDoneButtonVisibility() {
-        navigationItem.rightBarButtonItem?.isEnabled = !checkedRows.isEmpty
     }
     
     @objc private func refresh() {
@@ -221,8 +216,6 @@ extension RecentsViewController: UITableViewDelegate {
             default:
                 break
             }
-            
-            updateDoneButtonVisibility()
         }
     }
     
@@ -230,8 +223,6 @@ extension RecentsViewController: UITableViewDelegate {
         if mode == .picker {
             let cell = tableView.cellForRow(at: indexPath)
             cell?.accessoryType = .none
-            
-            updateDoneButtonVisibility()
         }
     }
     

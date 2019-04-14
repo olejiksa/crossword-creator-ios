@@ -6,7 +6,7 @@
 //  Copyright © 2018 Oleg Samoylov. All rights reserved.
 //
 
-struct Word {
+struct Word: Hashable {
     
     let question: String
     let answer: String
