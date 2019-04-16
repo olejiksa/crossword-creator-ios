@@ -108,18 +108,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     @discardableResult
     private func handleShortcutItem(item: UIApplicationShortcutItem) -> Bool {
         guard
-            ShortcutIdentifier(fullNameForType: item.type) != nil,
-            let mainVC = window?.rootViewController as? MainViewController
+            ShortcutIdentifier(fullNameForType: item.type) != nil
         else { return false }
         
-        mainVC.selectedIndex = 0
-        
-        guard
-            let nvc = mainVC.selectedViewController as? UINavigationController,
-            let vc = nvc.viewControllers.first as? RecentsViewController
-       else { return false }
-
-        nvc.popToRootViewController(animated: false)
+        let vc = RecentsBuilder.viewController()
+        window?.rootViewController = vc.navigationController
         vc.router?.wantsToCreate(with: vc)
         
         return true
