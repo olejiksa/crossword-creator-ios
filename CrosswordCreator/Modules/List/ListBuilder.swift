@@ -23,7 +23,7 @@ final class ListBuilder {
         let dataSource = ListDataSource(interactor: interactor,
                                         words: words,
                                         title: title)
-        let xmlService = XmlService()
+        let xmlService = ServiceLocator.xmlService
         
         let mode = !words.isEmpty
         let viewController = ListViewController(dataSource: dataSource,

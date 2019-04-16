@@ -35,9 +35,10 @@ final class GridViewController: UIViewController {
     
     // MARK: Lifecycle
     
-    init(dataSource: GridDataSource) {
+    init(dataSource: GridDataSource,
+         xmlService: XmlServiceProtocol) {
         self.dataSource = dataSource
-        self.xmlService = XmlService()
+        self.xmlService = xmlService
         
         super.init(nibName: nil, bundle: nil)
     }

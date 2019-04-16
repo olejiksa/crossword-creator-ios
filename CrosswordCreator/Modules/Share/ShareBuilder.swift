@@ -16,8 +16,6 @@ final class ShareBuilder {
         case gridWords([LayoutWord])
     }
     
-    private static let xmlService: XmlServiceProtocol = XmlService()
-    
     private static var documentsDirectory: String {
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentsDirectory = paths[0]
@@ -37,6 +35,8 @@ final class ShareBuilder {
         
         let name = "\(title).\(fileExtension.rawValue)"
         let fileURL = URL(fileURLWithPath: documentsDirectory).appendingPathComponent(name)
+        
+        let xmlService = ServiceLocator.xmlService
         
         let xml: String
         switch wordType {

@@ -10,9 +10,12 @@ final class GridBuilder {
     
     static func viewController(words: [LayoutWord] = []) -> GridViewController {
         let interactor = GridInteractor()
-        let gridDataSource = GridDataSource(interactor: interactor, words: words)
+        let xmlService = ServiceLocator.xmlService
+        let dataSource = GridDataSource(interactor: interactor, words: words)
         
-        let viewController = GridViewController(dataSource: gridDataSource)
+        let viewController = GridViewController(dataSource: dataSource,
+                                                xmlService: xmlService)
+        
         let router = GridRouter(transitionHandler: viewController)
         viewController.router = router
         

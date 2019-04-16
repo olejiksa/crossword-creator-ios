@@ -20,15 +20,28 @@ final class WordViewController: UIViewController {
     
     private enum Constants {
         static let title = "Word"
+        static let done = "Done"
     }
+    
+    
+    // MARK: Outlets
     
     @IBOutlet private weak var infoLabel: UILabel!
     @IBOutlet private weak var questionTextView: UITextView!
     @IBOutlet private weak var answerTextField: UITextField!
     
-    private let word: OrderedWord?
+    
+    // MARK: Public Properties
     
     weak var delegate: WordViewControllerDelegate?
+    
+    
+    // MARK: Private Properties
+    
+    private let word: OrderedWord?
+    
+    
+    
     
     // MARK: Lifecycle
     
@@ -56,7 +69,10 @@ final class WordViewController: UIViewController {
         title = Constants.title
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(willDone))
+        let doneButton = UIBarButtonItem(title: Constants.done,
+                                         style: .plain,
+                                         target: self,
+                                         action: #selector(willDone))
         
         navigationItem.rightBarButtonItem = doneButton
         

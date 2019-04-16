@@ -19,7 +19,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: Private Properties
     
-    private let xmlService = XmlService()
+    private let xmlService = ServiceLocator.xmlService
     private var launchedShortcutItem: UIApplicationShortcutItem?
     
     
@@ -98,7 +98,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             handled = false
         }
         
-        clearCache()
         return handled
     }
     
@@ -116,18 +115,5 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         vc.router?.wantsToCreate(with: vc)
         
         return true
-    }
-    
-    private func clearCache() {
-        let fileManager = FileManager.default
-        let tempFolderPath = NSTemporaryDirectory()
-        do {
-            let filePaths = try fileManager.contentsOfDirectory(atPath: tempFolderPath)
-            for filePath in filePaths {
-                try fileManager.removeItem(atPath: tempFolderPath + filePath)
-            }
-        } catch {
-            print("Could not clear temp folder: \(error)")
-        }
     }
 }

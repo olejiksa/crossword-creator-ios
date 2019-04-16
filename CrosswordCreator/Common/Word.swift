@@ -8,6 +8,42 @@
 
 import Foundation
 
+struct Word: Hashable {
+    
+    let question: String
+    let answer: String
+}
+
+typealias OrderedWord = (word: Word, index: Int)
+typealias FilledWord = (word: Word, index: Int, enteredAnswer: String?)
+
+struct LayoutWord: Equatable {
+    
+    enum Direction: String {
+        
+        case vertical = "Vertical"
+        case horizontal = "Horizontal"
+    }
+    
+    var question = ""
+    var answer = ""
+    var column = 0
+    var row = 0
+    var direction: Direction = .horizontal
+    
+    init(question: String,
+         answer: String,
+         column: Int,
+         row: Int,
+         direction: Direction) {
+        self.question = question
+        self.answer = answer
+        self.column = column
+        self.row = row
+        self.direction = direction
+    }
+}
+
 struct RAWListFile: Codable {
     
     let word: [RAWListWord]

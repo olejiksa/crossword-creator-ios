@@ -10,11 +10,16 @@ import UIKit
 
 final class RollViewController: UIViewController {
     
+    // MARK: Public Data Structures
+    
     enum Mode {
         
         case questions
         case answers
     }
+    
+    
+    // MARK: Private Data Structures
     
     private enum Constants {
         
@@ -22,11 +27,20 @@ final class RollViewController: UIViewController {
         static let words = "Words"
     }
     
+    
+    // MARK: Outlets
+    
     @IBOutlet private weak var tableView: UITableView!
+    
+    
+    // MARK: Private Properties
     
     private let words: [LayoutWord]
     private let mode: Mode
     private let cellIdentifier = "\(RollCell.self)"
+    
+    
+    // MARK: Public Properties
     
     var across: [LayoutWord] {
         return words.filter { $0.direction == .horizontal }
@@ -35,6 +49,11 @@ final class RollViewController: UIViewController {
     var down: [LayoutWord] {
         return words.filter { $0.direction == .vertical }
     }
+    
+    
+    
+    
+    // MARK: Lifecycle
     
     init(with words: [LayoutWord], mode: Mode) {
         self.words = words
@@ -49,7 +68,6 @@ final class RollViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -60,6 +78,11 @@ final class RollViewController: UIViewController {
                            forCellReuseIdentifier: cellIdentifier)
         
         title = mode == .questions ? Constants.questions : Constants.words
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
@@ -75,15 +98,18 @@ extension RollViewController: UITableViewDataSource {
         return 2
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView,
+                   titleForHeaderInSection section: Int) -> String? {
         return section == 0 ? "Across" : "Down"
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
         return section == 0 ? across.count : down.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let word = indexPath.section == 0 ? across[indexPath.row] : down[indexPath.row]
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? RollCell {
             cell.nameLabel?.text = mode == .questions ? word.question : word.answer

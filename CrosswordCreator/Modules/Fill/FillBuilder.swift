@@ -14,10 +14,14 @@ final class FillBuilder {
         return FillAlertController.create(with: filledWord)
     }
     
-    static func viewController(with title: String, words: [LayoutWord]) -> FillViewController {
-        let fillDataSource = FillDataSource(words: words)
+    static func viewController(with title: String,
+                               words: [LayoutWord]) -> FillViewController {
+        let dataSource = FillDataSource(words: words)
+        let xmlService = ServiceLocator.xmlService
         
-        let viewController = FillViewController(dataSource: fillDataSource, title: title)
+        let viewController = FillViewController(dataSource: dataSource,
+                                                xmlService: xmlService,
+                                                title: title)
         let navigationController = UINavigationController(rootViewController: viewController)
         
         let router = FillRouter(transitionHandler: viewController,

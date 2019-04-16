@@ -18,22 +18,22 @@ final class AlertsFactory {
     }
     
     static func damagedFile(_ vc: UIViewController) {
-        let title = "Damaged file"
+        let title = "Damaged File"
         let message = "Unfortunately, we can't show you this file"
         
         show(vc, title: title, message: message)
     }
     
     static func crosswordIsFilledCorrectly(_ vc: UIViewController) {
-        let title = "Filled correctly"
-        let message = "Wonderful! You've filled the crossword puzzle is absolutely true"
+        let title = "Filled Correctly"
+        let message = "Wonderful! You've filled the crossword absolutely true"
         
         show(vc, title: title, message: message)
     }
     
     static func crosswordIsFilledIncorrectly(_ vc: UIViewController) {
-        let title = "Filled incorrectly"
-        let message = "Mistakes had been made when you was filling out the crossword puzzle. Do you want to see them?"
+        let title = "Not Filled Correctly"
+        let message = "Mistakes had been made. Do you want to see them?"
         
         show(vc, title: title, message: message, actions: .yesNo)
     }

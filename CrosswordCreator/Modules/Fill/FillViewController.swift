@@ -41,9 +41,10 @@ final class FillViewController: UIViewController {
     // MARK: Lifecycle
     
     init(dataSource: FillDataSource,
+         xmlService: XmlServiceProtocol,
          title: String) {
         self.dataSource = dataSource
-        self.xmlService = XmlService()
+        self.xmlService = xmlService
         self.gridTitle = title
         
         super.init(nibName: nil, bundle: nil)
@@ -64,6 +65,9 @@ final class FillViewController: UIViewController {
     
     private func setupView() {
         collectionView.collectionViewLayout = NodeLayout(itemWidth: 50, itemHeight: 50, space: 1)
+        let gesture = UIPinchGestureRecognizer(target: self, action: #selector(didReceivePinchGesture(_:)))
+        collectionView.addGestureRecognizer(gesture)
+        
         dataSource.setup(with: collectionView)
         
         setupNavigationBar()
@@ -111,6 +115,20 @@ final class FillViewController: UIViewController {
             AlertsFactory.crosswordIsFilledCorrectly(self)
         }
     }
+    
+    @objc private func didReceivePinchGesture(_ gesture: UIPinchGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            dataSource.scaleStart = dataSource.scale
+            
+        case .changed:
+            dataSource.scale = dataSource.scaleStart * gesture.scale
+            collectionView?.collectionViewLayout.invalidateLayout()
+            
+        default:
+            break
+        }
+    }
 }
 
 
@@ -120,7 +138,8 @@ final class FillViewController: UIViewController {
 
 extension FillViewController: UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
         let letter = dataSource.charGrid[indexPath.section][indexPath.row]
         
         if let word = letter.word, let index = letter.indexes.last {
@@ -131,6 +150,12 @@ extension FillViewController: UICollectionViewDelegate {
             
             router?.wantsToFill(with: filledWord)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 50 * dataSource.scale, height: 50 * dataSource.scale)
     }
 }
 
