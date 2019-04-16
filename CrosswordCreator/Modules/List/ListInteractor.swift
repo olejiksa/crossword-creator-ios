@@ -24,10 +24,13 @@ final class ListInteractor: ListInteractorProtocol {
     }
     
     private let persistanceManager: PersistanceManager
+    private let persistanceService: PersistanceServiceProtocol
     
-    init() {
+    init(persistanceService: PersistanceServiceProtocol) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         persistanceManager = appDelegate.persistanceManager
+        
+        self.persistanceService = persistanceService
     }
     
     func getWords() -> [Word] {
@@ -83,9 +86,9 @@ final class ListInteractor: ListInteractorProtocol {
     
     func save(_ words: [Word], with title: String, mode: Bool) {
         if !mode {
-            persistanceManager.appendNewTermsList(name: title, words: words)
+            persistanceService.addDictionary(name: title, words: words)
         } else {
-            persistanceManager.updateTermsList(name: title, words: words)
+            persistanceService.updateDictionary(name: title, words: words)
         }
     }
 }

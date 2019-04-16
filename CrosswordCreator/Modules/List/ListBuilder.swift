@@ -19,7 +19,8 @@ final class ListBuilder {
     }
     
     static func viewController(with title: String, words: [Word]) -> ListViewController {
-        let interactor = ListInteractor()
+        let persistanceService = ServiceLocator.persistanceService
+        let interactor = ListInteractor(persistanceService: persistanceService)
         let dataSource = ListDataSource(interactor: interactor,
                                         words: words,
                                         title: title)

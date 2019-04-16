@@ -58,6 +58,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         guard let shortcutItem = launchedShortcutItem else { return }
+        
         handleShortcutItem(item: shortcutItem)
         launchedShortcutItem = nil
     }
@@ -66,6 +67,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         let handled: Bool
+        let persistanceService = ServiceLocator.persistanceService
         
         switch url.pathExtension {
         case FileExtension.list.rawValue:
@@ -74,8 +76,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             var mutableUrl = url
             mutableUrl.deletePathExtension()
             
-            persistanceManager.appendNewTermsList(name: mutableUrl.lastPathComponent,
-                                                  words: words)
+            persistanceService.addDictionary(name: mutableUrl.lastPathComponent,
+                                             words: words)
             
             handled = true
             
@@ -87,8 +89,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             var mutableUrl = url
             mutableUrl.deletePathExtension()
             
-            persistanceManager.appendNewCrossword(name: mutableUrl.lastPathComponent,
-                                                  words: layoutWords)
+            persistanceService.addCrossword(name: mutableUrl.lastPathComponent,
+                                            words: layoutWords)
             
             handled = true
             

@@ -26,7 +26,7 @@ final class PersistanceManager {
         return container
     }()
     
-    private lazy var managedContext: NSManagedObjectContext = {
+    lazy var managedContext: NSManagedObjectContext = {
         return container.viewContext
     }()
     
@@ -99,81 +99,8 @@ final class PersistanceManager {
         }
     }
     
-    func appendNewTermsList(name: String, words: [Word]) {
-        let index = fetch(entityName: "Crossword").count
-        let crossword: Crossword = insert()
-        crossword.id = Int16(index)
-        crossword.updatedOn = Date()
-        crossword.createdOn = Date()
-        crossword.name = name
-        crossword.isTermsList = true
-        
-        let listWords: [ListWord] = words.enumerated().map {
-            let listWord = ListWord(context: managedContext)
-            listWord.id = Int16($0)
-            listWord.answer = $1.answer
-            listWord.question = $1.question
-            
-            return listWord
-        }
-        
-        crossword.words = NSOrderedSet(array: listWords)
-        
-        save()
-    }
-    
-    func updateTermsList(name: String, words: [Word]) {
-        let crosswords: [Crossword] = fetch(entityName: "Crossword")
-        let crossword = crosswords.first { $0.name == name && $0.isTermsList }
-        
-        crossword?.updatedOn = Date()
-        
-        let listWords: [ListWord] = words.enumerated().map {
-            let listWord = ListWord(context: managedContext)
-            listWord.id = Int16($0)
-            listWord.answer = $1.answer
-            listWord.question = $1.question
-            
-            return listWord
-        }
-        
-        crossword?.words = NSOrderedSet(array: listWords)
-        
-        save()
-    }
-    
-    func appendNewCrossword(name: String, words: [LayoutWord]) {
-        let index = fetch(entityName: "Crossword").count
-        let crossword: Crossword = insert()
-        crossword.id = Int16(index)
-        crossword.updatedOn = Date()
-        crossword.createdOn = Date()
-        crossword.name = name
-        crossword.isTermsList = false
-        
-        let gridWords: [GridWord] = words.enumerated().map {
-            let gridWord = GridWord(context: managedContext)
-            gridWord.id = Int16($0)
-            gridWord.y = Int16(($1.row + 1) * 25)
-            gridWord.x = Int16(($1.column + 1) * 25)
-            gridWord.isHorizontal = $1.direction == .horizontal
-            
-            return gridWord
-        }
-        
-        let listWords: [ListWord] = words.enumerated().map {
-            let listWord = ListWord(context: managedContext)
-            listWord.id = Int16($0)
-            listWord.answer = $1.answer
-            listWord.question = $1.question
-            listWord.gridWord = gridWords.first { $0.id == listWord.id }
-            
-            return listWord
-        }
-        
-        crossword.words = NSOrderedSet(array: listWords)
-        
-        save()
+    func insert<T>() -> T where T: NSManagedObject {
+        return T(context: managedContext)
     }
     
     
@@ -193,9 +120,5 @@ final class PersistanceManager {
         }
         
         return nil
-    }
-    
-    private func insert<T>() -> T where T: NSManagedObject {
-        return T(context: managedContext)
     }
 }

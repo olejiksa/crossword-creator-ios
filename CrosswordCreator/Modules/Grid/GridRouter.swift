@@ -26,7 +26,7 @@ final class GridRouter: GridRouterProtocol {
     }
     
     func wantsToSave() {
-        let saveAlertController = SaveAlertController.create(with: .grid)
+        let saveAlertController = SaveBuilder.alertController(with: .grid)
         saveAlertController.delegate = transitionHandler
         transitionHandler?.present(saveAlertController)
     }

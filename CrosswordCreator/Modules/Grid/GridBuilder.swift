@@ -9,7 +9,8 @@
 final class GridBuilder {
     
     static func viewController(words: [LayoutWord] = []) -> GridViewController {
-        let interactor = GridInteractor()
+        let persistanceService = ServiceLocator.persistanceService
+        let interactor = GridInteractor(persistanceService: persistanceService)
         let xmlService = ServiceLocator.xmlService
         let dataSource = GridDataSource(interactor: interactor, words: words)
         

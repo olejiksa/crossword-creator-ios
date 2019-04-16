@@ -110,7 +110,7 @@ final class FillViewController: UIViewController {
         let isValid = validAnswers == enteredAnswers
         
         if !isValid {
-            AlertsFactory.crosswordIsFilledIncorrectly(self)
+            AlertsFactory.crosswordIsFilledIncorrectly(self, yesAction: showMistakes)
         } else {
             AlertsFactory.crosswordIsFilledCorrectly(self)
         }
@@ -128,6 +128,16 @@ final class FillViewController: UIViewController {
         default:
             break
         }
+    }
+    
+    func showMistakes() {
+        UIView.animate(withDuration: 5, animations: { [weak self] in
+            self?.collectionView?.backgroundColor = .red
+        }, completion: { [weak self] _ in
+            UIView.animate(withDuration: 5, animations: {
+                self?.collectionView?.backgroundColor = .lightGray
+            })
+        })
     }
 }
 

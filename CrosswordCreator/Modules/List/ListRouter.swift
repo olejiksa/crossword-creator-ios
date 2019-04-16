@@ -32,7 +32,6 @@ final class ListRouter: ListRouterProtocol {
     func wantsToOpenWordEditor(with mode: WordBuilder.Mode) {
         let wordAlertController = WordBuilder.viewController(with: mode)
         wordAlertController.delegate = transitionHandler
-        
         navigationTransitionHandler?.push(wordAlertController)
     }
     
@@ -41,9 +40,8 @@ final class ListRouter: ListRouterProtocol {
     }
     
     func wantsToSave() {
-        let saveAlertController = SaveAlertController.create(with: .list)
+        let saveAlertController = SaveBuilder.alertController(with: .list)
         saveAlertController.delegate = transitionHandler
-        
         transitionHandler?.present(saveAlertController)
     }
     

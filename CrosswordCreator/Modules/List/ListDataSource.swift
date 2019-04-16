@@ -127,7 +127,6 @@ extension ListDataSource: WordViewControllerDelegate {
     func addWord(_ word: Word) {
         words.append(word)
         interactor.updateWord((word, lastIndex))
-        
         vc?.updateVisibility()
     }
     

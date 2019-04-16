@@ -15,21 +15,13 @@ protocol GridInteractorProtocol: class {
 
 final class GridInteractor: GridInteractorProtocol {
     
-    private enum Constants {
-        
-        static let listWordName = "ListWord"
-        static let gridWordName = "GridWord"
-        static let crosswordName = "Crossword"
-    }
+    private let persistanceService: PersistanceServiceProtocol
     
-    private let persistanceManager: PersistanceManager
-    
-    init() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        persistanceManager = appDelegate.persistanceManager
+    init(persistanceService: PersistanceServiceProtocol) {
+        self.persistanceService = persistanceService
     }
     
     func save(_ words: [LayoutWord], with title: String) {
-        persistanceManager.appendNewCrossword(name: title, words: words)
+        persistanceService.addCrossword(name: title, words: words)
     }
 }

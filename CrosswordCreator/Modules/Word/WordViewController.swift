@@ -80,18 +80,20 @@ final class WordViewController: UIViewController {
         questionTextView.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
         questionTextView.layer.borderWidth = 0.5
         questionTextView.clipsToBounds = true
-        questionTextView?.text = word?.word.question
-        questionTextView?.delegate = self
+        questionTextView.text = word?.word.question
+        questionTextView.delegate = self
         
-        answerTextField?.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
-        answerTextField?.layer.borderWidth = 0.5
-        answerTextField?.text = word?.word.answer
-        answerTextField?.becomeFirstResponder()
-        answerTextField?.addTarget(self,
+        answerTextField.layer.cornerRadius = 5
+        answerTextField.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        answerTextField.layer.borderWidth = 0.5
+        answerTextField.text = word?.word.answer
+        answerTextField.addTarget(self,
                                    action: #selector(textFieldDidChange),
                                    for: .editingChanged)
         
         doneButton.isEnabled = false
+        
+        questionTextView.becomeFirstResponder()
     }
     
     @objc private func willDone() {

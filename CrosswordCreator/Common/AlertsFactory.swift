@@ -13,7 +13,7 @@ final class AlertsFactory {
     private enum Actions {
         
         case ok
-        case yesNo
+        case yesNo(CompletionBlock?, CompletionBlock?)
         case yesNoCancel
     }
     
@@ -31,11 +31,12 @@ final class AlertsFactory {
         show(vc, title: title, message: message)
     }
     
-    static func crosswordIsFilledIncorrectly(_ vc: UIViewController) {
+    static func crosswordIsFilledIncorrectly(_ vc: UIViewController,
+                                             yesAction: @escaping CompletionBlock) {
         let title = "Not Filled Correctly"
         let message = "Mistakes had been made. Do you want to see them?"
         
-        show(vc, title: title, message: message, actions: .yesNo)
+        show(vc, title: title, message: message, actions: .yesNo(yesAction, nil))
     }
     
     
@@ -56,8 +57,8 @@ final class AlertsFactory {
                 
                 alertController.addAction(okAction)
                 
-            case .yesNo:
-                let yesAction = UIAlertAction(title: "Yes", style: .default)
+            case .yesNo(let yesAction, _):
+                let yesAction = UIAlertAction(title: "Yes", style: .default) { _ in yesAction?() }
                 let noAction = UIAlertAction(title: "No", style: .cancel)
                 
                 alertController.addAction(yesAction)

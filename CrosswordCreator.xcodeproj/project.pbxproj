@@ -90,6 +90,9 @@
 		EBE867F822416D0E004531E5 /* FillAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE867F722416D0E004531E5 /* FillAlertController.swift */; };
 		EBE8680322417BDF004531E5 /* ShareBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE8680222417BDF004531E5 /* ShareBuilder.swift */; };
 		EBE8F24422663A1400631F77 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE8F24322663A1400631F77 /* ServiceLocator.swift */; };
+		EBE8F24722663EF500631F77 /* PersistanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE8F24622663EF500631F77 /* PersistanceService.swift */; };
+		EBE8F2492266426B00631F77 /* SaveBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE8F2482266426B00631F77 /* SaveBuilder.swift */; };
+		EBE8F24B2266446C00631F77 /* CompletionBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE8F24A2266446C00631F77 /* CompletionBlock.swift */; };
 		EBE9B011222C4EC60007FA91 /* NewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE9B010222C4EC60007FA91 /* NewRouter.swift */; };
 		EBE9B013222C57800007FA91 /* GridRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE9B012222C57800007FA91 /* GridRouter.swift */; };
 		EBF1EBCD225D214200BBA28D /* NewAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF1EBCC225D214200BBA28D /* NewAlertController.swift */; };
@@ -188,6 +191,9 @@
 		EBE867F722416D0E004531E5 /* FillAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillAlertController.swift; sourceTree = "<group>"; };
 		EBE8680222417BDF004531E5 /* ShareBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareBuilder.swift; sourceTree = "<group>"; };
 		EBE8F24322663A1400631F77 /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
+		EBE8F24622663EF500631F77 /* PersistanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceService.swift; sourceTree = "<group>"; };
+		EBE8F2482266426B00631F77 /* SaveBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveBuilder.swift; sourceTree = "<group>"; };
+		EBE8F24A2266446C00631F77 /* CompletionBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletionBlock.swift; sourceTree = "<group>"; };
 		EBE9B010222C4EC60007FA91 /* NewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRouter.swift; sourceTree = "<group>"; };
 		EBE9B012222C57800007FA91 /* GridRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridRouter.swift; sourceTree = "<group>"; };
 		EBF1EBCC225D214200BBA28D /* NewAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAlertController.swift; sourceTree = "<group>"; };
@@ -223,6 +229,7 @@
 				EB3CBF8C223B3DA70043E8FB /* FileExtension.swift */,
 				EBF1EBE0225D446C00BBA28D /* SubtitleCell.swift */,
 				EB3CBF622233ED3C0043E8FB /* Word.swift */,
+				EBE8F24A2266446C00631F77 /* CompletionBlock.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -259,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				EBE8F24322663A1400631F77 /* ServiceLocator.swift */,
+				EBE8F24622663EF500631F77 /* PersistanceService.swift */,
 				EB214F1D2218BD3300D1C3A0 /* XmlService.swift */,
 			);
 			path = Services;
@@ -390,6 +398,7 @@
 			isa = PBXGroup;
 			children = (
 				EB214F1822182A6B00D1C3A0 /* SaveAlertController.swift */,
+				EBE8F2482266426B00631F77 /* SaveBuilder.swift */,
 			);
 			path = Save;
 			sourceTree = "<group>";
@@ -587,6 +596,7 @@
 				EB3CBF672233F0250043E8FB /* XMLEncodingStorage.swift in Sources */,
 				EBE867F822416D0E004531E5 /* FillAlertController.swift in Sources */,
 				EBF1EBDA225D2DEC00BBA28D /* TermsViewController.swift in Sources */,
+				EBE8F2492266426B00631F77 /* SaveBuilder.swift in Sources */,
 				EB3CBF4C2233EBF10043E8FB /* ISO8601DateFormatter.swift in Sources */,
 				EB3CBF692233F0290043E8FB /* XMLReferencingEncoder.swift in Sources */,
 				EB3CBF8D223B3DA70043E8FB /* FileExtension.swift in Sources */,
@@ -640,10 +650,12 @@
 				EB3CBF652233F0210043E8FB /* XMLEncoder.swift in Sources */,
 				EBE9B013222C57800007FA91 /* GridRouter.swift in Sources */,
 				EB1CD99721A0865B005E9BB8 /* GridBuilder.swift in Sources */,
+				EBE8F24722663EF500631F77 /* PersistanceService.swift in Sources */,
 				EBF1EBE3225D4E2E00BBA28D /* RecentsModuleIO.swift in Sources */,
 				EB3CBF8B223B389E0043E8FB /* RecentsRouter.swift in Sources */,
 				EB8FBBE02217AAE900F92DDE /* GridInteractor.swift in Sources */,
 				EB3CBF6F223425A10043E8FB /* FillViewController.swift in Sources */,
+				EBE8F24B2266446C00631F77 /* CompletionBlock.swift in Sources */,
 				EB214F202218C21400D1C3A0 /* Document.swift in Sources */,
 				EB3CBF802234785F0043E8FB /* RollViewController.swift in Sources */,
 				EB002D26218CC05C00A89806 /* WordBuilder.swift in Sources */,
