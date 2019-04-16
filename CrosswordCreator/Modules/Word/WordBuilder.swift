@@ -8,18 +8,18 @@
 
 final class WordBuilder {
     
-    static func alertController(with mode: Mode) -> WordAlertController {
-        let alertController: WordAlertController
+    static func viewController(with mode: Mode) -> WordViewController {
+        let viewController: WordViewController
         
         switch mode {
         case .new:
-            alertController = WordAlertController.create()
+            viewController = WordViewController()
             
         case .edit(let word, let index):
-            alertController = WordAlertController.create(with: (word, index))
+            viewController = WordViewController((word, index))
         }
         
-        return alertController
+        return viewController
     }
     
     enum Mode {

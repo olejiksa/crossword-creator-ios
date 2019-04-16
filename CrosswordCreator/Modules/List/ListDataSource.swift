@@ -120,9 +120,9 @@ extension ListDataSource: UITableViewDataSource {
 
 
 
-// MARK: - WordAlertControllerDelegate
+// MARK: - WordViewControllerDelegate
 
-extension ListDataSource: WordAlertControllerDelegate {
+extension ListDataSource: WordViewControllerDelegate {
     
     func addWord(_ word: Word) {
         words.append(word)

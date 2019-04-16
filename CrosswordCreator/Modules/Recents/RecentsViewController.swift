@@ -196,6 +196,8 @@ extension RecentsViewController: UITableViewDataSource {
             cell.layer.cornerRadius = 15.0
             cell.clipsToBounds = true
             
+            cell.setNeedsDisplay()
+            
             return cell
             
         case .picker:
@@ -205,6 +207,8 @@ extension RecentsViewController: UITableViewDataSource {
             
             cell.layer.cornerRadius = 15.0
             cell.clipsToBounds = true
+            
+            cell.setNeedsDisplay()
             
             return cell
         }

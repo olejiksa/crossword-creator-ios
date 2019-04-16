@@ -51,6 +51,8 @@ final class TermsViewController: UIViewController {
         let nib = UINib(nibName: cellIdentifier, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
         
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 10))
+        
         setupNavigationBar()
     }
     
@@ -85,7 +87,7 @@ final class TermsViewController: UIViewController {
 
 extension TermsViewController: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         let count = words.count
         
         if count == 0 {
@@ -99,6 +101,10 @@ extension TermsViewController: UITableViewDataSource {
         return count
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ListViewCell
         
@@ -109,8 +115,11 @@ extension TermsViewController: UITableViewDataSource {
             cell = ListViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
         }
         
-        let word = words[indexPath.row]
+        let word = words[indexPath.section]
         cell.setup(with: word)
+        
+        cell.layer.cornerRadius = 15.0
+        cell.clipsToBounds = true
         
         return cell
     }
@@ -125,6 +134,16 @@ extension TermsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        return headerView
     }
 }
 

@@ -10,7 +10,7 @@ import UIKit
 
 protocol FillAlertControllerDelegate: class {
     
-    func fill(with answer: String, index: Int)
+    func fill(with answer: String, index: Int, maxLength: Int)
 }
 
 final class FillAlertController: UIAlertController {
@@ -73,11 +73,14 @@ final class FillAlertController: UIAlertController {
         let okAction = UIAlertAction(title: Constants.ok, style: .default) { [weak self] _ in
             guard
                 let strongSelf = self,
-                let answer = strongSelf.textFields?[0].text, let index = self?.index
+                let answer = strongSelf.textFields?[0].text, let index = self?.index,
+                let maxLength = strongSelf.maxLength
             else { return }
             
             let trimmedAnswer = answer.trimmingCharacters(in: .whitespaces)
-            self?.delegate?.fill(with: trimmedAnswer, index: index)
+            self?.delegate?.fill(with: trimmedAnswer,
+                                 index: index,
+                                 maxLength: maxLength)
         }
         addAction(okAction)
         

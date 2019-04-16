@@ -26,8 +26,9 @@ final class RecentsRouter: RecentsRouterProtocol {
     
     func wantsToOpenListEditor(with title: String, words: [Word]) {
         let vc = ListBuilder.viewController(with: title, words: words)
-        let nvc = UINavigationController(rootViewController: vc)
-        transitionHandler?.present(nvc)
+        if let nvc = vc.navigationController {
+            transitionHandler?.present(nvc)
+        }
     }
     
     func wantsToFill(with title: String, words: [LayoutWord]) {

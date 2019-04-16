@@ -33,7 +33,7 @@
             <constraints>
                 <constraint firstItem="fND-0V-eJP" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="6lc-A7-RGT"/>
                 <constraint firstItem="fND-0V-eJP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="eDx-Ur-qtu"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="fND-0V-eJP" secondAttribute="bottom" id="fmr-JV-kFV"/>
+                <constraint firstAttribute="bottom" secondItem="fND-0V-eJP" secondAttribute="bottom" id="fmr-JV-kFV"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="fND-0V-eJP" secondAttribute="trailing" id="zPr-zg-gAF"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

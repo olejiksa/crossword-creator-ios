@@ -52,19 +52,21 @@ final class AlertsFactory {
         if let actions = actions {
             switch actions {
             case .ok:
-                break
+                let okAction = UIAlertAction(title: "OK", style: .default)
+                
+                alertController.addAction(okAction)
                 
             case .yesNo:
                 let yesAction = UIAlertAction(title: "Yes", style: .default)
-                let noAction = UIAlertAction(title: "No", style: .default)
+                let noAction = UIAlertAction(title: "No", style: .cancel)
                 
                 alertController.addAction(yesAction)
                 alertController.addAction(noAction)
                 
             case .yesNoCancel:
                 let yesAction = UIAlertAction(title: "Yes", style: .default)
-                let noAction = UIAlertAction(title: "No", style: .default)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+                let noAction = UIAlertAction(title: "No", style: .cancel)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
                 
                 alertController.addAction(yesAction)
                 alertController.addAction(noAction)

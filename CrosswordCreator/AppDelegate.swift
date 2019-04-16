@@ -32,7 +32,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = MainBuilder.mainViewController()
+        
+        let vc = RecentsBuilder.viewController()
+        window?.rootViewController = vc.navigationController
         window?.makeKeyAndVisible()
         
         UIApplication.shared.windows.first?.backgroundColor = .white

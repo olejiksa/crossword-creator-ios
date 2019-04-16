@@ -6,6 +6,8 @@
 //  Copyright © 2018 Oleg Samoylov. All rights reserved.
 //
 
+import UIKit
+
 final class ListBuilder {
     
     private enum Constants {
@@ -27,7 +29,10 @@ final class ListBuilder {
         let viewController = ListViewController(dataSource: dataSource,
                                                 xmlService: xmlService,
                                                 mode: mode)
-        let router = ListRouter(transitionHandler: viewController)
+        let nvc = UINavigationController(rootViewController: viewController)
+        
+        let router = ListRouter(transitionHandler: viewController,
+                                navigationTransitionHandler: nvc)
         viewController.router = router
         dataSource.vc = viewController
         

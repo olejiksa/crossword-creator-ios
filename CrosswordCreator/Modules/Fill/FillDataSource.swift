@@ -26,7 +26,7 @@ final class FillDataSource: NSObject, FillDataSourceProtocol {
     
     struct Letter {
         
-        var index: Int?
+        var indexes: [Int] = []
         var value: String
         var word: LayoutWord?
         
@@ -87,23 +87,23 @@ final class FillDataSource: NSObject, FillDataSourceProtocol {
             case .horizontal:
                 charGrid[item.row][item.column].value = "\(index + 1) "
                 charGrid[item.row][item.column].word = item
-                charGrid[item.row][item.column].index = index
+                charGrid[item.row][item.column].indexes += [index]
                 
                 (1...item.answer.count).forEach {
                     charGrid[item.row][item.column + $0].value = " "
                     charGrid[item.row][item.column + $0].word = item
-                    charGrid[item.row][item.column + $0].index = index
+                    charGrid[item.row][item.column + $0].indexes += [index]
                 }
                 
             case .vertical:
                 charGrid[item.row][item.column].value = "\(index + 1) "
                 charGrid[item.row][item.column].word = item
-                charGrid[item.row][item.column].index = index
+                charGrid[item.row][item.column].indexes += [index]
                 
                 (1...item.answer.count).forEach {
                     charGrid[item.row + $0][item.column].value = " "
                     charGrid[item.row + $0][item.column].word = item
-                    charGrid[item.row + $0][item.column].index = index
+                    charGrid[item.row + $0][item.column].indexes += [index]
                 }
             }
         }

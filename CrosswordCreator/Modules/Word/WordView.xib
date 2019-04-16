@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WordViewController" customModule="CrosswordCreator" customModuleProvider="target">
+            <connections>
+                <outlet property="answerTextField" destination="sZd-D8-fwx" id="ev7-B7-cNp"/>
+                <outlet property="infoLabel" destination="VYV-iZ-Uyi" id="zUY-EC-skK"/>
+                <outlet property="questionTextView" destination="q1K-ZW-jjh" id="N4g-V5-ZF8"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYV-iZ-Uyi">
+                    <rect key="frame" x="16" y="36" width="343" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="q1K-ZW-jjh">
+                    <rect key="frame" x="16" y="64.5" width="343" height="33"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sZd-D8-fwx">
+                    <rect key="frame" x="16" y="142.5" width="343" height="33"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="33" id="6u2-Ir-Klm"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJf-FJ-FmQ">
+                    <rect key="frame" x="16" y="113.5" width="343" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="VYV-iZ-Uyi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="EPV-mC-yug"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nJf-FJ-FmQ" secondAttribute="trailing" constant="16" id="Flz-xK-Qjz"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="q1K-ZW-jjh" secondAttribute="trailing" constant="16" id="RXH-jW-Fm3"/>
+                <constraint firstItem="q1K-ZW-jjh" firstAttribute="top" secondItem="VYV-iZ-Uyi" secondAttribute="bottom" constant="8" id="Wf0-7P-zbt"/>
+                <constraint firstItem="sZd-D8-fwx" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="cED-Rn-vFG"/>
+                <constraint firstItem="q1K-ZW-jjh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="eSI-Ah-VEZ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sZd-D8-fwx" secondAttribute="trailing" constant="16" id="mvS-gN-VEn"/>
+                <constraint firstItem="nJf-FJ-FmQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="nKC-fL-BRh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VYV-iZ-Uyi" secondAttribute="trailing" constant="16" id="sc1-OP-OqQ"/>
+                <constraint firstItem="nJf-FJ-FmQ" firstAttribute="top" secondItem="q1K-ZW-jjh" secondAttribute="bottom" constant="16" id="u4o-m2-gg2"/>
+                <constraint firstItem="VYV-iZ-Uyi" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="yHF-DQ-AL0"/>
+                <constraint firstItem="sZd-D8-fwx" firstAttribute="top" secondItem="nJf-FJ-FmQ" secondAttribute="bottom" constant="8" id="zJu-wz-k6d"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

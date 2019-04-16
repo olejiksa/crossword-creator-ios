@@ -18,19 +18,22 @@ protocol ListRouterProtocol {
 
 final class ListRouter: ListRouterProtocol {
     
-    typealias ListTransitionHandler = ViewTransitionHandler & WordAlertControllerDelegate & SaveAlertControllerDelegate
+    typealias ListTransitionHandler = ViewTransitionHandler & WordViewControllerDelegate & SaveAlertControllerDelegate
     
     private weak var transitionHandler: ListTransitionHandler?
+    private weak var navigationTransitionHandler: NavigationTransitionHandler?
     
-    init(transitionHandler: ListTransitionHandler) {
+    init(transitionHandler: ListTransitionHandler,
+         navigationTransitionHandler: NavigationTransitionHandler?) {
         self.transitionHandler = transitionHandler
+        self.navigationTransitionHandler = navigationTransitionHandler
     }
     
     func wantsToOpenWordEditor(with mode: WordBuilder.Mode) {
-        let wordAlertController = WordBuilder.alertController(with: mode)
+        let wordAlertController = WordBuilder.viewController(with: mode)
         wordAlertController.delegate = transitionHandler
         
-        transitionHandler?.present(wordAlertController)
+        navigationTransitionHandler?.push(wordAlertController)
     }
     
     func wantsToGoBack() {

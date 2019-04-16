@@ -34,7 +34,6 @@
 		EB214F382219840F00D1C3A0 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB214F362219840F00D1C3A0 /* HelpViewController.swift */; };
 		EB214F392219840F00D1C3A0 /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB214F372219840F00D1C3A0 /* HelpViewController.xib */; };
 		EB21C4F521876DBF0074A21B /* String+IsEmptyOrWhitespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB21C4F421876DBF0074A21B /* String+IsEmptyOrWhitespace.swift */; };
-		EB21C4F92187705C0074A21B /* WordAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB21C4F82187705C0074A21B /* WordAlertController.swift */; };
 		EB21C4FB218771A30074A21B /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB21C4FA218771A30074A21B /* Word.swift */; };
 		EB21C5022187893A0074A21B /* ListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB21C5002187893A0074A21B /* ListViewCell.swift */; };
 		EB21C5032187893A0074A21B /* ListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB21C5012187893A0074A21B /* ListViewCell.xib */; };
@@ -78,6 +77,9 @@
 		EB632E2C22634282004359A1 /* CreationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB632E2A22634282004359A1 /* CreationView.xib */; };
 		EB632E2E22634DDE004359A1 /* CreationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB632E2D22634DDE004359A1 /* CreationRouter.swift */; };
 		EB632E3022635594004359A1 /* Array+Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB632E2F22635594004359A1 /* Array+Diff.swift */; };
+		EB632E3322639209004359A1 /* WordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB632E3122639209004359A1 /* WordViewController.swift */; };
+		EB632E3422639209004359A1 /* WordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB632E3222639209004359A1 /* WordView.xib */; };
+		EB632E362263A0B1004359A1 /* Controller+HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB632E352263A0B1004359A1 /* Controller+HideKeyboard.swift */; };
 		EB6DFD1B2257E1920058C83A /* RollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DFD192257E1920058C83A /* RollCell.swift */; };
 		EB6DFD1C2257E1920058C83A /* RollCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB6DFD1A2257E1920058C83A /* RollCell.xib */; };
 		EB7817D9217A1FFF00BA9D50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7817D8217A1FFF00BA9D50 /* AppDelegate.swift */; };
@@ -134,7 +136,6 @@
 		EB214F362219840F00D1C3A0 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		EB214F372219840F00D1C3A0 /* HelpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
 		EB21C4F421876DBF0074A21B /* String+IsEmptyOrWhitespace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+IsEmptyOrWhitespace.swift"; sourceTree = "<group>"; };
-		EB21C4F82187705C0074A21B /* WordAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordAlertController.swift; sourceTree = "<group>"; };
 		EB21C4FA218771A30074A21B /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		EB21C5002187893A0074A21B /* ListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCell.swift; sourceTree = "<group>"; };
 		EB21C5012187893A0074A21B /* ListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListViewCell.xib; sourceTree = "<group>"; };
@@ -178,6 +179,9 @@
 		EB632E2A22634282004359A1 /* CreationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreationView.xib; sourceTree = "<group>"; };
 		EB632E2D22634DDE004359A1 /* CreationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationRouter.swift; sourceTree = "<group>"; };
 		EB632E2F22635594004359A1 /* Array+Diff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Diff.swift"; sourceTree = "<group>"; };
+		EB632E3122639209004359A1 /* WordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewController.swift; sourceTree = "<group>"; };
+		EB632E3222639209004359A1 /* WordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WordView.xib; sourceTree = "<group>"; };
+		EB632E352263A0B1004359A1 /* Controller+HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Controller+HideKeyboard.swift"; sourceTree = "<group>"; };
 		EB6DFD192257E1920058C83A /* RollCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollCell.swift; sourceTree = "<group>"; };
 		EB6DFD1A2257E1920058C83A /* RollCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RollCell.xib; sourceTree = "<group>"; };
 		EB7817D5217A1FFF00BA9D50 /* CrosswordCreator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrosswordCreator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -231,6 +235,7 @@
 				EB002D28218CC34100A89806 /* TransitionHandler.swift */,
 				EB3CBF8C223B3DA70043E8FB /* FileExtension.swift */,
 				EBF1EBE0225D446C00BBA28D /* SubtitleTableViewCell.swift */,
+				EB3CBF622233ED3C0043E8FB /* RAWWord.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -337,6 +342,7 @@
 				EB27342A2206F58A00ABAC20 /* String+Subscript.swift */,
 				EBF1EBDE225D32DD00BBA28D /* Table+Empty.swift */,
 				EB632E2F22635594004359A1 /* Array+Diff.swift */,
+				EB632E352263A0B1004359A1 /* Controller+HideKeyboard.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -344,10 +350,10 @@
 		EB21C4FC218775490074A21B /* Word */ = {
 			isa = PBXGroup;
 			children = (
-				EB3CBF622233ED3C0043E8FB /* RAWWord.swift */,
 				EB21C4FA218771A30074A21B /* Word.swift */,
 				EB002D25218CC05C00A89806 /* WordBuilder.swift */,
-				EB21C4F82187705C0074A21B /* WordAlertController.swift */,
+				EB632E3122639209004359A1 /* WordViewController.swift */,
+				EB632E3222639209004359A1 /* WordView.xib */,
 			);
 			path = Word;
 			sourceTree = "<group>";
@@ -579,6 +585,7 @@
 				EB7817ED217A244C00BA9D50 /* ListView.xib in Resources */,
 				EB3CBF812234785F0043E8FB /* RollView.xib in Resources */,
 				EB1CD99521A08642005E9BB8 /* GridView.xib in Resources */,
+				EB632E3422639209004359A1 /* WordView.xib in Resources */,
 				EB3CBF70223425A10043E8FB /* FillView.xib in Resources */,
 				EB1CD99221A08089005E9BB8 /* RecentsView.xib in Resources */,
 			);
@@ -602,7 +609,6 @@
 				EBF1EBD7225D2DC500BBA28D /* TermsBuilder.swift in Sources */,
 				EB214F222218C24000D1C3A0 /* Element.swift in Sources */,
 				EB2734292206E6C300ABAC20 /* CrosswordsGenerator.swift in Sources */,
-				EB21C4F92187705C0074A21B /* WordAlertController.swift in Sources */,
 				EB002D2B218CC46B00A89806 /* Controller+TransitionHandler.swift in Sources */,
 				EB3CBF582233EC300043E8FB /* DecodingErrorExtension.swift in Sources */,
 				EB3CBF7D223478020043E8FB /* RollBuilder.swift in Sources */,
@@ -621,10 +627,12 @@
 				EB6DFD1B2257E1920058C83A /* RollCell.swift in Sources */,
 				EB3CBF72223427380043E8FB /* FillRouter.swift in Sources */,
 				EB3CBF4E2233EBF80043E8FB /* XMLKey.swift in Sources */,
+				EB632E3322639209004359A1 /* WordViewController.swift in Sources */,
 				EB3CBF4A2233DB130043E8FB /* ShortcutIdentifier.swift in Sources */,
 				EB214F282218C28100D1C3A0 /* Parser.swift in Sources */,
 				EB8FBBE42217CB2300F92DDE /* CoreDataCoreSpotlightDelegate.swift in Sources */,
 				EBF1EBDF225D32DD00BBA28D /* Table+Empty.swift in Sources */,
+				EB632E362263A0B1004359A1 /* Controller+HideKeyboard.swift in Sources */,
 				EB7817DB217A1FFF00BA9D50 /* ListViewController.swift in Sources */,
 				EBE9B011222C4EC60007FA91 /* NewRouter.swift in Sources */,
 				EBE8680322417BDF004531E5 /* ShareBuilder.swift in Sources */,

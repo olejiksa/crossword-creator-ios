@@ -10,7 +10,7 @@ import UIKit
 
 final class ListViewController: UIViewController {
     
-    typealias WordsListDataSource = ListDataSourceProtocol & WordAlertControllerDelegate
+    typealias WordsListDataSource = ListDataSourceProtocol & WordViewControllerDelegate
     
     // MARK: Private Data Structures
     
@@ -151,9 +151,9 @@ extension ListViewController: UITableViewDelegate {
 
 
 
-// MARK: - WordAlertControllerDelegate
+// MARK: - WordViewControllerDelegate
 
-extension ListViewController: WordAlertControllerDelegate {
+extension ListViewController: WordViewControllerDelegate {
     
     func addWord(_ word: Word) {
         dataSource.addWord(word)

@@ -100,7 +100,16 @@ final class FillViewController: UIViewController {
     }
     
     @IBAction private func check(_ sender: UIBarButtonItem) {
-        AlertsFactory.crosswordIsFilledIncorrectly(self)
+        let validAnswers = dataSource.words.map { $0.answer }
+        let enteredAnswers = dataSource.enteredAnswers
+        
+        let isValid = validAnswers == enteredAnswers
+        
+        if !isValid {
+            AlertsFactory.crosswordIsFilledIncorrectly(self)
+        } else {
+            AlertsFactory.crosswordIsFilledCorrectly(self)
+        }
     }
 }
 
@@ -114,7 +123,7 @@ extension FillViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let letter = dataSource.charGrid[indexPath.section][indexPath.row]
         
-        if let word = letter.word, let index = letter.index {
+        if let word = letter.word, let index = letter.indexes.last {
             let filledWord: FilledWord
             filledWord.index = index
             filledWord.word = Word(question: word.question, answer: word.answer)
@@ -130,17 +139,32 @@ extension FillViewController: UICollectionViewDelegate {
 
 extension FillViewController: FillAlertControllerDelegate {
     
-    func fill(with answer: String, index: Int) {
+    func fill(with answer: String, index: Int, maxLength: Int) {
         dataSource.enteredAnswers[index] = answer
+        
+        var answerToFill = answer
+        (1...maxLength).forEach { _ in
+            answerToFill += " "
+        }
+        
+        var ind = -1
         
         for i in 0..<dataSource.charGrid.count {
             for j in 0..<dataSource.charGrid[i].count {
-                if dataSource.charGrid[i][j].index == index, j < answer.count {
-                    dataSource.charGrid[i][j].value = String(answer[j])
+                if dataSource.charGrid[i][j].indexes.count > 0,
+                   dataSource.charGrid[i][j].indexes.contains(index), ind < answerToFill.count {
+                    
+                    if ind < 0 {
+                        ind += 1
+                        continue
+                    } else {
+                        dataSource.charGrid[i][j].value = String(answerToFill[ind])
+                        ind += 1
+                    }
+                    
+                    collectionView.reloadItems(at: [IndexPath(row: j, section: i)])
                 }
             }
         }
-        
-        collectionView.reloadData()
     }
 }

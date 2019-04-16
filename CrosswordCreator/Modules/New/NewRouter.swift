@@ -27,8 +27,9 @@ final class NewRouter: NewRouterProtocol {
     
     func wantsToOpenListEditor() {
         let listViewController = ListBuilder.viewController()
-        let navigationController = UINavigationController(rootViewController: listViewController)
-        transitionHandler?.present(navigationController)
+        if let nvc = listViewController.navigationController {
+            transitionHandler?.present(nvc)
+        }
     }
     
     func wantsToOpenListEditor(_ action: UIAlertAction) {
