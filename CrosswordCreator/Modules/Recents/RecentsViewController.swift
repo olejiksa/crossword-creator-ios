@@ -44,7 +44,7 @@ final class RecentsViewController: UIViewController {
     private let recentsCell = RecentsCell.self
     private let subtitleCell = SubtitleCell.self
     
-    private let interactor: RecentsInteractorProtocol
+    let interactor: RecentsInteractorProtocol
     
     private let mode: Mode
     private var checkedSections: [Int] = []
@@ -77,7 +77,7 @@ final class RecentsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        tableView.reloadData()
+        refresh()
     }
     
     
@@ -242,10 +242,10 @@ extension RecentsViewController: UITableViewDelegate {
             
             if interactor.isTermsList(at: index) {
                 let words = interactor.getWords(at: index)
-                router?.wantsToOpenListEditor(with: title, words: words)
+                router?.wantsToOpenListEditor(with: title, words: words, index: index)
             } else {
                 let layoutWords = interactor.getLayoutWords(at: index)
-                router?.wantsToFill(with: title, words: layoutWords)
+                router?.wantsToFill(with: title, words: layoutWords, index: index)
             }
         } else if let cell = tableView.cellForRow(at: indexPath) {
             switch cell.accessoryType {
@@ -320,7 +320,11 @@ extension RecentsViewController: UIViewControllerPreviewingDelegate {
                 if (cell as? RecentsCell)?.secondSubtitle?.text == "Dictionary",
                     let title = (cell as? RecentsCell)?.titleLabel?.text {
                     let words = interactor.getWords(at: indexPath.section)
-                    let nvc = ListBuilder.viewController(with: title, words: words).navigationController
+                    let index = indexPath.section
+                    
+                    let vc = ListBuilder.viewController(with: title, words: words)
+                    vc.index = index
+                    let nvc = vc.navigationController
                     
                     nvc?.setToolbarHidden(true, animated: true)
                     nvc?.setNavigationBarHidden(true, animated: true)
@@ -328,7 +332,11 @@ extension RecentsViewController: UIViewControllerPreviewingDelegate {
                     return nvc
                 } else if let title = (cell as? RecentsCell)?.titleLabel?.text {
                     let words = interactor.getLayoutWords(at: indexPath.section)
-                    let nvc = FillBuilder.viewController(with: title, words: words).navigationController
+                    let index = indexPath.section
+                    
+                    let vc = FillBuilder.viewController(with: title, words: words)
+                    vc.index = index
+                    let nvc = vc.navigationController
                     
                     nvc?.setToolbarHidden(true, animated: true)
                     nvc?.setNavigationBarHidden(true, animated: true)

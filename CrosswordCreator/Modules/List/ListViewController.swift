@@ -32,6 +32,22 @@ final class ListViewController: UIViewController {
     private let mode: Bool
     
     private var saveButton: UIBarButtonItem?
+    var index = 0
+    
+    override var previewActionItems: [UIPreviewActionItem] {
+        let deleteAction = UIPreviewAction(title: "Delete", style: .destructive) { (action, viewController) -> Void in
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let persistanceManager = appDelegate.persistanceManager
+            
+            let crosswords: [Crossword] = persistanceManager.fetch(entityName: "Crossword")
+            persistanceManager.remove(crosswords[self.index])
+            persistanceManager.save()
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTheTable"), object: nil)
+        }
+        
+        return [deleteAction]
+    }
     
     @IBOutlet private weak var tableView: UITableView!
     
@@ -242,3 +258,10 @@ extension ListViewController: SaveAlertControllerDelegate {
 //        return nil
 //    }
 //}
+
+extension UINavigationController {
+    
+    override open var previewActionItems: [UIPreviewActionItem] {
+        return topViewController?.previewActionItems ?? []
+    }
+}

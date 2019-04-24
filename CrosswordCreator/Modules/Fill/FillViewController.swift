@@ -36,6 +36,25 @@ final class FillViewController: UIViewController {
     
     var router: FillRouterProtocol?
     
+    var index: Int = 0
+    
+    
+    
+    override var previewActionItems: [UIPreviewActionItem] {
+        let deleteAction = UIPreviewAction(title: "Delete", style: .destructive) { (action, viewController) -> Void in
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let persistanceManager = appDelegate.persistanceManager
+            
+            let crosswords: [Crossword] = persistanceManager.fetch(entityName: "Crossword")
+            persistanceManager.remove(crosswords[self.index])
+            persistanceManager.save()
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTheTable"), object: nil)
+        }
+        
+        return [deleteAction]
+    }
+    
     
     
     
