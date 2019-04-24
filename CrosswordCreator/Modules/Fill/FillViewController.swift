@@ -72,6 +72,7 @@ final class FillViewController: UIViewController {
         dataSource.setup(with: collectionView)
         
         setupNavigationBar()
+        setupToolbar()
         
         collectionView.delegate = self
     }
@@ -94,6 +95,17 @@ final class FillViewController: UIViewController {
         navigationItem.rightBarButtonItems = [shareButton, printButton]
     }
     
+    private func setupToolbar() {
+        let questions = UIBarButtonItem(title: "Questions", style: .plain, target: self, action: #selector(seeQuestions))
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        let fixedSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
+        fixedSpacer.width = 10
+        let zoom = UIBarButtonItem(title: "Zoom", style: .plain, target: self, action: #selector(didZoomTapped))
+        let check = UIBarButtonItem(title: "Check", style: .plain, target: self, action: #selector(self.check))
+        
+        toolbarItems = [questions, spacer, zoom, fixedSpacer, check]
+    }
+    
     @objc private func willCancel() {
         router?.wantsToGoBack()
     }
@@ -102,11 +114,11 @@ final class FillViewController: UIViewController {
         router?.wantsToShare(with: gridTitle, view: view, layoutWords: dataSource.words)
     }
     
-    @IBAction private func seeQuestions(_ sender: UIBarButtonItem) {
+    @objc private func seeQuestions() {
         router?.wantsToSeeQuestions(with: dataSource.words)
     }
     
-    @IBAction private func check(_ sender: UIBarButtonItem) {
+    @objc private func check() {
         let validAnswers = dataSource.words.map { $0.answer }
         let enteredAnswers = dataSource.enteredAnswers
         
@@ -176,7 +188,7 @@ final class FillViewController: UIViewController {
         }
     }
     
-    @IBAction func didZoomTapped(_ sender: UIBarButtonItem) {
+    @objc private func didZoomTapped() {
         let alertController = UIAlertController(title:"Zoom",
                                                 message: nil,
                                                 preferredStyle: .alert)

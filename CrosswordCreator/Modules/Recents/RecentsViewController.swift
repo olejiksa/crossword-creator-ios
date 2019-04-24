@@ -68,6 +68,7 @@ final class RecentsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        registerForPreviewing(with: self, sourceView: tableView)
         NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: NSNotification.Name(rawValue: "reloadTheTable"), object: nil)
         setupView()
         interactor.setupSearchableContent()
@@ -286,5 +287,60 @@ extension RecentsViewController: UITableViewDelegate {
         tableView.beginUpdates()
         tableView.deleteSections(IndexSet(arrayLiteral: indexPath.section), with: .automatic)
         tableView.endUpdates()
+    }
+}
+
+
+
+
+// MARK: - UIViewControllerPreviewingDelegate
+
+extension RecentsViewController: UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                           commit viewControllerToCommit: UIViewController) {
+        present(viewControllerToCommit)
+        
+        (viewControllerToCommit as? UINavigationController)?.setToolbarHidden(false, animated: true)
+        (viewControllerToCommit as? UINavigationController)?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                           viewControllerForLocation location: CGPoint) -> UIViewController? {
+        if let indexPath = tableView.indexPathForRow(at: location) {
+            previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
+            
+            let cell = tableView.cellForRow(at: indexPath)
+            
+            switch cell {
+            case is SubtitleCell:
+                break
+                
+            case is RecentsCell:
+                if (cell as? RecentsCell)?.secondSubtitle?.text == "Dictionary",
+                    let title = (cell as? RecentsCell)?.titleLabel?.text {
+                    let words = interactor.getWords(at: indexPath.section)
+                    let nvc = ListBuilder.viewController(with: title, words: words).navigationController
+                    
+                    nvc?.setToolbarHidden(true, animated: true)
+                    nvc?.setNavigationBarHidden(true, animated: true)
+                    
+                    return nvc
+                } else if let title = (cell as? RecentsCell)?.titleLabel?.text {
+                    let words = interactor.getLayoutWords(at: indexPath.section)
+                    let nvc = FillBuilder.viewController(with: title, words: words).navigationController
+                    
+                    nvc?.setToolbarHidden(true, animated: true)
+                    nvc?.setNavigationBarHidden(true, animated: true)
+                    
+                    return nvc
+                }
+                
+            default:
+                break
+            }
+        }
+        
+        return nil
     }
 }

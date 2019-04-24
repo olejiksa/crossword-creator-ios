@@ -66,8 +66,9 @@ final class ListViewController: UIViewController {
     private func setupView() {
         dataSource.setup(with: tableView)
         setupNavigationBar()
+        setupToolbar()
         
-        registerForPreviewing(with: self, sourceView: tableView)
+        //registerForPreviewing(with: self, sourceView: tableView)
     }
     
     private func setupNavigationBar() {
@@ -94,7 +95,14 @@ final class ListViewController: UIViewController {
         navigationItem.rightBarButtonItems = [shareButton, saveButton]
     }
     
-    @IBAction private func openWordAlertController(_ sender: UIBarButtonItem) {
+    private func setupToolbar() {
+        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(openWordAlertController))
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        
+        toolbarItems = [spacer, add]
+    }
+    
+    @objc private func openWordAlertController() {
         router?.wantsToOpenWordEditor(with: .new)
     }
     
@@ -213,24 +221,24 @@ extension ListViewController: SaveAlertControllerDelegate {
 
 // MARK: - UIViewControllerPreviewingDelegate
 
-extension ListViewController: UIViewControllerPreviewingDelegate {
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
-                           commit viewControllerToCommit: UIViewController) {
-        navigationController?.pushViewController(viewControllerToCommit, animated: true)
-    }
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
-                           viewControllerForLocation location: CGPoint) -> UIViewController? {
-        if let indexPath = tableView.indexPathForRow(at: location) {
-            previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
-            
-            if let cell = tableView.cellForRow(at: indexPath) as? ListViewCell,
-               let word = cell.word {
-                return WordBuilder.viewController(with: .edit(word, indexPath.section))
-            } else { return nil }
-        }
-        
-        return nil
-    }
-}
+//extension ListViewController: UIViewControllerPreviewingDelegate {
+//    
+//    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+//                           commit viewControllerToCommit: UIViewController) {
+//        navigationController?.pushViewController(viewControllerToCommit, animated: true)
+//    }
+//    
+//    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+//                           viewControllerForLocation location: CGPoint) -> UIViewController? {
+//        if let indexPath = tableView.indexPathForRow(at: location) {
+//            previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
+//            
+//            if let cell = tableView.cellForRow(at: indexPath) as? ListViewCell,
+//               let word = cell.word {
+//                return WordBuilder.viewController(with: .edit(word, indexPath.section))
+//            } else { return nil }
+//        }
+//        
+//        return nil
+//    }
+//}

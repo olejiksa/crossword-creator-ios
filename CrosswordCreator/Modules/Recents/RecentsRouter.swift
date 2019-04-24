@@ -27,6 +27,9 @@ final class RecentsRouter: RecentsRouterProtocol {
     func wantsToOpenListEditor(with title: String, words: [Word]) {
         let vc = ListBuilder.viewController(with: title, words: words)
         if let nvc = vc.navigationController {
+            nvc.setToolbarHidden(false, animated: true)
+            nvc.setNavigationBarHidden(false, animated: true)
+            
             transitionHandler?.present(nvc)
         }
     }
@@ -34,6 +37,9 @@ final class RecentsRouter: RecentsRouterProtocol {
     func wantsToFill(with title: String, words: [LayoutWord]) {
         let vc = FillBuilder.viewController(with: title, words: words)
         if let nvc = vc.navigationController {
+            nvc.setToolbarHidden(false, animated: true)
+            nvc.setNavigationBarHidden(false, animated: true)
+            
             transitionHandler?.present(nvc)
         }
     }
