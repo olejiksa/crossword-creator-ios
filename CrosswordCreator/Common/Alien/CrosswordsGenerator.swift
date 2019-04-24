@@ -2,8 +2,8 @@
 //  CrosswordsGenerator.swift
 //  crosswords_generator
 //
-//  Created by Maxim Bilan on 9/11/15.
-//  Copyright © 2015 Maxim Bilan. All rights reserved.
+//  Created by Oleg Samoylov on 9/02/18.
+//  Copyright © 2019 Oleg Samoylov. All rights reserved.
 //
 
 import UIKit
@@ -19,8 +19,6 @@ protocol CrosswordsGeneratorProtocol: class {
 
 open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
 	
-	// MARK: - Public properties
-	
 	open var columns: Int = 0
 	open var rows: Int = 0
 	open var maxLoops: Int = 2000
@@ -32,32 +30,26 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
 		}
 	}
 	
-	// MARK: - Public additional properties
-	
 	open var fillAllWords = false
 	open var emptySymbol = "-"
 	open var debug = true
 	open var orientationOptimization = false
 	
-	// MARK: - Logic properties
-	
 	fileprivate var grid: Array2D<String>?
 	fileprivate var currentWords: Array<(String, String)> = Array()
 	fileprivate var resultData: Array<LayoutWord> = Array()
 	
-	// MARK: - Initialization
+	public init() { }
 	
-	public init() {
-	}
-	
-	public init(columns: Int, rows: Int, maxLoops: Int = 2000, words: Array<(String, String)>) {
+	public init(columns: Int,
+                rows: Int,
+                maxLoops: Int = 2000,
+                words: Array<(String, String)>) {
 		self.columns = columns
 		self.rows = rows
 		self.maxLoops = maxLoops
 		self.words = words
 	}
-	
-	// MARK: - Crosswords generation
 	
 	open func generate() {
 		
@@ -69,21 +61,11 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
 		
 		words.sort(by: {$0.1.lengthOfBytes(using: String.Encoding.utf8) > $1.1.lengthOfBytes(using: String.Encoding.utf8)})
 		
-//        if debug {
-//            print("--- Words ---")
-//            print(words)
-//        }
-		
 		for word in words {
             if !currentWords.contains(where: { $0.0 == word.0 && $0.1 == word.1 }) {
 				_ = fitAndAdd(question: word.0, answer: word.1)
 			}
 		}
-		
-//        if debug {
-//            print("--- Result ---")
-//            printGrid()
-//        }
 		
 		if fillAllWords {
 			
@@ -94,8 +76,8 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
 				}
 			}
 			
-			var moreLikely = Array<(String, String)>() // set was
-			var lessLikely = Array<(String, String)>() // set was
+			var moreLikely = Array<(String, String)>()
+			var lessLikely = Array<(String, String)>()
 			for word in remainingWords {
 				var hasSameLetters = false
 				for comparingWord in remainingWords {
@@ -111,10 +93,9 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
 				}
 				
 				if hasSameLetters {
-					moreLikely.append(word) // insert
-				}
-				else {
-					lessLikely.append(word) // insert
+					moreLikely.append(word)
+				} else {
+					lessLikely.append(word)
 				}
 			}
 			
@@ -127,11 +108,6 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
                     fitInRandomPlace(question: word.0, answer: word.1)
 				}
 			}
-			
-//            if debug {
-//                print("--- Fill All Words ---")
-//                printGrid()
-//            }
 		}
 	}
 	
@@ -202,7 +178,6 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
 			if currentWords.count == 0 {
 				let direction = randomValue()
 				
-				// +1 offset for the first word, so more likely intersections for short words
 				let column = 1 + 1
 				let row = 1 + 1
 
@@ -397,8 +372,6 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
 		}
 	}
 	
-	// MARK: - Public info methods
-	
 	open func maxColumn() -> Int {
 		var column = 0
 		for i in 0 ..< rows {
@@ -439,8 +412,6 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
 		return count
 	}
 	
-	// MARK: - Misc
-	
 	fileprivate func randomValue() -> Int {
 		if orientationOptimization {
 			return UIDevice.current.orientation.isLandscape ? 1 : 0
@@ -453,17 +424,4 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
 	fileprivate func randomInt(_ min: Int, max:Int) -> Int {
 		return min + Int(arc4random_uniform(UInt32(max - min + 1)))
 	}
-	
-	// MARK: - Debug
-	
-//    func printGrid() {
-//        for i in 0 ..< rows {
-//            var s = ""
-//            for j in 0 ..< columns {
-//                s += grid![j, i]
-//            }
-//            print(s)
-//        }
-//    }
-	
 }
