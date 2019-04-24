@@ -113,6 +113,7 @@ final class FillViewController: UIViewController {
         let isValid = validAnswers == enteredAnswers
         
         if !isValid {
+            dataSource.badAnswers = dataSource.words.filter { !enteredAnswers.contains($0.answer) }
             AlertsFactory.crosswordIsFilledIncorrectly(self, yesAction: showMistakes)
         } else {
             AlertsFactory.crosswordIsFilledCorrectly(self)
@@ -134,10 +135,29 @@ final class FillViewController: UIViewController {
     }
     
     func showMistakes() {
-        UIView.animate(withDuration: 3, delay: 0, options: .allowUserInteraction, animations: { self.collectionView.backgroundColor = .red }, completion: { _ in
-            UIView.animate(withDuration: 3, delay: 0, options: .allowUserInteraction, animations:
-                { self.collectionView.backgroundColor = .lightGray })
+        let indexes: [IndexPath] = dataSource.badAnswers.reduce(into: [IndexPath](), { result, layoutWord in
+            var innerIndexes = [IndexPath]()
+            switch layoutWord.direction {
+            case .horizontal:
+                (0..<1).forEach { innerIndexes.append(IndexPath(row: layoutWord.column + $0, section: layoutWord.row)) }
+                
+            case .vertical:
+                (0..<1).forEach { innerIndexes.append(IndexPath(row: layoutWord.column, section: layoutWord.row + $0)) }
+            }
+            
+            result += innerIndexes
         })
+        
+        for indexPath in indexes {
+            let cell = self.collectionView.cellForItem(at: indexPath)
+            
+            UIView.animate(withDuration: 3, delay: 0, options: .allowUserInteraction, animations: { cell?.backgroundColor = .red
+                
+            }, completion: { _ in
+                UIView.animate(withDuration: 3, delay: 0, options: .allowUserInteraction, animations:
+                    { cell?.backgroundColor = .lightGray })
+            })
+        }
     }
     
     @objc private func print() {
@@ -166,7 +186,7 @@ final class FillViewController: UIViewController {
         slider.value = scale
         alertController.view.addSubview(slider)
         
-        let height = NSLayoutConstraint(item: alertController.view,
+        let height = NSLayoutConstraint(item: alertController.view as Any,
                                         attribute: .height, relatedBy: .equal,
                                         toItem: nil, attribute: .notAnAttribute,
                                         multiplier: 1, constant: 140)
@@ -185,7 +205,6 @@ final class FillViewController: UIViewController {
         }))
         
         self.present(alertController)
-        //  collectionView.collectionViewLayout = NodeLayout(itemWidth: 25, itemHeight: 25, space: 1)
     }
 }
 

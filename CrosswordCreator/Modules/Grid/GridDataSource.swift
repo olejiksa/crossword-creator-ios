@@ -43,7 +43,7 @@ final class GridDataSource: NSObject, GridDataSourceProtocol {
         
         size = calculateBounds()
         
-        charGrid = Array(repeating: Array(repeating: String(), count: 32), count: 32)
+        charGrid = Array(repeating: Array(repeating: String(), count: 130), count: 130)
         setupCharGrid()
     }
     

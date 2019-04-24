@@ -97,7 +97,7 @@ final class GridViewController: UIViewController {
         slider.value = scale
         alertController.view.addSubview(slider)
         
-        let height = NSLayoutConstraint(item: alertController.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 140)
+        let height = NSLayoutConstraint(item: alertController.view as Any, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 140)
         alertController.view.addConstraint(height)
         
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (error) -> Void in

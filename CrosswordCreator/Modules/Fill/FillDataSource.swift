@@ -13,6 +13,7 @@ protocol FillDataSourceProtocol {
     var charGrid: [[FillDataSource.Letter]] { get }
     var words: [LayoutWord] { get }
     var enteredAnswers: [String] { get }
+    var badAnswers: [LayoutWord] { get }
     
     func setup(with: UICollectionView)
 }
@@ -41,6 +42,7 @@ final class FillDataSource: NSObject, FillDataSourceProtocol {
     let words: [LayoutWord]
     
     var enteredAnswers: [String]
+    var badAnswers: [LayoutWord] = []
     
     var scale: CGFloat = 1.0
     var scaleStart: CGFloat = 0.0
