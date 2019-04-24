@@ -40,7 +40,13 @@
                                 <action selector="seeQuestions:" destination="-1" id="JiS-hA-Ugl"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="QaD-jO-qjR"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="TXN-Tf-cIG"/>
+                        <barButtonItem title="Zoom" id="MYP-b0-iaG">
+                            <connections>
+                                <action selector="didZoomTapped:" destination="-1" id="joa-6N-ihd"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="wJi-3q-WVs"/>
                         <barButtonItem title="Check" id="83R-gl-Ohy">
                             <connections>
                                 <action selector="check:" destination="-1" id="Xqe-35-Nyp"/>

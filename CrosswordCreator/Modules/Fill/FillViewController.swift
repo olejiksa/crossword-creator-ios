@@ -23,6 +23,7 @@ final class FillViewController: UIViewController {
     private let dataSource: FillDataSource
     private let xmlService: XmlServiceProtocol
     private let gridTitle: String
+    private var scale: Float = 50.0
     
     
     // MARK: Outlets
@@ -83,12 +84,14 @@ final class FillViewController: UIViewController {
                                            target: self,
                                            action: #selector(willCancel))
         
+        let printButton = UIBarButtonItem(title: "Print", style: .plain, target: self, action: #selector(print))
+        
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action,
                                           target: self,
                                           action: #selector(willShare))
         
         navigationItem.leftBarButtonItem = cancelButton
-        navigationItem.rightBarButtonItems = [shareButton]
+        navigationItem.rightBarButtonItems = [shareButton, printButton]
     }
     
     @objc private func willCancel() {
@@ -131,13 +134,58 @@ final class FillViewController: UIViewController {
     }
     
     func showMistakes() {
-        UIView.animate(withDuration: 5, animations: { [weak self] in
-            self?.collectionView?.backgroundColor = .red
-        }, completion: { [weak self] _ in
-            UIView.animate(withDuration: 5, animations: {
-                self?.collectionView?.backgroundColor = .lightGray
-            })
+        UIView.animate(withDuration: 3, delay: 0, options: .allowUserInteraction, animations: { self.collectionView.backgroundColor = .red }, completion: { _ in
+            UIView.animate(withDuration: 3, delay: 0, options: .allowUserInteraction, animations:
+                { self.collectionView.backgroundColor = .lightGray })
         })
+    }
+    
+    @objc private func print() {
+        if let screenshot = collectionView.screenshot() {
+            let printInfo = UIPrintInfo(dictionary: nil)
+            printInfo.jobName = gridTitle
+            printInfo.outputType = .general
+            
+            let printController = UIPrintInteractionController.shared
+            printController.printInfo = printInfo
+            printController.showsNumberOfCopies = false
+            printController.printPageRenderer = ImagePageRenderer(image: screenshot)
+            printController.printingItem = screenshot
+            
+            printController.present(from: collectionView.frame, in: collectionView, animated: true, completionHandler: nil)
+        }
+    }
+    
+    @IBAction func didZoomTapped(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title:"Zoom",
+                                                message: nil,
+                                                preferredStyle: .alert)
+        let slider = UISlider(frame: CGRect(x: 35, y: 50, width: 200, height: 20))
+        slider.minimumValue = 25
+        slider.maximumValue = 50
+        slider.value = scale
+        alertController.view.addSubview(slider)
+        
+        let height = NSLayoutConstraint(item: alertController.view,
+                                        attribute: .height, relatedBy: .equal,
+                                        toItem: nil, attribute: .notAnAttribute,
+                                        multiplier: 1, constant: 140)
+        alertController.view.addConstraint(height)
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (error) -> Void in
+            self.scale = slider.value
+            let val = CGFloat(slider.value)
+            self.collectionView.collectionViewLayout = NodeLayout(itemWidth: val,
+                                                             itemHeight: val,
+                                                             space: 1)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (error) -> Void in
+            
+        }))
+        
+        self.present(alertController)
+        //  collectionView.collectionViewLayout = NodeLayout(itemWidth: 25, itemHeight: 25, space: 1)
     }
 }
 

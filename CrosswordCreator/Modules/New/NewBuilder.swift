@@ -10,9 +10,10 @@ import UIKit
 
 final class NewBuilder {
     
-    static func alertController(with transitionHandler: ViewTransitionHandler) -> NewAlertController {
+    static func alertController(with transitionHandler: ViewTransitionHandler,
+                                superview: UIView) -> NewAlertController {
         let router = NewRouter(transitionHandler: transitionHandler)
-        let alertController = NewAlertController.create(with: router)
+        let alertController = NewAlertController.create(with: router, superview: superview)
         return alertController
     }
 }

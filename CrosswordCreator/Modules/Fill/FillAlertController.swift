@@ -78,7 +78,9 @@ final class FillAlertController: UIAlertController {
             else { return }
             
             let trimmedAnswer = answer.trimmingCharacters(in: .whitespaces)
-            self?.delegate?.fill(with: trimmedAnswer,
+            let lowercasedAnswer = trimmedAnswer.lowercased()
+            
+            self?.delegate?.fill(with: lowercasedAnswer,
                                  index: index,
                                  maxLength: maxLength)
         }

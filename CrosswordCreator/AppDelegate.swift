@@ -114,7 +114,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let vc = RecentsBuilder.viewController()
         window?.rootViewController = vc.navigationController
-        vc.router?.wantsToCreate(with: vc)
+        vc.router?.wantsToCreate(with: vc, superview: vc.view)
         
         return true
     }

@@ -24,9 +24,9 @@ final class GridDataSource: NSObject, GridDataSourceProtocol {
     }
     
     private let interactor: GridInteractorProtocol
-    private let size: (columns: Int, rows: Int)
+    private var size: (columns: Int, rows: Int) = (0, 0)
     
-    private var charGrid: [[String]]
+    private var charGrid: [[String]] = []
     var words: [LayoutWord] = []
     
     
@@ -39,11 +39,11 @@ final class GridDataSource: NSObject, GridDataSourceProtocol {
         self.interactor = interactor
         self.words = words
         
-        size = (32, 32)
-        charGrid = Array(repeating: Array(repeating: String(), count: 32), count: 32)
-        
         super.init()
         
+        size = calculateBounds()
+        
+        charGrid = Array(repeating: Array(repeating: String(), count: 32), count: 32)
         setupCharGrid()
     }
     

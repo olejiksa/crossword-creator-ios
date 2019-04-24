@@ -11,7 +11,6 @@ import UIKit
 final class CreationViewController: UIViewController {
     
     @IBOutlet private weak var fillAllSwitch: UISwitch!
-    @IBOutlet private weak var orientationBoost: UISwitch!
     @IBOutlet private weak var nextButton: UIBarButtonItem!
     @IBOutlet private weak var missedWordsLabel: UILabel!
     
@@ -44,7 +43,7 @@ final class CreationViewController: UIViewController {
                                             words: words.map { ($0.question, $0.answer) })
         
         generator.fillAllWords = fillAllSwitch.isOn
-        generator.orientationOptimization = orientationBoost.isOn
+        generator.orientationOptimization = false
         generator.generate()
         
         layoutWords = generator.result

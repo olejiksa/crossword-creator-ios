@@ -127,7 +127,7 @@ final class RecentsViewController: UIViewController {
     }
     
     @objc private func willAdd() {
-        router?.wantsToCreate(with: self)
+        router?.wantsToCreate(with: self, superview: view)
     }
     
     @objc private func willCancel() {

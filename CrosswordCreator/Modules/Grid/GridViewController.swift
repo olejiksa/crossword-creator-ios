@@ -22,6 +22,7 @@ final class GridViewController: UIViewController {
     
     private let dataSource: GridDataSource
     private let xmlService: XmlServiceProtocol
+    private var scale: Float = 50
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -84,6 +85,35 @@ final class GridViewController: UIViewController {
     
     @objc private func willShare() {
         router?.wantsToShare(with: "Untitled", view: view, layoutWords: dataSource.words)
+    }
+    
+    @IBAction func didZoomTapped(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title:"Zoom",
+                                                message: nil,
+                                                preferredStyle: .alert)
+        let slider = UISlider(frame: CGRect(x: 35, y: 50, width: 200, height: 20))
+        slider.minimumValue = 25
+        slider.maximumValue = 50
+        slider.value = scale
+        alertController.view.addSubview(slider)
+        
+        let height = NSLayoutConstraint(item: alertController.view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 140)
+        alertController.view.addConstraint(height)
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (error) -> Void in
+            self.scale = slider.value
+            let val = CGFloat(slider.value)
+            self.collectionView.collectionViewLayout = NodeLayout(itemWidth: val,
+                                                                  itemHeight: val,
+                                                                  space: 1)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (error) -> Void in
+            
+        }))
+        
+        self.present(alertController)
+        //  collectionView.collectionViewLayout = NodeLayout(itemWidth: 25, itemHeight: 25, space: 1)
     }
 }
 

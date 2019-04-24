@@ -35,6 +35,12 @@ final class TermsViewController: UIViewController {
     
     // MARK: Lifecycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,14 +57,14 @@ final class TermsViewController: UIViewController {
         let nib = UINib(nibName: cellIdentifier, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
         
-        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 10))
-        
         setupNavigationBar()
+        
+        registerForPreviewing(with: self, sourceView: tableView)
     }
     
     private func setupNavigationBar() {
         title = Constants.title
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
         
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel,
                                            target: self,
@@ -88,9 +94,7 @@ final class TermsViewController: UIViewController {
 extension TermsViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        let count = words.count
-        
-        if count == 0 {
+        if words.isEmpty {
             nextButton.isEnabled = false
             tableView.setupEmptyView(with: Constants.noWords)
         } else {
@@ -98,7 +102,7 @@ extension TermsViewController: UITableViewDataSource {
             tableView.restore()
         }
         
-        return count
+        return words.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -145,6 +149,16 @@ extension TermsViewController: UITableViewDelegate {
         headerView.backgroundColor = .clear
         return headerView
     }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == words.count - 1 ? 10 : 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        return headerView
+    }
 }
 
 
@@ -158,5 +172,32 @@ extension TermsViewController: RecentsModuleOutput {
         self.words = words
         
         tableView.reloadData()
+    }
+}
+
+
+
+
+// MARK: - UIViewControllerPreviewingDelegate
+
+extension TermsViewController: UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                           commit viewControllerToCommit: UIViewController) {
+        // unused
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                           viewControllerForLocation location: CGPoint) -> UIViewController? {
+        if let indexPath = tableView.indexPathForRow(at: location) {
+            previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
+            
+            if let cell = tableView.cellForRow(at: indexPath) as? ListViewCell,
+                let word = cell.word {
+                return WordBuilder.viewController(with: .edit(word, indexPath.section))
+            } else { return nil }
+        }
+        
+        return nil
     }
 }

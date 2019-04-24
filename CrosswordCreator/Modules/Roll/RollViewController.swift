@@ -68,6 +68,7 @@ final class RollViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -84,6 +85,7 @@ final class RollViewController: UIViewController {
         super.viewDidAppear(animated)
         
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.isTranslucent = false
     }
 }
 

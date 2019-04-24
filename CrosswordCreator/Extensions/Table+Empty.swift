@@ -14,7 +14,7 @@ extension UITableView {
         let origin = CGPoint(x: 0, y: 0)
         let width = bounds.size.width
         let height = bounds.size.height
-        let size = CGSize(width: width, height: height)
+        let size = CGSize(width: width, height: height - 10)
         let rectangle = CGRect(origin: origin, size: size)
         
         let noItemsLabel = UILabel(frame: rectangle)

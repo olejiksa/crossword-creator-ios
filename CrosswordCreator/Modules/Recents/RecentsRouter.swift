@@ -12,7 +12,7 @@ protocol RecentsRouterProtocol {
     
     func wantsToOpenListEditor(with title: String, words: [Word])
     func wantsToFill(with title: String, words: [LayoutWord])
-    func wantsToCreate(with viewController: UIViewController)
+    func wantsToCreate(with viewController: UIViewController, superview: UIView)
     func wantsToGoBack()
 }
 
@@ -38,8 +38,9 @@ final class RecentsRouter: RecentsRouterProtocol {
         }
     }
     
-    func wantsToCreate(with viewController: UIViewController) {
-        let ac = NewBuilder.alertController(with: viewController)
+    func wantsToCreate(with viewController: UIViewController,
+                       superview: UIView) {
+        let ac = NewBuilder.alertController(with: viewController, superview: superview)
         transitionHandler?.present(ac)
     }
     

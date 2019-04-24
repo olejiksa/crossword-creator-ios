@@ -13,6 +13,7 @@ final class TermsBuilder {
     static func viewController() -> TermsViewController {
         let viewController = TermsViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.navigationBar.prefersLargeTitles = true
         let router = TermsRouter(transitionHandler: viewController,
                                  navigationTransitionHandler: navigationController)
         viewController.router = router

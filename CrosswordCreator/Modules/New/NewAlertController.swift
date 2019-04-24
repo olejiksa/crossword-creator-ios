@@ -29,12 +29,13 @@ final class NewAlertController: UIAlertController {
     
     // MARK: Public
     
-    static func create(with router: NewRouterProtocol?) -> NewAlertController {
+    static func create(with router: NewRouterProtocol?,
+                       superview: UIView) -> NewAlertController {
         let newAlertController = NewAlertController(title: Constants.title,
                                                     message: Constants.message,
                                                     preferredStyle: .actionSheet)
         newAlertController.router = router
-        newAlertController.setup()
+        newAlertController.setup(with: superview)
         
         return newAlertController
     }
@@ -42,7 +43,7 @@ final class NewAlertController: UIAlertController {
     
     // MARK: Private
     
-    private func setup() {
+    private func setup(with superview: UIView) {
         let createTermsListAction = UIAlertAction(title: Constants.termsList,
                                                   style: .default,
                                                   handler: router?.wantsToOpenListEditor(_:))
@@ -55,5 +56,11 @@ final class NewAlertController: UIAlertController {
         
         let cancelAction = UIAlertAction(title: Constants.cancel, style: .cancel)
         addAction(cancelAction)
+        
+        if let popoverController = popoverPresentationController {
+            popoverController.sourceView = superview
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
     }
 }

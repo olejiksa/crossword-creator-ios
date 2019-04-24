@@ -66,6 +66,8 @@ final class ListViewController: UIViewController {
     private func setupView() {
         dataSource.setup(with: tableView)
         setupNavigationBar()
+        
+        registerForPreviewing(with: self, sourceView: tableView)
     }
     
     private func setupNavigationBar() {
@@ -204,5 +206,31 @@ extension ListViewController: SaveAlertControllerDelegate {
     func save(with title: String) {
         dataSource.save(with: title, mode: mode)
         router?.wantsToGoBack()
+    }
+}
+
+
+
+// MARK: - UIViewControllerPreviewingDelegate
+
+extension ListViewController: UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                           commit viewControllerToCommit: UIViewController) {
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                           viewControllerForLocation location: CGPoint) -> UIViewController? {
+        if let indexPath = tableView.indexPathForRow(at: location) {
+            previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
+            
+            if let cell = tableView.cellForRow(at: indexPath) as? ListViewCell,
+               let word = cell.word {
+                return WordBuilder.viewController(with: .edit(word, indexPath.section))
+            } else { return nil }
+        }
+        
+        return nil
     }
 }
