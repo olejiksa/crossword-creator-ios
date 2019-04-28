@@ -18,10 +18,62 @@ protocol CrosswordsGeneratorProtocol: class {
 }
 
 open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
-	
+    
+    open func maxColumn() -> Int {
+        var column = 0
+        for i in 0 ..< rows {
+            for j in 0 ..< columns {
+                if grid![j, i] != emptySymbol {
+                    if j > column {
+                        column = j
+                    }
+                }
+            }
+        }
+        return column + 1
+    }
+    
+    open func maxRow() -> Int {
+        var row = 0
+        for i in 0 ..< rows {
+            for j in 0 ..< columns {
+                if grid![j, i] != emptySymbol {
+                    if i > row {
+                        row = i
+                    }
+                }
+            }
+        }
+        return row + 1
+    }
+    
+    open func lettersCount() -> Int {
+        var count = 0
+        for i in 0 ..< rows {
+            for j in 0 ..< columns {
+                if grid![j, i] != emptySymbol {
+                    count += 1
+                }
+            }
+        }
+        return count
+    }
+    
+    fileprivate func randomValue() -> Int {
+        if orientationOptimization {
+            return UIDevice.current.orientation.isLandscape ? 1 : 0
+        }
+        else {
+            return randomInt(0, max: 1)
+        }
+    }
+    
+    fileprivate func randomInt(_ min: Int, max:Int) -> Int {
+        return min + Int(arc4random_uniform(UInt32(max - min + 1)))
+    }
+    
 	open var columns: Int = 0
 	open var rows: Int = 0
-	open var maxLoops: Int = 2000
 	open var words: Array<(String, String)> = Array()
 	
 	var result: Array<LayoutWord> {
@@ -35,24 +87,17 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
 	open var debug = true
 	open var orientationOptimization = false
 	
-	fileprivate var grid: Array2D<String>?
-	fileprivate var currentWords: Array<(String, String)> = Array()
-	fileprivate var resultData: Array<LayoutWord> = Array()
-	
 	public init() { }
 	
 	public init(columns: Int,
                 rows: Int,
-                maxLoops: Int = 2000,
                 words: Array<(String, String)>) {
 		self.columns = columns
 		self.rows = rows
-		self.maxLoops = maxLoops
 		self.words = words
 	}
 	
 	open func generate() {
-		
 		self.grid = nil
 		self.grid = Array2D(columns: columns, rows: rows, defaultValue: emptySymbol)
 		
@@ -68,7 +113,6 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
 		}
 		
 		if fillAllWords {
-			
 			var remainingWords = Array<(String, String)>()
 			for word in words {
                 if !currentWords.contains(where: { $0.0 == word.0 && $0.1 == word.1 }) {
@@ -166,6 +210,10 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
 		
 		return newCoordlist
 	}
+    
+    fileprivate var grid: Array2D<String>?
+    fileprivate var currentWords: Array<(String, String)> = Array()
+    fileprivate var resultData: Array<LayoutWord> = Array()
 	
     fileprivate func fitAndAdd(question: String, answer: String) -> Bool {
 		
@@ -173,7 +221,7 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
 		var count = 0
 		var coordlist = suggestCoord(answer)
 		
-		while !fit && count < maxLoops {
+		while !fit {
 			
 			if currentWords.count == 0 {
 				let direction = randomValue()
@@ -364,64 +412,10 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
 				setCell(c, row: r, value: String(letter))
 				if direction == 0 {
 					c += 1
-				}
-				else {
+				} else {
 					r += 1
 				}
 			}
 		}
-	}
-	
-	open func maxColumn() -> Int {
-		var column = 0
-		for i in 0 ..< rows {
-			for j in 0 ..< columns {
-				if grid![j, i] != emptySymbol {
-					if j > column {
-						column = j
-					}
-				}
-			}
-		}
-		return column + 1
-	}
-	
-	open func maxRow() -> Int {
-		var row = 0
-		for i in 0 ..< rows {
-			for j in 0 ..< columns {
-				if grid![j, i] != emptySymbol {
-					if i > row {
-						row = i
-					}
-				}
-			}
-		}
-		return row + 1
-	}
-	
-	open func lettersCount() -> Int {
-		var count = 0
-		for i in 0 ..< rows {
-			for j in 0 ..< columns {
-				if grid![j, i] != emptySymbol {
-					count += 1
-				}
-			}
-		}
-		return count
-	}
-	
-	fileprivate func randomValue() -> Int {
-		if orientationOptimization {
-			return UIDevice.current.orientation.isLandscape ? 1 : 0
-		}
-		else {
-			return randomInt(0, max: 1)
-		}
-	}
-	
-	fileprivate func randomInt(_ min: Int, max:Int) -> Int {
-		return min + Int(arc4random_uniform(UInt32(max - min + 1)))
 	}
 }
