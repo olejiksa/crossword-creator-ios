@@ -22,7 +22,7 @@ final class ListDataSource: NSObject, ListDataSourceProtocol {
     
     private enum Constants {
         
-        static let noWords = "You don't have any words yet"
+        static let noWords = "words_no_items".localized
     }
     
     var lastIndex: Int {

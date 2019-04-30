@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings
+  CrosswordCreator
+
+  Created by Oleg Samoylov on 28/04/2019.
+  Copyright © 2019 Oleg Samoylov. All rights reserved.
+*/
+
+"cancel" = "Отменить";
+"check" = "Проверить";
+"delete" = "Удалить";
+"dictionaries" = "Словари";
+"print" = "Напечатать";
+"questions" = "Вопросы";
+"untitled" = "Безымянный";
+"zoom" = "Масштаб";
+"yes" = "Да";
+"no" = "Нет";
+
+"recents_title" = "Недавние";
+"recents_short_no_items" = "У вас еще нет словарей";
+"recents_long_no_items" = "У вас еще нет словарей и кроссвордов";
+
+"new_title" = "Новый словарь или кроссворд";
+"new_description" = "Словари используются для создания кроссворда. Вы можете использовать один или несколько.";
+"new_option_dictionary" = "Словарь";
+"new_option_crossword" = "Кроссворд";
+
+"list_title" = "Список";
+
+"grid_title" = "Сетка";
+
+"fill_title" = "Заполнение";
+
+"word_title" = "Слово";
+"word_question" = "Вопрос";
+"word_answer" = "Ответ";
+
+"words_title" = "Слова";
+"words_no_items" = "У вас еще нет слов";
+
+"questions_across" = "По горизонтали";
+"questions_down" = "По вертикали";
+"questions_answer" = "Ваш ответ";

@@ -19,13 +19,16 @@ final class WordViewController: UIViewController {
     // MARK: Private Data Structures
     
     private enum Constants {
-        static let title = "Word"
-        static let done = "Done"
+        static let title = "word_title".localized
+        static let question = "word_question".localized
+        static let answer = "word_answer".localized
     }
     
     
     // MARK: Outlets
     
+    @IBOutlet private weak var questionHeader: UILabel!
+    @IBOutlet private weak var answerHeader: UILabel!
     @IBOutlet private weak var infoLabel: UILabel!
     @IBOutlet private weak var questionTextView: UITextView!
     @IBOutlet private weak var answerTextField: UITextField!
@@ -69,27 +72,14 @@ final class WordViewController: UIViewController {
         title = Constants.title
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let doneButton = UIBarButtonItem(title: Constants.done,
-                                         style: .plain,
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done,
                                          target: self,
                                          action: #selector(willDone))
         
         navigationItem.rightBarButtonItem = doneButton
         
-        questionTextView.layer.cornerRadius = 5
-        questionTextView.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
-        questionTextView.layer.borderWidth = 0.5
-        questionTextView.clipsToBounds = true
-        questionTextView.text = word?.word.question
-        questionTextView.delegate = self
-        
-        answerTextField.layer.cornerRadius = 5
-        answerTextField.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
-        answerTextField.layer.borderWidth = 0.5
-        answerTextField.text = word?.word.answer
-        answerTextField.addTarget(self,
-                                   action: #selector(textFieldDidChange),
-                                   for: .editingChanged)
+        setupQuesiton()
+        setupAnswer()
         
         doneButton.isEnabled = false
         
@@ -131,6 +121,27 @@ final class WordViewController: UIViewController {
         let answerIsValid = !answer.isEmpty && !answer.contains(" ")
         
         navigationItem.rightBarButtonItem?.isEnabled = !isQuestionEmpty && answerIsValid
+    }
+    
+    private func setupQuesiton() {
+        questionHeader.text = Constants.question
+        questionTextView.layer.cornerRadius = 5
+        questionTextView.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        questionTextView.layer.borderWidth = 0.5
+        questionTextView.clipsToBounds = true
+        questionTextView.text = word?.word.question
+        questionTextView.delegate = self
+    }
+    
+    private func setupAnswer() {
+        answerHeader.text = Constants.answer
+        answerTextField.layer.cornerRadius = 5
+        answerTextField.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        answerTextField.layer.borderWidth = 0.5
+        answerTextField.text = word?.word.answer
+        answerTextField.addTarget(self,
+                                  action: #selector(textFieldDidChange),
+                                  for: .editingChanged)
     }
 }
 

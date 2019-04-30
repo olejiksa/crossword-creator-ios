@@ -19,10 +19,10 @@ final class RecentsViewController: UIViewController {
     
     private enum Constants {
         
-        static let title = "Recents"
-        static let alternateTitle = "Dictionaries"
-        static let noTermsLists = "You don't have any dictionaries yet"
-        static let noCrosswords = "You don't have any dictionaries\nand crosswords yet"
+        static let title = "recents_title".localized
+        static let alternateTitle = "dictionaries".localized
+        static let noTermsLists = "recents_short_no_items".localized
+        static let noCrosswords = "recents_long_no_items".localized
     }
     
     
@@ -105,8 +105,7 @@ final class RecentsViewController: UIViewController {
                                                action: #selector(willCancel))
             navigationItem.leftBarButtonItem = cancelButton
             
-            let doneButton = UIBarButtonItem(title: "Done",
-                                             style: .plain,
+            let doneButton = UIBarButtonItem(barButtonSystemItem: .done,
                                              target: self,
                                              action: #selector(willDone))
             navigationItem.rightBarButtonItem = doneButton

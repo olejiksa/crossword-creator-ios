@@ -16,7 +16,8 @@ final class ListViewController: UIViewController {
     
     private enum Constants {
         
-        static let title = "List"
+        static let delete = "delete".localized
+        static let title = "list_title".localized
     }
     
     
@@ -35,7 +36,7 @@ final class ListViewController: UIViewController {
     var index = 0
     
     override var previewActionItems: [UIPreviewActionItem] {
-        let deleteAction = UIPreviewAction(title: "Delete", style: .destructive) { (action, viewController) -> Void in
+        let deleteAction = UIPreviewAction(title: Constants.delete, style: .destructive) { (action, viewController) -> Void in
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let persistanceManager = appDelegate.persistanceManager
             

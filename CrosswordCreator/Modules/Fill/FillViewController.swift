@@ -14,7 +14,12 @@ final class FillViewController: UIViewController {
     
     private enum Constants {
         
-        static let title = "Fill"
+        static let cancel = "cancel".localized
+        static let title = "fill_title".localized
+        static let questions = "questions".localized
+        static let zoom = "zoom".localized
+        static let check = "check".localized
+        static let print = "print".localized
     }
     
     
@@ -104,7 +109,7 @@ final class FillViewController: UIViewController {
                                            target: self,
                                            action: #selector(willCancel))
         
-        let printButton = UIBarButtonItem(title: "Print", style: .plain, target: self, action: #selector(print))
+        let printButton = UIBarButtonItem(title: Constants.print, style: .plain, target: self, action: #selector(print))
         
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action,
                                           target: self,
@@ -115,12 +120,12 @@ final class FillViewController: UIViewController {
     }
     
     private func setupToolbar() {
-        let questions = UIBarButtonItem(title: "Questions", style: .plain, target: self, action: #selector(seeQuestions))
+        let questions = UIBarButtonItem(title: Constants.questions, style: .plain, target: self, action: #selector(seeQuestions))
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         let fixedSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
         fixedSpacer.width = 10
-        let zoom = UIBarButtonItem(title: "Zoom", style: .plain, target: self, action: #selector(didZoomTapped))
-        let check = UIBarButtonItem(title: "Check", style: .plain, target: self, action: #selector(self.check))
+        let zoom = UIBarButtonItem(title: Constants.zoom, style: .plain, target: self, action: #selector(didZoomTapped))
+        let check = UIBarButtonItem(title: Constants.check, style: .plain, target: self, action: #selector(self.check))
         
         toolbarItems = [questions, spacer, zoom, fixedSpacer, check]
     }
@@ -208,7 +213,7 @@ final class FillViewController: UIViewController {
     }
     
     @objc private func didZoomTapped() {
-        let alertController = UIAlertController(title:"Zoom",
+        let alertController = UIAlertController(title: Constants.zoom,
                                                 message: nil,
                                                 preferredStyle: .alert)
         let slider = UISlider(frame: CGRect(x: 35, y: 50, width: 200, height: 20))
@@ -231,7 +236,7 @@ final class FillViewController: UIViewController {
                                                              space: 1)
         }))
         
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (error) -> Void in
+        alertController.addAction(UIAlertAction(title: Constants.cancel, style: .cancel, handler: { (error) -> Void in
             
         }))
         

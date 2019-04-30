@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings
+  CrosswordCreator
+
+  Created by Oleg Samoylov on 28/04/2019.
+  Copyright © 2019 Oleg Samoylov. All rights reserved.
+*/
+
+"cancel" = "Cancel";
+"check" = "Check";
+"delete" = "Delete";
+"dictionaries" = "Dictionaries";
+"print" = "Print";
+"questions" = "Questions";
+"untitled" = "Untitled";
+"zoom" = "Zoom";
+"yes" = "Yes";
+"no" = "No";
+
+"recents_title" = "Recents";
+"recents_short_no_items" = "You don't have any dictionaries yet";
+"recents_long_no_items" = "You don't have any dictionaries and crosswords yet";
+
+"new_title" = "New dictionary or crossword";
+"new_description" = "Dictionaries are used to create crossword. You can use single or multiple dictionaries for it.";
+"new_option_dictionary" = "Dictionary";
+"new_option_crossword" = "Crossword";
+
+"list_title" = "List";
+
+"grid_title" = "Grid";
+
+"fill_title" = "Fill";
+
+"word_title" = "Word";
+"word_question" = "Question";
+"word_answer" = "Answer";
+
+"words_title" = "Words";
+"words_no_items" = "You don't have any words yet";
+
+"questions_across" = "Across";
+"questions_down" = "Down";
+"questions_answer" = "Your answer";

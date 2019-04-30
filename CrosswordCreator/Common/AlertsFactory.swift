@@ -17,6 +17,13 @@ final class AlertsFactory {
         case yesNoCancel
     }
     
+    private enum Constants {
+        
+        static let yes = "yes".localized
+        static let no = "no".localized
+        static let cancel = "cancel".localized
+    }
+    
     static func damagedFile(_ vc: UIViewController) {
         let title = "Damaged File"
         let message = "Unfortunately, we can't show you this file"
@@ -58,16 +65,16 @@ final class AlertsFactory {
                 alertController.addAction(okAction)
                 
             case .yesNo(let yesAction, _):
-                let yesAction = UIAlertAction(title: "Yes", style: .default) { _ in yesAction?() }
-                let noAction = UIAlertAction(title: "No", style: .cancel)
+                let yesAction = UIAlertAction(title: Constants.yes, style: .default) { _ in yesAction?() }
+                let noAction = UIAlertAction(title: Constants.no, style: .cancel)
                 
                 alertController.addAction(yesAction)
                 alertController.addAction(noAction)
                 
             case .yesNoCancel:
-                let yesAction = UIAlertAction(title: "Yes", style: .default)
-                let noAction = UIAlertAction(title: "No", style: .cancel)
-                let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+                let yesAction = UIAlertAction(title: Constants.yes, style: .default)
+                let noAction = UIAlertAction(title: Constants.no, style: .cancel)
+                let cancelAction = UIAlertAction(title: Constants.cancel, style: .destructive)
                 
                 alertController.addAction(yesAction)
                 alertController.addAction(noAction)

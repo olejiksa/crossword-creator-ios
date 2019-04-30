@@ -13,8 +13,8 @@ final class TermsViewController: UIViewController {
     // MARK: Private Data Structures
     
     private enum Constants {
-        static let title = "Words"
-        static let noWords = "You don't have any words yet"
+        static let title = "words_title".localized
+        static let noWords = "words_no_items".localized
     }
     
     

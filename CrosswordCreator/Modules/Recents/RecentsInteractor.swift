@@ -25,6 +25,10 @@ protocol RecentsInteractorProtocol: class {
 
 final class RecentsInteractor: RecentsInteractorProtocol {
     
+    private enum Constants {
+        static let untitled = "untitled".localized
+    }
+    
     private let persistanceManager: PersistanceManager
     private let crosswordName = "Crossword"
     private let onlyTerms: Bool
@@ -39,14 +43,14 @@ final class RecentsInteractor: RecentsInteractorProtocol {
         let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
         let filtered = onlyTerms ? crosswords.filter { $0.isTermsList } : crosswords
         
-        return filtered.map { $0.name ?? "Untitled" }
+        return filtered.map { $0.name ?? Constants.untitled }
     }
     
     func getCrosswordWithDates() -> [(String, Date, Bool)] {
         let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
         let filtered = onlyTerms ? crosswords.filter { $0.isTermsList } : crosswords
         
-        return filtered.map { ($0.name ?? "Untitled", $0.updatedOn ?? Date(), $0.isTermsList) }
+        return filtered.map { ($0.name ?? Constants.untitled, $0.updatedOn ?? Date(), $0.isTermsList) }
     }
     
     func getLayoutWords(at index: Int) -> [LayoutWord] {

@@ -23,8 +23,10 @@ final class RollViewController: UIViewController {
     
     private enum Constants {
         
-        static let questions = "Questions"
-        static let words = "Words"
+        static let across = "questions_across".localized
+        static let down = "questions_down".localized
+        static let questions = "questions".localized
+        static let words = "words_title".localized
     }
     
     
@@ -114,7 +116,7 @@ extension RollViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "Across" : "Down"
+        return section == 0 ? Constants.across : Constants.down
     }
     
     func tableView(_ tableView: UITableView,

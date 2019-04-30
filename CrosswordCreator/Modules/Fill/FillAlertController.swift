@@ -19,10 +19,10 @@ final class FillAlertController: UIAlertController {
     
     private enum Constants {
         
-        static let question = "Question"
-        static let answer = "Your answer"
+        static let question = "word_question".localized
+        static let answer = "questions_answer".localized
         static let ok = "OK"
-        static let cancel = "Cancel"
+        static let cancel = "cancel".localized
     }
     
     
