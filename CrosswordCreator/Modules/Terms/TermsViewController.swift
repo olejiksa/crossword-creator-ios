@@ -164,9 +164,9 @@ extension TermsViewController: UITableViewDelegate {
 
 
 
-// MARK: - RecentsModuleOutput
+// MARK: - HomeModuleOutput
 
-extension TermsViewController: RecentsModuleOutput {
+extension TermsViewController: HomeModuleOutput {
     
     func transferWords(_ words: [Word]) {
         self.words = words

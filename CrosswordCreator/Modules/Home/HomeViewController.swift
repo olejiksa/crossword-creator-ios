@@ -1,5 +1,5 @@
 //
-//  RecentsViewController.swift
+//  HomeViewController.swift
 //  CrosswordCreator
 //
 //  Created by Oleg Samoylov on 17/11/2018.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreGraphics
 
-final class RecentsViewController: UIViewController {
+final class HomeViewController: UIViewController {
     
     enum Mode {
         case standard, picker
@@ -19,17 +19,17 @@ final class RecentsViewController: UIViewController {
     
     private enum Constants {
         
-        static let title = "recents_title".localized
+        static let title = "home_title".localized
         static let alternateTitle = "dictionaries".localized
-        static let noTermsLists = "recents_short_no_items".localized
-        static let noCrosswords = "recents_long_no_items".localized
+        static let noTermsLists = "home_short_no_items".localized
+        static let noCrosswords = "home_long_no_items".localized
     }
     
     
     // MARK: Public Properties
     
-    var router: RecentsRouterProtocol?
-    var moduleOutput: RecentsModuleOutput?
+    var router: HomeRouterProtocol?
+    var moduleOutput: HomeModuleOutput?
     
     
     // MARK: Outlets
@@ -41,10 +41,10 @@ final class RecentsViewController: UIViewController {
     
     private let cellSpacingHeight: CGFloat = 5
     
-    private let recentsCell = RecentsCell.self
+    private let homeCell = HomeCell.self
     private let subtitleCell = SubtitleCell.self
     
-    let interactor: RecentsInteractorProtocol
+    let interactor: HomeInteractorProtocol
     
     private let mode: Mode
     private var checkedSections: [Int] = []
@@ -54,7 +54,7 @@ final class RecentsViewController: UIViewController {
     
     // MARK: Lifecycle
     
-    init(interactor: RecentsInteractorProtocol, mode: Mode = .standard) {
+    init(interactor: HomeInteractorProtocol, mode: Mode = .standard) {
         self.interactor = interactor
         self.mode = mode
         
@@ -115,8 +115,8 @@ final class RecentsViewController: UIViewController {
     private func setupTableView() {
         switch mode {
         case .standard:
-            let nib = UINib(nibName: "\(recentsCell)", bundle: Bundle.main)
-            tableView.register(nib, forCellReuseIdentifier: "\(recentsCell)")
+            let nib = UINib(nibName: "\(homeCell)", bundle: Bundle.main)
+            tableView.register(nib, forCellReuseIdentifier: "\(homeCell)")
             
         case .picker:
             tableView.register(subtitleCell, forCellReuseIdentifier: "\(subtitleCell)")
@@ -153,7 +153,7 @@ final class RecentsViewController: UIViewController {
 
 // MARK: - UITableViewDataSource
 
-extension RecentsViewController: UITableViewDataSource {
+extension HomeViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         let count = interactor.getCrosswords().count
@@ -180,7 +180,7 @@ extension RecentsViewController: UITableViewDataSource {
         
         switch mode {
         case .standard:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(recentsCell)", for: indexPath) as? RecentsCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(homeCell)", for: indexPath) as? HomeCell else {
                 return UITableViewCell(style: .default, reuseIdentifier: "\(UITableViewCell.self)")
             }
             
@@ -230,7 +230,7 @@ extension RecentsViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension RecentsViewController: UITableViewDelegate {
+extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -294,7 +294,7 @@ extension RecentsViewController: UITableViewDelegate {
 
 // MARK: - UIViewControllerPreviewingDelegate
 
-extension RecentsViewController: UIViewControllerPreviewingDelegate {
+extension HomeViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing,
                            commit viewControllerToCommit: UIViewController) {
@@ -315,9 +315,9 @@ extension RecentsViewController: UIViewControllerPreviewingDelegate {
             case is SubtitleCell:
                 break
                 
-            case is RecentsCell:
-                if (cell as? RecentsCell)?.secondSubtitle?.text == "Dictionary",
-                    let title = (cell as? RecentsCell)?.titleLabel?.text {
+            case is HomeCell:
+                if (cell as? HomeCell)?.secondSubtitle?.text == "Dictionary",
+                    let title = (cell as? HomeCell)?.titleLabel?.text {
                     let words = interactor.getWords(at: indexPath.section)
                     let index = indexPath.section
                     
@@ -329,7 +329,7 @@ extension RecentsViewController: UIViewControllerPreviewingDelegate {
                     nvc?.setNavigationBarHidden(true, animated: true)
                     
                     return nvc
-                } else if let title = (cell as? RecentsCell)?.titleLabel?.text {
+                } else if let title = (cell as? HomeCell)?.titleLabel?.text {
                     let words = interactor.getLayoutWords(at: indexPath.section)
                     let index = indexPath.section
                     

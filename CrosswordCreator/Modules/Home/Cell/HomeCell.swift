@@ -1,5 +1,5 @@
 //
-//  RecentsCell.swift
+//  HomeCell.swift
 //  CrosswordCreator
 //
 //  Created by Oleg Samoylov on 15/03/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class RecentsCell: UITableViewCell {
+final class HomeCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var firstSubtitle: UILabel!

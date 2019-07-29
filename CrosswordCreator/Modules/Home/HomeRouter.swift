@@ -1,5 +1,5 @@
 //
-//  RecentsRouter.swift
+//  HomeRouter.swift
 //  CrosswordCreator
 //
 //  Created by Oleg Samoylov on 15/03/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol RecentsRouterProtocol {
+protocol HomeRouterProtocol {
     
     func wantsToOpenListEditor(with title: String, words: [Word], index: Int)
     func wantsToFill(with title: String, words: [LayoutWord], index: Int)
@@ -16,7 +16,7 @@ protocol RecentsRouterProtocol {
     func wantsToGoBack()
 }
 
-final class RecentsRouter: RecentsRouterProtocol {
+final class HomeRouter: HomeRouterProtocol {
     
     private weak var transitionHandler: ViewTransitionHandler?
     

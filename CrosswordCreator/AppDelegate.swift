@@ -33,7 +33,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        let vc = RecentsBuilder.viewController()
+        let vc = HomeBuilder.viewController()
         window?.rootViewController = vc.navigationController
         window?.makeKeyAndVisible()
         
@@ -112,7 +112,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             ShortcutIdentifier(fullNameForType: item.type) != nil
         else { return false }
         
-        let vc = RecentsBuilder.viewController()
+        let vc = HomeBuilder.viewController()
         window?.rootViewController = vc.navigationController
         vc.router?.wantsToCreate(with: vc, superview: vc.view)
         

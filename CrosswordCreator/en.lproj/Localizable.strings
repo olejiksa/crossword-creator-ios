@@ -17,9 +17,9 @@
 "yes" = "Yes";
 "no" = "No";
 
-"recents_title" = "Recents";
-"recents_short_no_items" = "You don't have any dictionaries yet";
-"recents_long_no_items" = "You don't have any dictionaries\n and crosswords yet";
+"home_title" = "Home";
+"home_short_no_items" = "You don't have any dictionaries yet";
+"home_long_no_items" = "You don't have any dictionaries\n and crosswords yet";
 
 "new_title" = "New dictionary or crossword";
 "new_description" = "Dictionaries are used to create crossword. You can use single or multiple dictionaries for it.";

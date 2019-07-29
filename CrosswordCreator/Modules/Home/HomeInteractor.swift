@@ -1,5 +1,5 @@
 //
-//  RecentsInteractor.swift
+//  HomeInteractor.swift
 //  CrosswordCreator
 //
 //  Created by Oleg Samoylov on 16/02/2019.
@@ -10,7 +10,7 @@ import UIKit
 import CoreSpotlight
 import MobileCoreServices
 
-protocol RecentsInteractorProtocol: class {
+protocol HomeInteractorProtocol: class {
     
     func getCrosswords() -> [String]
     func getCrosswordWithDates() -> [(String, Date, Bool)]
@@ -23,7 +23,7 @@ protocol RecentsInteractorProtocol: class {
     func removeCrossword(at index: Int)
 }
 
-final class RecentsInteractor: RecentsInteractorProtocol {
+final class HomeInteractor: HomeInteractorProtocol {
     
     private enum Constants {
         static let untitled = "untitled".localized
