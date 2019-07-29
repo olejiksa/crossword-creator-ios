@@ -95,9 +95,9 @@ final class HomeInteractor: HomeInteractorProtocol {
             // Set the description.
             if let updatedOn = crossword.updatedOn {
                 searchableItemAttributeSet.contentDescription = dateFormatter.string(from: updatedOn)
+            } else {
+                searchableItemAttributeSet.contentDescription = "..."
             }
-            
-            searchableItemAttributeSet.thumbnailURL = Bundle.main.url(forResource: "home", withExtension: "pdf")
             
             let searchableItem = CSSearchableItem(uniqueIdentifier: "com.olejiksa.crosswordCreator.\(i)",
                 domainIdentifier: "crosswords", attributeSet: searchableItemAttributeSet)

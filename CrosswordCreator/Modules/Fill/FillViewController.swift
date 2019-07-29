@@ -54,7 +54,7 @@ final class FillViewController: UIViewController {
             persistanceManager.remove(crosswords[self.index])
             persistanceManager.save()
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTheTable"), object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadTheTable"), object: nil)
         }
         
         return [deleteAction]

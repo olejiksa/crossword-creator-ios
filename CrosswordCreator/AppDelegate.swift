@@ -6,6 +6,7 @@
 //  Copyright © 2018 Oleg Samoylov. All rights reserved.
 //
 
+import CoreSpotlight
 import UIKit
 
 @UIApplicationMain
@@ -81,7 +82,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             
             handled = true
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTheTable"), object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadTheTable"), object: nil)
             
         case FileExtension.grid.rawValue:
             let layoutWords = xmlService.readGrid(from: url)
@@ -94,13 +95,30 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             
             handled = true
             
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadTheTable"), object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadTheTable"), object: nil)
             
         default:
             handled = false
         }
         
         return handled
+    }
+    
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        if userActivity.activityType == CSSearchableItemActionType {
+            if let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
+                print(uniqueIdentifier)
+                
+                let vc = HomeBuilder.viewController()
+                vc.spotlightIndex = Int(uniqueIdentifier.split(separator: ".").last ?? "")
+                
+                window?.rootViewController = vc.navigationController
+            }
+        }
+        
+        return true
     }
     
     

@@ -30,6 +30,7 @@ final class HomeViewController: UIViewController {
     
     var router: HomeRouterProtocol?
     var moduleOutput: HomeModuleOutput?
+    var spotlightIndex: Int?
     
     
     // MARK: Outlets
@@ -69,9 +70,13 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         registerForPreviewing(with: self, sourceView: tableView)
-        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: NSNotification.Name(rawValue: "reloadTheTable"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: Notification.Name(rawValue: "reloadTheTable"), object: nil)
         setupView()
         interactor.setupSearchableContent()
+        
+        if let spotlightIndex = spotlightIndex {
+            tableView(tableView, didSelectRowAt: IndexPath(row: 0, section: spotlightIndex))
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
