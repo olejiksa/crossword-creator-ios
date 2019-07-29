@@ -33,10 +33,10 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Crc-Ld-GCk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5oj-9O-dNg"/>
+                <constraint firstItem="Crc-Ld-GCk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5oj-9O-dNg"/>
                 <constraint firstItem="Crc-Ld-GCk" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="DUS-g8-3gX"/>
                 <constraint firstAttribute="bottom" secondItem="Crc-Ld-GCk" secondAttribute="bottom" id="Qbv-et-7Bq"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Crc-Ld-GCk" secondAttribute="trailing" id="skJ-ac-ZHw"/>
+                <constraint firstAttribute="trailing" secondItem="Crc-Ld-GCk" secondAttribute="trailing" id="skJ-ac-ZHw"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="-635" y="198"/>

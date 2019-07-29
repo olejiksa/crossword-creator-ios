@@ -31,9 +31,9 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="G2e-OM-fof" secondAttribute="bottom" id="Xe5-yS-yR9"/>
-                <constraint firstItem="G2e-OM-fof" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Yrk-vh-D7b"/>
+                <constraint firstItem="G2e-OM-fof" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Yrk-vh-D7b"/>
                 <constraint firstItem="G2e-OM-fof" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="ZKe-tU-lm3"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="G2e-OM-fof" secondAttribute="trailing" id="cgk-Ay-1YM"/>
+                <constraint firstAttribute="trailing" secondItem="G2e-OM-fof" secondAttribute="trailing" id="cgk-Ay-1YM"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
         </view>
