@@ -150,6 +150,7 @@ final class HomeViewController: UIViewController {
     
     @objc private func refresh() {
         tableView.reloadData()
+        interactor.setupSearchableContent()
     }
 }
 
