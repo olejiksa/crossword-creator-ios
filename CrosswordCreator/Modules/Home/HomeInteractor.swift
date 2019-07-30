@@ -79,33 +79,7 @@ final class HomeInteractor: HomeInteractorProtocol {
         let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
         guard !crosswords.isEmpty else { return }
         
-        var searchableItems = [CSSearchableItem]()
-        let dateFormatter = DateFormatter()
-        
-        for i in 0..<crosswords.count {
-            let crossword = crosswords[i]
-            
-            let searchableItemAttributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
-            
-            // Set the title.
-            searchableItemAttributeSet.title = crossword.name
-            
-            // Set the image (no yet).
-            
-            // Set the description.
-            if let updatedOn = crossword.updatedOn {
-                searchableItemAttributeSet.contentDescription = dateFormatter.string(from: updatedOn)
-            } else {
-                searchableItemAttributeSet.contentDescription = "..."
-            }
-            
-            let searchableItem = CSSearchableItem(uniqueIdentifier: "com.olejiksa.crosswordCreator.\(i)",
-                domainIdentifier: "crosswords", attributeSet: searchableItemAttributeSet)
-            
-            searchableItems.append(searchableItem)
-        }
-        
-        CSSearchableIndex.default().indexSearchableItems(searchableItems)
+        SpotlightService().setupSpotlight(with: crosswords, domainID: "crosswords")
     }
     
     func removeCrossword(at index: Int) {

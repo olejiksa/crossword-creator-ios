@@ -108,13 +108,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if userActivity.activityType == CSSearchableItemActionType {
-            if let uniqueIdentifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
-                print(uniqueIdentifier)
-                
-                let vc = HomeBuilder.viewController()
-                vc.spotlightIndex = Int(uniqueIdentifier.split(separator: ".").last ?? "")
-                
-                window?.rootViewController = vc.navigationController
+            if let selectedID = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String {
+                if let selectedID = Int(selectedID.components(separatedBy: ".").last ?? "") {
+                    let vc = HomeBuilder.viewController()
+                    vc.spotlightIndex = selectedID
+                    window?.rootViewController = vc.navigationController
+                }
             }
         }
         

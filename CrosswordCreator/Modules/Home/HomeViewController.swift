@@ -242,7 +242,9 @@ extension HomeViewController: UITableViewDelegate {
         
         if mode == .standard {
             let index = indexPath.section
-            let title = interactor.getCrosswords()[index]
+            let crosswords = interactor.getCrosswords()
+            guard index < crosswords.count else { return }
+            let title = crosswords[index]
             
             if interactor.isTermsList(at: index) {
                 let words = interactor.getWords(at: index)

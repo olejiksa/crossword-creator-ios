@@ -13,6 +13,7 @@
 		EB002D29218CC34100A89806 /* TransitionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002D28218CC34100A89806 /* TransitionHandler.swift */; };
 		EB002D2B218CC46B00A89806 /* Controller+TransitionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002D2A218CC46B00A89806 /* Controller+TransitionHandler.swift */; };
 		EB002D2D218CC8CC00A89806 /* ListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002D2C218CC8CC00A89806 /* ListDataSource.swift */; };
+		EB15D07B22F0E3DC00EB41CD /* SpotlightService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15D07A22F0E3DC00EB41CD /* SpotlightService.swift */; };
 		EB1CD98E21A07ED8005E9BB8 /* HomeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CD98D21A07ED8005E9BB8 /* HomeBuilder.swift */; };
 		EB1CD99021A07EED005E9BB8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CD98F21A07EED005E9BB8 /* HomeViewController.swift */; };
 		EB1CD99221A08089005E9BB8 /* HomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB1CD99121A08089005E9BB8 /* HomeView.xib */; };
@@ -115,6 +116,7 @@
 		EB002D28218CC34100A89806 /* TransitionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionHandler.swift; sourceTree = "<group>"; };
 		EB002D2A218CC46B00A89806 /* Controller+TransitionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Controller+TransitionHandler.swift"; sourceTree = "<group>"; };
 		EB002D2C218CC8CC00A89806 /* ListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataSource.swift; sourceTree = "<group>"; };
+		EB15D07A22F0E3DC00EB41CD /* SpotlightService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightService.swift; sourceTree = "<group>"; };
 		EB1CD98D21A07ED8005E9BB8 /* HomeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBuilder.swift; sourceTree = "<group>"; };
 		EB1CD98F21A07EED005E9BB8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		EB1CD99121A08089005E9BB8 /* HomeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeView.xib; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				EBE8F24322663A1400631F77 /* ServiceLocator.swift */,
 				EBE8F24622663EF500631F77 /* PersistanceService.swift */,
 				EB214F1D2218BD3300D1C3A0 /* XmlService.swift */,
+				EB15D07A22F0E3DC00EB41CD /* SpotlightService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				EB3CBF72223427380043E8FB /* FillRouter.swift in Sources */,
 				EB3CBF4E2233EBF80043E8FB /* XMLKey.swift in Sources */,
 				EB632E3322639209004359A1 /* WordViewController.swift in Sources */,
+				EB15D07B22F0E3DC00EB41CD /* SpotlightService.swift in Sources */,
 				EB3CBF4A2233DB130043E8FB /* ShortcutIdentifier.swift in Sources */,
 				EB214F282218C28100D1C3A0 /* Parser.swift in Sources */,
 				EBE8F24D22666C5500631F77 /* UIScrollView+Image.swift in Sources */,
