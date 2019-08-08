@@ -83,7 +83,6 @@
 		EB7A57B521E87CAD001E72D2 /* GridDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7A57B421E87CAD001E72D2 /* GridDataSource.swift */; };
 		EB8FBBE02217AAE900F92DDE /* GridInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8FBBDF2217AAE900F92DDE /* GridInteractor.swift */; };
 		EB8FBBE22217B6C000F92DDE /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8FBBE12217B6C000F92DDE /* HomeInteractor.swift */; };
-		EB8FBBE42217CB2300F92DDE /* CoreDataCoreSpotlightDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8FBBE32217CB2300F92DDE /* CoreDataCoreSpotlightDelegate.swift */; };
 		EBBB79FC227622F000415804 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EBBB79FE227622F000415804 /* Localizable.strings */; };
 		EBBB7A012279100300415804 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB7A002279100300415804 /* String+Localized.swift */; };
 		EBD4D886218CDEAB009028B5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EBD4D884218CDEAB009028B5 /* Model.xcdatamodeld */; };
@@ -188,7 +187,6 @@
 		EB7A57B421E87CAD001E72D2 /* GridDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridDataSource.swift; sourceTree = "<group>"; };
 		EB8FBBDF2217AAE900F92DDE /* GridInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridInteractor.swift; sourceTree = "<group>"; };
 		EB8FBBE12217B6C000F92DDE /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
-		EB8FBBE32217CB2300F92DDE /* CoreDataCoreSpotlightDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataCoreSpotlightDelegate.swift; sourceTree = "<group>"; };
 		EBBB79F7227621EE00415804 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		EBBB79FD227622F000415804 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EBBB79FF227622F200415804 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -232,15 +230,15 @@
 			children = (
 				EB214F2B2218D80800D1C3A0 /* Alien */,
 				EB3CBF782234311A0043E8FB /* AlertsFactory.swift */,
-				EB8FBBE32217CB2300F92DDE /* CoreDataCoreSpotlightDelegate.swift */,
-				EBE6B8672194D6CC00B59EE5 /* PersistanceManager.swift */,
-				EB3CBF492233DB130043E8FB /* ShortcutIdentifier.swift */,
-				EB002D28218CC34100A89806 /* TransitionHandler.swift */,
-				EB3CBF8C223B3DA70043E8FB /* FileExtension.swift */,
-				EBF1EBE0225D446C00BBA28D /* SubtitleCell.swift */,
-				EB3CBF622233ED3C0043E8FB /* Word.swift */,
+				EB2734242206E6B700ABAC20 /* Array2D.swift */,
 				EBE8F24A2266446C00631F77 /* CompletionBlock.swift */,
+				EB3CBF8C223B3DA70043E8FB /* FileExtension.swift */,
+				EBE6B8672194D6CC00B59EE5 /* PersistanceManager.swift */,
 				EBE8F24E226672B100631F77 /* PrintPageRenderer.swift */,
+				EB3CBF492233DB130043E8FB /* ShortcutIdentifier.swift */,
+				EBF1EBE0225D446C00BBA28D /* SubtitleCell.swift */,
+				EB002D28218CC34100A89806 /* TransitionHandler.swift */,
+				EB3CBF622233ED3C0043E8FB /* Word.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -287,7 +285,6 @@
 		EB214F2B2218D80800D1C3A0 /* Alien */ = {
 			isa = PBXGroup;
 			children = (
-				EB2734242206E6B700ABAC20 /* Array2D.swift */,
 				EB2734262206E6BE00ABAC20 /* ArrayShuffle.swift */,
 				EB2734282206E6C300ABAC20 /* CrosswordsGenerator.swift */,
 				EB3CBF572233EC300043E8FB /* DecodingErrorExtension.swift */,
@@ -630,7 +627,6 @@
 				EB3CBF4A2233DB130043E8FB /* ShortcutIdentifier.swift in Sources */,
 				EB214F282218C28100D1C3A0 /* Parser.swift in Sources */,
 				EBE8F24D22666C5500631F77 /* UIScrollView+Image.swift in Sources */,
-				EB8FBBE42217CB2300F92DDE /* CoreDataCoreSpotlightDelegate.swift in Sources */,
 				EBF1EBDF225D32DD00BBA28D /* Table+Empty.swift in Sources */,
 				EB632E362263A0B1004359A1 /* Controller+HideKeyboard.swift in Sources */,
 				EB7817DB217A1FFF00BA9D50 /* ListViewController.swift in Sources */,
@@ -832,8 +828,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B2FMGUSH44;
 				INFOPLIST_FILE = CrosswordCreator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -842,7 +838,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.olejiksa.CrosswordCreator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = CrosswordCreatorStoreProfile;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -852,8 +848,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B2FMGUSH44;
 				INFOPLIST_FILE = CrosswordCreator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -862,7 +858,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.olejiksa.CrosswordCreator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = CrosswordCreatorStoreProfile;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

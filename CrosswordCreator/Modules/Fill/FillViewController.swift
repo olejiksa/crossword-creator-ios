@@ -28,7 +28,27 @@ final class FillViewController: UIViewController {
     private let dataSource: FillDataSource
     private let xmlService: XmlServiceProtocol
     private let gridTitle: String
-    private var scale: Float = 50.0
+    
+    private var _scale: CGFloat = 1.0
+    private var scale: CGFloat {
+        get { return _scale }
+        set(newScale) {
+            if newScale < scaleBoundLower {
+                _scale = scaleBoundLower
+            } else if newScale > scaleBoundUpper {
+                _scale = scaleBoundUpper
+            } else {
+                _scale = newScale
+            }
+        }
+    }
+    
+    private var scaleStart: CGFloat = 0
+    
+    private let scaleBoundLower: CGFloat = 0.5
+    private let scaleBoundUpper: CGFloat = 2
+    
+    private var gesture: UIPinchGestureRecognizer?
     
     
     // MARK: Outlets
@@ -90,8 +110,6 @@ final class FillViewController: UIViewController {
     
     private func setupView() {
         collectionView.collectionViewLayout = NodeLayout(itemWidth: 50, itemHeight: 50, space: 1)
-        let gesture = UIPinchGestureRecognizer(target: self, action: #selector(didReceivePinchGesture(_:)))
-        collectionView.addGestureRecognizer(gesture)
         
         dataSource.setup(with: collectionView)
         
@@ -99,6 +117,9 @@ final class FillViewController: UIViewController {
         setupToolbar()
         
         collectionView.delegate = self
+        
+        gesture = UIPinchGestureRecognizer(target: self, action: #selector(didReceivePinchGesture))
+        collectionView.addGestureRecognizer(gesture!)
     }
     
     private func setupNavigationBar() {
@@ -122,12 +143,9 @@ final class FillViewController: UIViewController {
     private func setupToolbar() {
         let questions = UIBarButtonItem(title: Constants.questions, style: .plain, target: self, action: #selector(seeQuestions))
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let fixedSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
-        fixedSpacer.width = 10
-        let zoom = UIBarButtonItem(title: Constants.zoom, style: .plain, target: self, action: #selector(didZoomTapped))
         let check = UIBarButtonItem(title: Constants.check, style: .plain, target: self, action: #selector(self.check))
         
-        toolbarItems = [questions, spacer, zoom, fixedSpacer, check]
+        toolbarItems = [questions, spacer, check]
     }
     
     @objc private func willCancel() {
@@ -153,20 +171,6 @@ final class FillViewController: UIViewController {
             AlertsFactory.crosswordIsFilledIncorrectly(self, yesAction: showMistakes)
         } else {
             AlertsFactory.crosswordIsFilledCorrectly(self)
-        }
-    }
-    
-    @objc private func didReceivePinchGesture(_ gesture: UIPinchGestureRecognizer) {
-        switch gesture.state {
-        case .began:
-            dataSource.scaleStart = dataSource.scale
-            
-        case .changed:
-            dataSource.scale = dataSource.scaleStart * gesture.scale
-            collectionView?.collectionViewLayout.invalidateLayout()
-            
-        default:
-            break
         }
     }
     
@@ -212,35 +216,22 @@ final class FillViewController: UIViewController {
         }
     }
     
-    @objc private func didZoomTapped() {
-        let alertController = UIAlertController(title: Constants.zoom,
-                                                message: nil,
-                                                preferredStyle: .alert)
-        let slider = UISlider(frame: CGRect(x: 35, y: 50, width: 200, height: 20))
-        slider.minimumValue = 25
-        slider.maximumValue = 50
-        slider.value = scale
-        alertController.view.addSubview(slider)
-        
-        let height = NSLayoutConstraint(item: alertController.view as Any,
-                                        attribute: .height, relatedBy: .equal,
-                                        toItem: nil, attribute: .notAnAttribute,
-                                        multiplier: 1, constant: 140)
-        alertController.view.addConstraint(height)
-        
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (error) -> Void in
-            self.scale = slider.value
-            let val = CGFloat(slider.value)
-            self.collectionView.collectionViewLayout = NodeLayout(itemWidth: val,
-                                                             itemHeight: val,
-                                                             space: 1)
-        }))
-        
-        alertController.addAction(UIAlertAction(title: Constants.cancel, style: .cancel, handler: { (error) -> Void in
+    @objc private func didReceivePinchGesture(_ gesture: UIPinchGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            scaleStart = scale
             
-        }))
-        
-        self.present(alertController)
+        case .changed:
+            scale = scaleStart * gesture.scale
+            
+            Swift.print(scale)
+            (collectionView.collectionViewLayout as? NodeLayout)?.itemWidth = 50 * scale
+            (collectionView.collectionViewLayout as? NodeLayout)?.itemHeight = 50 * scale
+            collectionView.collectionViewLayout.invalidateLayout()
+            
+        default:
+            break
+        }
     }
 }
 
@@ -268,7 +259,8 @@ extension FillViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 50 * dataSource.scale, height: 50 * dataSource.scale)
+        return CGSize(width: (collectionViewLayout as! NodeLayout).itemWidth,
+                      height: (collectionViewLayout as! NodeLayout).itemHeight)
     }
 }
 

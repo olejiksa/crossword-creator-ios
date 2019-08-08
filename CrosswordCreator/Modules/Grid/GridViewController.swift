@@ -22,7 +22,25 @@ final class GridViewController: UIViewController {
     
     private let dataSource: GridDataSource
     private let xmlService: XmlServiceProtocol
-    private var scale: Float = 50
+    private var gesture: UIPinchGestureRecognizer?
+    private var _scale: CGFloat = 1.0
+    private var scale: CGFloat {
+        get { return _scale }
+        set(newScale) {
+            if newScale < scaleBoundLower {
+                _scale = scaleBoundLower
+            } else if newScale > scaleBoundUpper {
+                _scale = scaleBoundUpper
+            } else {
+                _scale = newScale
+            }
+        }
+    }
+    
+    private var scaleStart: CGFloat = 0
+    
+    private let scaleBoundLower: CGFloat = 0.5
+    private let scaleBoundUpper: CGFloat = 2
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -62,6 +80,9 @@ final class GridViewController: UIViewController {
         dataSource.setup(with: collectionView)
         
         setupNavigationBar()
+        
+        gesture = UIPinchGestureRecognizer(target: self, action: #selector(didReceivePinchGesture))
+        collectionView.addGestureRecognizer(gesture!)
     }
     
     private func setupNavigationBar() {
@@ -87,33 +108,22 @@ final class GridViewController: UIViewController {
         router?.wantsToShare(with: "Untitled", view: view, layoutWords: dataSource.words)
     }
     
-    @IBAction func didZoomTapped(_ sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title:"Zoom",
-                                                message: nil,
-                                                preferredStyle: .alert)
-        let slider = UISlider(frame: CGRect(x: 35, y: 50, width: 200, height: 20))
-        slider.minimumValue = 25
-        slider.maximumValue = 50
-        slider.value = scale
-        alertController.view.addSubview(slider)
-        
-        let height = NSLayoutConstraint(item: alertController.view as Any, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 140)
-        alertController.view.addConstraint(height)
-        
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (error) -> Void in
-            self.scale = slider.value
-            let val = CGFloat(slider.value)
-            self.collectionView.collectionViewLayout = NodeLayout(itemWidth: val,
-                                                                  itemHeight: val,
-                                                                  space: 1)
-        }))
-        
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (error) -> Void in
+    @objc private func didReceivePinchGesture(_ gesture: UIPinchGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            scaleStart = scale
             
-        }))
-        
-        self.present(alertController)
-        //  collectionView.collectionViewLayout = NodeLayout(itemWidth: 25, itemHeight: 25, space: 1)
+        case .changed:
+            scale = scaleStart * gesture.scale
+            
+            Swift.print(scale)
+            (collectionView.collectionViewLayout as? NodeLayout)?.itemWidth = 50 * scale
+            (collectionView.collectionViewLayout as? NodeLayout)?.itemHeight = 50 * scale
+            collectionView.collectionViewLayout.invalidateLayout()
+            
+        default:
+            break
+        }
     }
 }
 

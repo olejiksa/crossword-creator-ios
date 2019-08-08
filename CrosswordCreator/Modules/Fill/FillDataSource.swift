@@ -44,9 +44,6 @@ final class FillDataSource: NSObject, FillDataSourceProtocol {
     var enteredAnswers: [String]
     var badAnswers: [LayoutWord] = []
     
-    var scale: CGFloat = 1.0
-    var scaleStart: CGFloat = 0.0
-    
     
     
     

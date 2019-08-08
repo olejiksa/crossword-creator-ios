@@ -14,7 +14,7 @@ final class PersistanceManager {
         let container = NSPersistentContainer(name: "Model")
         
         container.persistentStoreDescriptions.forEach {
-            $0.setOption(CoreDataCoreSpotlightDelegate(forStoreWith: $0, model: container.managedObjectModel), forKey: NSCoreDataCoreSpotlightExporter)
+            $0.setOption(NSCoreDataCoreSpotlightDelegate(forStoreWith: $0, model: container.managedObjectModel), forKey: NSCoreDataCoreSpotlightExporter)
         }
         
         container.loadPersistentStores { _, error in
