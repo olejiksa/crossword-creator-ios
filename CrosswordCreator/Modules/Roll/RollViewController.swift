@@ -87,7 +87,6 @@ final class RollViewController: UIViewController {
         super.viewDidAppear(animated)
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.isTranslucent = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,6 +115,10 @@ extension RollViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    titleForHeaderInSection section: Int) -> String? {
+        guard self.tableView(tableView, numberOfRowsInSection: section) > 0 else {
+            return nil
+        }
+        
         return section == 0 ? Constants.across : Constants.down
     }
     

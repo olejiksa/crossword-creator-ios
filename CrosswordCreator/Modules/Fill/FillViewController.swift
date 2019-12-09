@@ -19,7 +19,6 @@ final class FillViewController: UIViewController {
         static let questions = "questions".localized
         static let zoom = "zoom".localized
         static let check = "check".localized
-        static let print = "print".localized
     }
     
     
@@ -130,7 +129,10 @@ final class FillViewController: UIViewController {
                                            target: self,
                                            action: #selector(willCancel))
         
-        let printButton = UIBarButtonItem(title: Constants.print, style: .plain, target: self, action: #selector(print))
+        let printButton = UIBarButtonItem(image: UIImage(systemName: "printer"),
+                                          style: .plain,
+                                          target: self,
+                                          action: #selector(print))
         
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action,
                                           target: self,
@@ -143,9 +145,12 @@ final class FillViewController: UIViewController {
     private func setupToolbar() {
         let questions = UIBarButtonItem(title: Constants.questions, style: .plain, target: self, action: #selector(seeQuestions))
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let check = UIBarButtonItem(title: Constants.check, style: .plain, target: self, action: #selector(self.check))
+        let checkButton = UIBarButtonItem(image: UIImage(systemName: "checkmark"),
+                                          style: .plain,
+                                          target: self,
+                                          action: #selector(self.check))
         
-        toolbarItems = [questions, spacer, check]
+        toolbarItems = [questions, spacer, checkButton]
     }
     
     @objc private func willCancel() {
