@@ -87,6 +87,7 @@
 		EB7A57B521E87CAD001E72D2 /* GridDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7A57B421E87CAD001E72D2 /* GridDataSource.swift */; };
 		EB8FBBE02217AAE900F92DDE /* GridInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8FBBDF2217AAE900F92DDE /* GridInteractor.swift */; };
 		EB8FBBE22217B6C000F92DDE /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8FBBE12217B6C000F92DDE /* HomeInteractor.swift */; };
+		EBB744D2239E778300EF684A /* RollDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB744D1239E778300EF684A /* RollDelegate.swift */; };
 		EBBB79FC227622F000415804 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EBBB79FE227622F000415804 /* Localizable.strings */; };
 		EBBB7A012279100300415804 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBB7A002279100300415804 /* String+Localized.swift */; };
 		EBD4D886218CDEAB009028B5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EBD4D884218CDEAB009028B5 /* Model.xcdatamodeld */; };
@@ -195,6 +196,7 @@
 		EB7A57B421E87CAD001E72D2 /* GridDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridDataSource.swift; sourceTree = "<group>"; };
 		EB8FBBDF2217AAE900F92DDE /* GridInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridInteractor.swift; sourceTree = "<group>"; };
 		EB8FBBE12217B6C000F92DDE /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
+		EBB744D1239E778300EF684A /* RollDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollDelegate.swift; sourceTree = "<group>"; };
 		EBBB79F7227621EE00415804 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		EBBB79FD227622F000415804 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EBBB79FF227622F200415804 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 			children = (
 				EBE8F24522663E3900631F77 /* Cell */,
 				EB3CBF7C223478020043E8FB /* RollBuilder.swift */,
+				EBB744D1239E778300EF684A /* RollDelegate.swift */,
 				EB3CBF7E2234785F0043E8FB /* RollViewController.swift */,
 				EB3CBF7F2234785F0043E8FB /* RollView.xib */,
 			);
@@ -695,6 +698,7 @@
 				EB8FBBE02217AAE900F92DDE /* GridInteractor.swift in Sources */,
 				EB3CBF6F223425A10043E8FB /* FillViewController.swift in Sources */,
 				EBE8F24B2266446C00631F77 /* CompletionBlock.swift in Sources */,
+				EBB744D2239E778300EF684A /* RollDelegate.swift in Sources */,
 				EB214F202218C21400D1C3A0 /* Document.swift in Sources */,
 				EB3CBF802234785F0043E8FB /* RollViewController.swift in Sources */,
 				EB002D26218CC05C00A89806 /* WordBuilder.swift in Sources */,

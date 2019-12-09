@@ -45,6 +45,8 @@ final class RollViewController: UIViewController {
     
     // MARK: Public Properties
     
+    weak var delegate: RollDelegate?
+    
     var across: [LayoutWord] {
         return words.filter { $0.direction == .horizontal }
     }
@@ -75,17 +77,10 @@ final class RollViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = mode == .questions ? Constants.questions : Constants.words
-        
         setupTableView()
         setupSearchController()
+        setupNavigation()
         setupKeyboard()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,22 +99,24 @@ final class RollViewController: UIViewController {
     // MARK: Private
     
     private func setupTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        
         tableView.estimatedRowHeight = 44.0
         tableView.rowHeight = UITableView.automaticDimension
         
-        tableView.register(UINib(nibName: "\(RollCell.self)", bundle: Bundle.main),
+        tableView.register(UINib(nibName: cellIdentifier, bundle: Bundle.main),
                            forCellReuseIdentifier: cellIdentifier)
+    }
+    
+    private func setupNavigation() {
+        navigationItem.title = mode == .questions ? Constants.questions : Constants.words
+        navigationItem.searchController = searchController
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func setupSearchController() {
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        
-        navigationItem.searchController = searchController
     }
     
     private func setupKeyboard() {
@@ -231,7 +228,25 @@ extension RollViewController: UITableViewDataSource {
 extension RollViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        let word: LayoutWord
+        switch (indexPath.section, searchController.isActive) {
+        case (0, true):
+            word = searchedAcross[indexPath.row]
+            
+        case (0, false):
+            word = across[indexPath.row]
+
+        case (_, true):
+            word = searchedDown[indexPath.row]
+            
+        case (_, false):
+            word = down[indexPath.row]
+        }
+        
+        navigationController?.popViewController(animated: true)
+        
+        let index = words.enumerated().first(where: { $0.element == word })?.offset ?? 0
+        delegate?.openFillDialog(with: word, by: index)
     }
 }
 

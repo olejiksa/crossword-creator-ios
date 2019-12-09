@@ -18,7 +18,7 @@ protocol FillRouterProtocol {
 
 final class FillRouter: FillRouterProtocol {
     
-    typealias FillTransitionHandler = ViewTransitionHandler & FillAlertControllerDelegate
+    typealias FillTransitionHandler = ViewTransitionHandler & FillAlertControllerDelegate & RollDelegate
     
     private weak var transitionHandler: FillTransitionHandler?
     private weak var navigationTransitionHandler: NavigationTransitionHandler?
@@ -48,6 +48,7 @@ final class FillRouter: FillRouterProtocol {
     
     func wantsToSeeQuestions(with words: [LayoutWord]) {
         let rollViewController = RollBuilder.viewController(with: words, mode: .questions)
+        rollViewController.delegate = transitionHandler
         navigationTransitionHandler?.push(rollViewController)
     }
 }

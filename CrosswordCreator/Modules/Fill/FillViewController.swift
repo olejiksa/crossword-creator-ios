@@ -272,6 +272,8 @@ extension FillViewController: UICollectionViewDelegate {
 
 
 
+// MARK: - FillAlertControllerDelegate
+
 extension FillViewController: FillAlertControllerDelegate {
     
     func fill(with answer: String, index: Int, maxLength: Int) {
@@ -301,5 +303,22 @@ extension FillViewController: FillAlertControllerDelegate {
                 }
             }
         }
+    }
+}
+
+
+
+
+// MARK: - RollDelegate
+
+extension FillViewController: RollDelegate {
+    
+    func openFillDialog(with word: LayoutWord, by index: Int) {
+        let filledWord: FilledWord
+        filledWord.index = index
+        filledWord.word = Word(question: word.question, answer: word.answer)
+        filledWord.enteredAnswer = dataSource.enteredAnswers[index]
+        
+        router?.wantsToFill(with: filledWord)
     }
 }

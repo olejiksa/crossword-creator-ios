@@ -11,7 +11,7 @@ import UIKit
 final class RollBuilder {
     
     static func viewController(with words: [LayoutWord],
-                               mode: RollViewController.Mode) -> UIViewController {
+                               mode: RollViewController.Mode) -> RollViewController {
         return RollViewController(with: words, mode: mode)
     }
 }
