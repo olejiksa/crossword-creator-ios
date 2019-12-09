@@ -83,8 +83,7 @@ final class HomeInteractor: HomeInteractorProtocol {
     }
     
     func removeCrossword(at index: Int) {
-        let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
-        persistanceManager.remove(crosswords[index])
+        persistanceManager.remove(by: index, entityName: crosswordName)
         persistanceManager.save()
     }
     

@@ -299,12 +299,14 @@ extension HomeViewController: UITableViewDelegate {
                    forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         
-        let index = indexPath.section
-        interactor.removeCrossword(at: index)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let persistanceManager = appDelegate.persistanceManager
         
-        tableView.beginUpdates()
-        tableView.deleteSections(IndexSet(arrayLiteral: indexPath.section), with: .automatic)
-        tableView.endUpdates()
+        let crosswords: [Crossword] = persistanceManager.fetch(entityName: "Crossword")
+        persistanceManager.remove(crosswords[indexPath.section])
+        persistanceManager.save()
+        
+        tableView.reloadData()
     }
 }
 

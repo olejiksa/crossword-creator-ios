@@ -94,6 +94,7 @@ final class PersistanceManager {
         
         do {
             try managedContext.save()
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadTheTable"), object: nil)
         } catch {
             fatalError("An error occurred while saving: \(error)")
         }
