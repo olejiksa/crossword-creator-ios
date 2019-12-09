@@ -38,8 +38,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = vc.navigationController
         window?.makeKeyAndVisible()
         
-        UIApplication.shared.windows.first?.backgroundColor = .white
-        
         return true
     }
     
