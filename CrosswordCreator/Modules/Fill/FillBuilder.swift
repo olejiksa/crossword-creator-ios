@@ -23,6 +23,7 @@ final class FillBuilder {
                                                 xmlService: xmlService,
                                                 title: title)
         let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.modalPresentationStyle = .fullScreen
         
         let router = FillRouter(transitionHandler: viewController,
                                 navigationTransitionHandler: navigationController)
