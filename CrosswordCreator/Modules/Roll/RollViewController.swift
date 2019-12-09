@@ -40,6 +40,7 @@ final class RollViewController: UIViewController {
     private let words: [LayoutWord]
     private let mode: Mode
     private let cellIdentifier = "\(RollCell.self)"
+    private var searchController: UISearchController!
     
     
     // MARK: Public Properties
@@ -51,6 +52,9 @@ final class RollViewController: UIViewController {
     var down: [LayoutWord] {
         return words.filter { $0.direction == .vertical }
     }
+    
+    var searchedAcross: [LayoutWord] = []
+    var searchedDown: [LayoutWord] = []
     
     
     
@@ -81,6 +85,8 @@ final class RollViewController: UIViewController {
                            forCellReuseIdentifier: cellIdentifier)
         
         title = mode == .questions ? Constants.questions : Constants.words
+        
+        setupSearchController()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,6 +105,22 @@ final class RollViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         navigationController?.setToolbarHidden(false, animated: true)
+    }
+    
+    
+    // MARK: Private
+    
+    private func setupSearchController() {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        
+        navigationItem.searchController = searchController
+    }
+    
+    private func filterContent(for searchText: String) {
+        searchedAcross = across.filter { $0.question.localizedCaseInsensitiveContains(searchText) }
+        searchedDown = down.filter { $0.question.localizedCaseInsensitiveContains(searchText) }
     }
 }
 
@@ -124,12 +146,30 @@ extension RollViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
+        guard !searchController.isActive else {
+            return section == 0 ? searchedAcross.count : searchedDown.count
+        }
+        
         return section == 0 ? across.count : down.count
     }
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let word = indexPath.section == 0 ? across[indexPath.row] : down[indexPath.row]
+        let word: LayoutWord
+        switch (indexPath.section, searchController.isActive) {
+        case (0, true):
+            word = searchedAcross[indexPath.row]
+            
+        case (0, false):
+            word = across[indexPath.row]
+
+        case (_, true):
+            word = searchedDown[indexPath.row]
+            
+        case (_, false):
+            word = down[indexPath.row]
+        }
+        
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? RollCell {
             cell.nameLabel?.text = mode == .questions ? word.question : word.answer
             cell.indexLabel?.text = String((words.enumerated().first(where: { $0.element == word })?.offset ?? 0) + 1)
@@ -149,5 +189,19 @@ extension RollViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+
+
+
+// MARK: - UISearchResultsUpdating
+
+extension RollViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        filterContent(for: searchText)
+        tableView.reloadData()
     }
 }

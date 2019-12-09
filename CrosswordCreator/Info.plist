@@ -13,8 +13,6 @@
 			<array/>
 			<key>CFBundleTypeName</key>
 			<string>Crossword Creator List File</string>
-			<key>LSHandlerRank</key>
-			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.crosswordcreator.cwtf</string>
@@ -25,8 +23,6 @@
 			<array/>
 			<key>CFBundleTypeName</key>
 			<string>Crossword Creator Grid File</string>
-			<key>LSHandlerRank</key>
-			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.crosswordcreator.cwgf</string>
@@ -46,7 +42,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.education</string>
 	<key>LSRequiresIPhoneOS</key>

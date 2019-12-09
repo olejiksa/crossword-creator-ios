@@ -82,6 +82,7 @@ extension XmlService: XmlServiceProtocol {
             let sortedRaws = file.word.sorted { $0.id < $1.id }
             return sortedRaws.map { Word(question: $0.question, answer: $0.answer) }
         } catch {
+            print(error)
             return []
         }
     }
@@ -101,6 +102,7 @@ extension XmlService: XmlServiceProtocol {
                                   direction: $0.orientation == LayoutWord.Direction.vertical.rawValue ? .vertical : .horizontal)
             }
         } catch {
+            print(error)
             return []
         }
     }
