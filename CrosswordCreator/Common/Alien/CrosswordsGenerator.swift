@@ -216,10 +216,9 @@ open class CrosswordsGenerator: CrosswordsGeneratorProtocol {
     fileprivate var resultData: Array<LayoutWord> = Array()
 	
     fileprivate func fitAndAdd(question: String, answer: String) -> Bool {
-		
 		var fit = false
 		var count = 0
-		var coordlist = suggestCoord(answer)
+		let coordlist = suggestCoord(answer)
 		
 		while !fit {
 			

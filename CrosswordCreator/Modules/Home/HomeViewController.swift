@@ -99,9 +99,16 @@ final class HomeViewController: UIViewController {
         
         switch mode {
         case .standard:
+            let helpButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"),
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(willOpenHelp))
+            
             let addButton = UIBarButtonItem(barButtonSystemItem: .add,
                                             target: self,
                                             action: #selector(willAdd))
+            
+            navigationItem.leftBarButtonItem = helpButton
             navigationItem.rightBarButtonItem = addButton
             
         case .picker:
@@ -146,6 +153,10 @@ final class HomeViewController: UIViewController {
         
         moduleOutput?.transferWords(words)
         router?.wantsToGoBack()
+    }
+    
+    @objc private func willOpenHelp() {
+        router?.wantsToOpenHelp()
     }
     
     @objc private func refresh() {

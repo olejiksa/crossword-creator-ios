@@ -14,6 +14,7 @@ protocol HomeRouterProtocol {
     func wantsToFill(with title: String, words: [LayoutWord], index: Int)
     func wantsToCreate(with viewController: UIViewController, superview: UIView)
     func wantsToGoBack()
+    func wantsToOpenHelp()
 }
 
 final class HomeRouter: HomeRouterProtocol {
@@ -56,5 +57,11 @@ final class HomeRouter: HomeRouterProtocol {
     
     func wantsToGoBack() {
         transitionHandler?.dismiss()
+    }
+    
+    func wantsToOpenHelp() {
+        let vc = AboutBuilder.viewController(transitionHandler: transitionHandler)
+        let nvc = UINavigationController(rootViewController: vc)
+        transitionHandler?.present(nvc)
     }
 }

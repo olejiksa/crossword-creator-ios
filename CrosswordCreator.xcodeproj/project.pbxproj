@@ -75,6 +75,10 @@
 		EB632E362263A0B1004359A1 /* Controller+HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB632E352263A0B1004359A1 /* Controller+HideKeyboard.swift */; };
 		EB6DFD1B2257E1920058C83A /* RollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6DFD192257E1920058C83A /* RollCell.swift */; };
 		EB6DFD1C2257E1920058C83A /* RollCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB6DFD1A2257E1920058C83A /* RollCell.xib */; };
+		EB73E2B0239DF323005FD693 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB73E2AE239DF323005FD693 /* AboutViewController.swift */; };
+		EB73E2B1239DF323005FD693 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB73E2AF239DF323005FD693 /* AboutView.xib */; };
+		EB73E2B3239DF45D005FD693 /* AboutBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB73E2B2239DF45D005FD693 /* AboutBuilder.swift */; };
+		EB73E2B5239DF4AB005FD693 /* AboutRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB73E2B4239DF4AB005FD693 /* AboutRouter.swift */; };
 		EB7817D9217A1FFF00BA9D50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7817D8217A1FFF00BA9D50 /* AppDelegate.swift */; };
 		EB7817DB217A1FFF00BA9D50 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7817DA217A1FFF00BA9D50 /* ListViewController.swift */; };
 		EB7817E0217A200000BA9D50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB7817DF217A200000BA9D50 /* Assets.xcassets */; };
@@ -177,6 +181,10 @@
 		EB632E352263A0B1004359A1 /* Controller+HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Controller+HideKeyboard.swift"; sourceTree = "<group>"; };
 		EB6DFD192257E1920058C83A /* RollCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollCell.swift; sourceTree = "<group>"; };
 		EB6DFD1A2257E1920058C83A /* RollCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RollCell.xib; sourceTree = "<group>"; };
+		EB73E2AE239DF323005FD693 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		EB73E2AF239DF323005FD693 /* AboutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
+		EB73E2B2239DF45D005FD693 /* AboutBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutBuilder.swift; sourceTree = "<group>"; };
+		EB73E2B4239DF4AB005FD693 /* AboutRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutRouter.swift; sourceTree = "<group>"; };
 		EB7817D5217A1FFF00BA9D50 /* CrosswordCreator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrosswordCreator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB7817D8217A1FFF00BA9D50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB7817DA217A1FFF00BA9D50 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -378,6 +386,7 @@
 		EB3CBF772234308A0043E8FB /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				EB73E2AD239DF2FE005FD693 /* About */,
 				EB632E2622634015004359A1 /* Creation */,
 				EB3CBF6C223425910043E8FB /* Fill */,
 				EB1CD99321A0860A005E9BB8 /* Grid */,
@@ -431,6 +440,17 @@
 				EB632E2A22634282004359A1 /* CreationView.xib */,
 			);
 			path = Creation;
+			sourceTree = "<group>";
+		};
+		EB73E2AD239DF2FE005FD693 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				EB73E2B2239DF45D005FD693 /* AboutBuilder.swift */,
+				EB73E2B4239DF4AB005FD693 /* AboutRouter.swift */,
+				EB73E2AE239DF323005FD693 /* AboutViewController.swift */,
+				EB73E2AF239DF323005FD693 /* AboutView.xib */,
+			);
+			path = About;
 			sourceTree = "<group>";
 		};
 		EB7817CC217A1FFF00BA9D50 = {
@@ -570,6 +590,7 @@
 			files = (
 				EB632E2C22634282004359A1 /* CreationView.xib in Resources */,
 				EB21C5032187893A0074A21B /* ListViewCell.xib in Resources */,
+				EB73E2B1239DF323005FD693 /* AboutView.xib in Resources */,
 				EB7817E3217A200000BA9D50 /* LaunchScreen.storyboard in Resources */,
 				EB30560121F8ECEA00E9F6EE /* GridViewCell.xib in Resources */,
 				EB7817E0217A200000BA9D50 /* Assets.xcassets in Resources */,
@@ -606,6 +627,7 @@
 				EB002D2B218CC46B00A89806 /* Controller+TransitionHandler.swift in Sources */,
 				EB3CBF582233EC300043E8FB /* DecodingErrorExtension.swift in Sources */,
 				EB3CBF7D223478020043E8FB /* RollBuilder.swift in Sources */,
+				EB73E2B3239DF45D005FD693 /* AboutBuilder.swift in Sources */,
 				EB3CBF672233F0250043E8FB /* XMLEncodingStorage.swift in Sources */,
 				EBE867F822416D0E004531E5 /* FillAlertController.swift in Sources */,
 				EBF1EBDA225D2DEC00BBA28D /* TermsViewController.swift in Sources */,
@@ -635,7 +657,9 @@
 				EBE8680322417BDF004531E5 /* ShareBuilder.swift in Sources */,
 				EB3CBF602233EC3B0043E8FB /* XMLUnkeyedDecodingContainer.swift in Sources */,
 				EBE6B8682194D6CC00B59EE5 /* PersistanceManager.swift in Sources */,
+				EB73E2B5239DF4AB005FD693 /* AboutRouter.swift in Sources */,
 				EB1CD99921A0868E005E9BB8 /* GridViewController.swift in Sources */,
+				EB73E2B0239DF323005FD693 /* AboutViewController.swift in Sources */,
 				EB214F1922182A6B00D1C3A0 /* SaveAlertController.swift in Sources */,
 				EB214F262218C26B00D1C3A0 /* Options.swift in Sources */,
 				EBF1EBDD225D304600BBA28D /* TermsRouter.swift in Sources */,
