@@ -10,14 +10,13 @@ import UIKit
 
 final class ListViewController: UIViewController {
     
-    typealias WordsListDataSource = ListDataSourceProtocol & WordViewControllerDelegate
-    
     // MARK: Private Data Structures
     
     private enum Constants {
         
         static let delete = "delete".localized
         static let title = "list_title".localized
+        static let noWords = "words_no_items".localized
     }
     
     
@@ -28,9 +27,19 @@ final class ListViewController: UIViewController {
 
     // MARK: Private Properties
     
-    private let dataSource: WordsListDataSource
     private let xmlService: XmlServiceProtocol
     private let mode: Bool
+    private let searchController = UISearchController(searchResultsController: nil)
+    
+    var lastIndex: Int {
+        return words.index(before: words.endIndex)
+    }
+    
+    private let cellIdentifier = "\(ListViewCell.self)"
+    private let interactor: ListInteractorProtocol
+    private(set) var words: [Word] = []
+    private(set) var searchedWords: [Word] = []
+    let list_title: String
     
     private var saveButton: UIBarButtonItem?
     var index = 0
@@ -57,12 +66,16 @@ final class ListViewController: UIViewController {
     
     // MARK: Lifecycle
     
-    init(dataSource: WordsListDataSource,
-         xmlService: XmlServiceProtocol,
-         mode: Bool) {
-        self.dataSource = dataSource
+    init(xmlService: XmlServiceProtocol,
+         mode: Bool,
+         words: [Word],
+         list_title: String,
+         interactor: ListInteractorProtocol) {
         self.xmlService = xmlService
         self.mode = mode
+        self.words = words
+        self.list_title = list_title
+        self.interactor = interactor
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -78,23 +91,42 @@ final class ListViewController: UIViewController {
     }
     
     
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            undoManager?.undo()
+        }
+    }
+    
     // MARK: Private
     
     private func setupView() {
-        dataSource.setup(with: tableView)
-        setupNavigationBar()
-        setupToolbar()
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 10))
         
-        //registerForPreviewing(with: self, sourceView: tableView)
+        let nib = UINib(nibName: cellIdentifier, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
+        
+        setupNavigationBar()
+        setupSearchController()
+        
+        registerForPreviewing(with: self, sourceView: tableView)
     }
     
     private func setupNavigationBar() {
-        title = Constants.title
+        title = list_title
         navigationController?.navigationBar.prefersLargeTitles = true
         
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel,
                                            target: self,
                                            action: #selector(willCancel))
+        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add,
+                                        target: self,
+                                        action: #selector(willOpenWord))
         
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action,
                                           target: self,
@@ -105,26 +137,38 @@ final class ListViewController: UIViewController {
                                          action: #selector(willSave))
         self.saveButton = saveButton
         
-        shareButton.isEnabled = !dataSource.words.isEmpty
+        shareButton.isEnabled = !words.isEmpty
         saveButton.isEnabled = false
         
         navigationItem.leftBarButtonItem = cancelButton
-        navigationItem.rightBarButtonItems = [shareButton, saveButton]
-    }
-    
-    private func setupToolbar() {
-        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(openWordAlertController))
-        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         
-        toolbarItems = [spacer, add]
+        if !mode {
+            navigationItem.rightBarButtonItems = [addButton, shareButton, saveButton]
+        } else {
+            navigationItem.rightBarButtonItems = [addButton, shareButton]
+        }
     }
     
-    @objc private func openWordAlertController() {
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        
+        navigationItem.searchController = searchController
+    }
+    
+    private func filterContent(for searchText: String) {
+        searchedWords = words.filter {
+            $0.question.localizedCaseInsensitiveContains(searchText)
+                || $0.answer.localizedCaseInsensitiveContains(searchText)
+        }
+    }
+    
+    @objc private func willOpenWord() {
         router?.wantsToOpenWordEditor(with: .new)
     }
     
     @objc private func willShare() {
-        router?.wantsToShare(with: dataSource.title, view: view, words: dataSource.words)
+        router?.wantsToShare(with: list_title, view: view, words: words)
     }
     
     @objc private func willCancel() {
@@ -135,8 +179,7 @@ final class ListViewController: UIViewController {
         if !mode {
             router?.wantsToSave()
         } else {
-            dataSource.save(with: dataSource.title, mode: mode)
-            self.saveButton?.isEnabled = false
+            interactor.save(words, with: list_title, mode: mode)
         }
     }
 }
@@ -163,16 +206,6 @@ extension ListViewController: UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = .clear
-        return headerView
-    }
 }
 
 
@@ -183,22 +216,26 @@ extension ListViewController: UITableViewDelegate {
 extension ListViewController: WordViewControllerDelegate {
     
     func addWord(_ word: Word) {
-        dataSource.addWord(word)
+        words.append(word)
+        interactor.updateWord((word, lastIndex))
+        updateVisibility()
         
         tableView.beginUpdates()
         
-        let indexSet = IndexSet(arrayLiteral: dataSource.lastIndex)
+        let indexSet = IndexSet(arrayLiteral: lastIndex)
         tableView.insertSections(indexSet, with: .automatic)
         
         tableView.endUpdates()
         
-        let indexPath = IndexPath(row: 0, section: dataSource.lastIndex)
+        let indexPath = IndexPath(row: 0, section: lastIndex)
         
         tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
     }
     
     func replaceWord(by newWord: Word, at index: Int) {
-        dataSource.replaceWord(by: newWord, at: index)
+        words[index] = newWord
+        interactor.updateWord((newWord, index))
+        updateVisibility()
         
         tableView.beginUpdates()
         
@@ -218,6 +255,8 @@ extension ListViewController: ListViewControllerDelegate {
     
     func updateVisibility() {
         navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = true }
+        
+        willSave()
     }
 }
 
@@ -229,7 +268,7 @@ extension ListViewController: ListViewControllerDelegate {
 extension ListViewController: SaveAlertControllerDelegate {
     
     func save(with title: String) {
-        dataSource.save(with: title, mode: mode)
+        interactor.save(words, with: title, mode: mode)
         router?.wantsToGoBack()
     }
 }
@@ -238,31 +277,106 @@ extension ListViewController: SaveAlertControllerDelegate {
 
 // MARK: - UIViewControllerPreviewingDelegate
 
-//extension ListViewController: UIViewControllerPreviewingDelegate {
-//    
-//    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
-//                           commit viewControllerToCommit: UIViewController) {
-//        navigationController?.pushViewController(viewControllerToCommit, animated: true)
-//    }
-//    
-//    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
-//                           viewControllerForLocation location: CGPoint) -> UIViewController? {
-//        if let indexPath = tableView.indexPathForRow(at: location) {
-//            previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
-//            
-//            if let cell = tableView.cellForRow(at: indexPath) as? ListViewCell,
-//               let word = cell.word {
-//                return WordBuilder.viewController(with: .edit(word, indexPath.section))
-//            } else { return nil }
-//        }
-//        
-//        return nil
-//    }
-//}
+extension ListViewController: UIViewControllerPreviewingDelegate {
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                           commit viewControllerToCommit: UIViewController) {
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                           viewControllerForLocation location: CGPoint) -> UIViewController? {
+        if let indexPath = tableView.indexPathForRow(at: location) {
+            previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
+            
+            if let cell = tableView.cellForRow(at: indexPath) as? ListViewCell,
+               let word = cell.word {
+                return WordBuilder.viewController(with: .edit(word, indexPath.section))
+            } else { return nil }
+        }
+        
+        return nil
+    }
+}
 
 extension UINavigationController {
     
     override open var previewActionItems: [UIPreviewActionItem] {
         return topViewController?.previewActionItems ?? []
+    }
+}
+
+
+// MARK: - UITableViewDataSource
+
+extension ListViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        let array = searchController.isActive ? searchedWords : words
+        
+        if array.isEmpty {
+            tableView.setupEmptyView(with: Constants.noWords)
+        } else {
+            tableView.restore()
+        }
+        
+        return array.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: ListViewCell
+        let array = searchController.isActive ? searchedWords : words
+        
+        if let dequeuedCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
+                                                            for: indexPath) as? ListViewCell {
+            cell = dequeuedCell
+        } else {
+            cell = ListViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
+        }
+        
+        let word = array[indexPath.section]
+        cell.setup(with: word)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+    
+        let index = indexPath.section
+        let word = words[indexPath.section]
+        
+        words.remove(at: index)
+        interactor.removeWord(at: index)
+        
+        tableView.beginUpdates()
+        tableView.deleteSections(IndexSet(arrayLiteral: indexPath.section), with: .automatic)
+        tableView.endUpdates()
+        
+        undoManager?.registerUndo(withTarget: self, handler: { (selfTarget) in
+            selfTarget.addWord(word)
+        })
+        
+        updateVisibility()
+    }
+}
+
+
+
+
+// MARK: - UISearchResultsUpdating
+
+extension ListViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        filterContent(for: searchText)
+        tableView.reloadData()
     }
 }

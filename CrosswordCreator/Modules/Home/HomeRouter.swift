@@ -30,7 +30,6 @@ final class HomeRouter: HomeRouterProtocol {
         vc.index = index
         
         if let nvc = vc.navigationController {
-            nvc.setToolbarHidden(false, animated: true)
             nvc.setNavigationBarHidden(false, animated: true)
             
             transitionHandler?.present(nvc)

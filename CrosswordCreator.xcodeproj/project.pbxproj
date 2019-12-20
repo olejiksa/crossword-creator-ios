@@ -12,7 +12,6 @@
 		EB002D26218CC05C00A89806 /* WordBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002D25218CC05C00A89806 /* WordBuilder.swift */; };
 		EB002D29218CC34100A89806 /* TransitionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002D28218CC34100A89806 /* TransitionHandler.swift */; };
 		EB002D2B218CC46B00A89806 /* Controller+TransitionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002D2A218CC46B00A89806 /* Controller+TransitionHandler.swift */; };
-		EB002D2D218CC8CC00A89806 /* ListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB002D2C218CC8CC00A89806 /* ListDataSource.swift */; };
 		EB15D07B22F0E3DC00EB41CD /* SpotlightService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB15D07A22F0E3DC00EB41CD /* SpotlightService.swift */; };
 		EB1CD98E21A07ED8005E9BB8 /* HomeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CD98D21A07ED8005E9BB8 /* HomeBuilder.swift */; };
 		EB1CD99021A07EED005E9BB8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB1CD98F21A07EED005E9BB8 /* HomeViewController.swift */; };
@@ -39,7 +38,6 @@
 		EB30560121F8ECEA00E9F6EE /* GridViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB3055FF21F8ECEA00E9F6EE /* GridViewCell.xib */; };
 		EB30560521F8F1B700E9F6EE /* NodeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB30560421F8F1B700E9F6EE /* NodeLayout.swift */; };
 		EB3CBF4A2233DB130043E8FB /* ShortcutIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF492233DB130043E8FB /* ShortcutIdentifier.swift */; };
-		EB3CBF4C2233EBF10043E8FB /* ISO8601DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF4B2233EBF10043E8FB /* ISO8601DateFormatter.swift */; };
 		EB3CBF4E2233EBF80043E8FB /* XMLKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF4D2233EBF80043E8FB /* XMLKey.swift */; };
 		EB3CBF502233EC010043E8FB /* XMLStackParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF4F2233EC010043E8FB /* XMLStackParser.swift */; };
 		EB3CBF582233EC300043E8FB /* DecodingErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3CBF572233EC300043E8FB /* DecodingErrorExtension.swift */; };
@@ -119,7 +117,6 @@
 		EB002D25218CC05C00A89806 /* WordBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordBuilder.swift; sourceTree = "<group>"; };
 		EB002D28218CC34100A89806 /* TransitionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionHandler.swift; sourceTree = "<group>"; };
 		EB002D2A218CC46B00A89806 /* Controller+TransitionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Controller+TransitionHandler.swift"; sourceTree = "<group>"; };
-		EB002D2C218CC8CC00A89806 /* ListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataSource.swift; sourceTree = "<group>"; };
 		EB15D07A22F0E3DC00EB41CD /* SpotlightService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightService.swift; sourceTree = "<group>"; };
 		EB1CD98D21A07ED8005E9BB8 /* HomeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBuilder.swift; sourceTree = "<group>"; };
 		EB1CD98F21A07EED005E9BB8 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -146,7 +143,6 @@
 		EB3055FF21F8ECEA00E9F6EE /* GridViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GridViewCell.xib; sourceTree = "<group>"; };
 		EB30560421F8F1B700E9F6EE /* NodeLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeLayout.swift; sourceTree = "<group>"; };
 		EB3CBF492233DB130043E8FB /* ShortcutIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutIdentifier.swift; sourceTree = "<group>"; };
-		EB3CBF4B2233EBF10043E8FB /* ISO8601DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISO8601DateFormatter.swift; sourceTree = "<group>"; };
 		EB3CBF4D2233EBF80043E8FB /* XMLKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLKey.swift; sourceTree = "<group>"; };
 		EB3CBF4F2233EC010043E8FB /* XMLStackParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLStackParser.swift; sourceTree = "<group>"; };
 		EB3CBF572233EC300043E8FB /* DecodingErrorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodingErrorExtension.swift; sourceTree = "<group>"; };
@@ -302,7 +298,6 @@
 				EB214F212218C24000D1C3A0 /* Element.swift */,
 				EB3CBF6A2233F02D0043E8FB /* EncodingErrorExtension.swift */,
 				EB214F232218C25800D1C3A0 /* Error.swift */,
-				EB3CBF4B2233EBF10043E8FB /* ISO8601DateFormatter.swift */,
 				EB30560421F8F1B700E9F6EE /* NodeLayout.swift */,
 				EB214F252218C26B00D1C3A0 /* Options.swift */,
 				EB214F272218C28100D1C3A0 /* Parser.swift */,
@@ -475,16 +470,16 @@
 		EB7817D7217A1FFF00BA9D50 /* CrosswordCreator */ = {
 			isa = PBXGroup;
 			children = (
-				EB7817E4217A200000BA9D50 /* Info.plist */,
-				EB7817D8217A1FFF00BA9D50 /* AppDelegate.swift */,
-				EB7817DF217A200000BA9D50 /* Assets.xcassets */,
 				EB002D27218CC32300A89806 /* Common */,
 				EB21C4F621876E710074A21B /* Extensions */,
-				EB7817E1217A200000BA9D50 /* LaunchScreen.storyboard */,
 				EBD4D884218CDEAB009028B5 /* Model.xcdatamodeld */,
 				EB3CBF772234308A0043E8FB /* Modules */,
 				EB214F1C2218BC0100D1C3A0 /* Services */,
+				EB7817D8217A1FFF00BA9D50 /* AppDelegate.swift */,
 				EBBB79FE227622F000415804 /* Localizable.strings */,
+				EB7817DF217A200000BA9D50 /* Assets.xcassets */,
+				EB7817E1217A200000BA9D50 /* LaunchScreen.storyboard */,
+				EB7817E4217A200000BA9D50 /* Info.plist */,
 			);
 			path = CrosswordCreator;
 			sourceTree = "<group>";
@@ -494,7 +489,6 @@
 			children = (
 				EB21C4FF218788EF0074A21B /* Cell */,
 				EB002D1F218CB83700A89806 /* ListBuilder.swift */,
-				EB002D2C218CC8CC00A89806 /* ListDataSource.swift */,
 				EB002D23218CBF9400A89806 /* ListRouter.swift */,
 				EBE6B8692194D94D00B59EE5 /* ListInteractor.swift */,
 				EB7817DA217A1FFF00BA9D50 /* ListViewController.swift */,
@@ -635,7 +629,6 @@
 				EBE867F822416D0E004531E5 /* FillAlertController.swift in Sources */,
 				EBF1EBDA225D2DEC00BBA28D /* TermsViewController.swift in Sources */,
 				EBE8F2492266426B00631F77 /* SaveBuilder.swift in Sources */,
-				EB3CBF4C2233EBF10043E8FB /* ISO8601DateFormatter.swift in Sources */,
 				EBBB7A012279100300415804 /* String+Localized.swift in Sources */,
 				EB3CBF692233F0290043E8FB /* XMLReferencingEncoder.swift in Sources */,
 				EB3CBF8D223B3DA70043E8FB /* FileExtension.swift in Sources */,
@@ -672,7 +665,6 @@
 				EB3CBF6B2233F02D0043E8FB /* EncodingErrorExtension.swift in Sources */,
 				EB30560521F8F1B700E9F6EE /* NodeLayout.swift in Sources */,
 				EB3CBF5E2233EC380043E8FB /* XMLKeyedDecodingContainer.swift in Sources */,
-				EB002D2D218CC8CC00A89806 /* ListDataSource.swift in Sources */,
 				EB21C5022187893A0074A21B /* ListViewCell.swift in Sources */,
 				EB1CD98E21A07ED8005E9BB8 /* HomeBuilder.swift in Sources */,
 				EB002D20218CB83700A89806 /* ListBuilder.swift in Sources */,

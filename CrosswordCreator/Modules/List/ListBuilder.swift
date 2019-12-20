@@ -21,21 +21,19 @@ final class ListBuilder {
     static func viewController(with title: String, words: [Word]) -> ListViewController {
         let persistanceService = ServiceLocator.persistanceService
         let interactor = ListInteractor(persistanceService: persistanceService)
-        let dataSource = ListDataSource(interactor: interactor,
-                                        words: words,
-                                        title: title)
         let xmlService = ServiceLocator.xmlService
         
         let mode = !words.isEmpty
-        let viewController = ListViewController(dataSource: dataSource,
-                                                xmlService: xmlService,
-                                                mode: mode)
+        let viewController = ListViewController(xmlService: xmlService,
+                                                mode: mode,
+                                                words: words,
+                                                list_title: title,
+                                                interactor: interactor)
         let nvc = UINavigationController(rootViewController: viewController)
         
         let router = ListRouter(transitionHandler: viewController,
                                 navigationTransitionHandler: nvc)
         viewController.router = router
-        dataSource.vc = viewController
         
         return viewController
     }

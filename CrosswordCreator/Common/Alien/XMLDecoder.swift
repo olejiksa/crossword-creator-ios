@@ -729,7 +729,7 @@ extension _XMLDecoder {
         case .iso8601:
             if #available(macOS 10.12, iOS 10.0, watchOS 3.0, tvOS 10.0, *) {
                 let string = try self.unbox(value, as: String.self)!
-                guard let date = _iso8601Formatter.date(from: string) else {
+                guard let date = ISO8601DateFormatter().date(from: string) else {
                     throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Expected date string to be ISO8601-formatted."))
                 }
                 

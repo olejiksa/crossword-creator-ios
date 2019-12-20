@@ -122,9 +122,6 @@ extension TermsViewController: UITableViewDataSource {
         let word = words[indexPath.section]
         cell.setup(with: word)
         
-        cell.layer.cornerRadius = 15.0
-        cell.clipsToBounds = true
-        
         return cell
     }
 }
@@ -138,26 +135,6 @@ extension TermsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = .clear
-        return headerView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == words.count - 1 ? 10 : 0
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = .clear
-        return headerView
     }
 }
 

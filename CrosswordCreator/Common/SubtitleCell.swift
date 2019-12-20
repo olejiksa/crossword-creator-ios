@@ -17,16 +17,4 @@ final class SubtitleCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override var frame: CGRect {
-        get {
-            return super.frame
-        }
-        set (newFrame) {
-            var frame = newFrame
-            frame.origin.x += 10
-            frame.size.width -= 2 * 10
-            super.frame = frame
-        }
-    }
 }

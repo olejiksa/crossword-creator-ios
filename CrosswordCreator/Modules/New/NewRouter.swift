@@ -28,7 +28,6 @@ final class NewRouter: NewRouterProtocol {
     func wantsToOpenListEditor() {
         let listViewController = ListBuilder.viewController()
         if let nvc = listViewController.navigationController {
-            nvc.setToolbarHidden(false, animated: true)
             nvc.setNavigationBarHidden(false, animated: true)
             
             transitionHandler?.present(nvc)

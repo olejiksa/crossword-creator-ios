@@ -32,6 +32,8 @@ final class HomeViewController: UIViewController {
     var moduleOutput: HomeModuleOutput?
     var spotlightIndex: Int?
     
+    private let searchController = UISearchController(searchResultsController: nil)
+    
     
     // MARK: Outlets
     
@@ -91,6 +93,7 @@ final class HomeViewController: UIViewController {
     private func setupView() {
         setupTableView()
         setupNavigationBar()
+        setupSearchController()
     }
     
     private func setupNavigationBar() {
@@ -99,16 +102,10 @@ final class HomeViewController: UIViewController {
         
         switch mode {
         case .standard:
-            let helpButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"),
-                                            style: .plain,
-                                            target: self,
-                                            action: #selector(willOpenHelp))
-            
             let addButton = UIBarButtonItem(barButtonSystemItem: .add,
                                             target: self,
                                             action: #selector(willAdd))
             
-            navigationItem.leftBarButtonItem = helpButton
             navigationItem.rightBarButtonItem = addButton
             
         case .picker:
@@ -122,6 +119,13 @@ final class HomeViewController: UIViewController {
                                              action: #selector(willDone))
             navigationItem.rightBarButtonItem = doneButton
         }
+    }
+    
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        
+        navigationItem.searchController = searchController
     }
     
     private func setupTableView() {
@@ -162,6 +166,10 @@ final class HomeViewController: UIViewController {
     @objc private func refresh() {
         tableView.reloadData()
         interactor.setupSearchableContent()
+    }
+    
+    private func filterContent(for searchText: String) {
+        
     }
 }
 
@@ -210,11 +218,6 @@ extension HomeViewController: UITableViewDataSource {
             
             cell.firstSubtitle?.text = dateString
             
-            cell.layer.cornerRadius = 15.0
-            cell.clipsToBounds = true
-            
-            cell.setNeedsDisplay()
-            
             return cell
             
         case .picker:
@@ -222,23 +225,8 @@ extension HomeViewController: UITableViewDataSource {
             cell.textLabel?.text = title
             cell.detailTextLabel?.text = dateString
             
-            cell.layer.cornerRadius = 15.0
-            cell.clipsToBounds = true
-            
-            cell.setNeedsDisplay()
-            
             return cell
         }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = .clear
-        return headerView
     }
 }
 
@@ -370,5 +358,19 @@ extension HomeViewController: UIViewControllerPreviewingDelegate {
         }
         
         return nil
+    }
+}
+
+
+
+
+// MARK: - UISearchResultsUpdating
+
+extension HomeViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        filterContent(for: searchText)
+        tableView.reloadData()
     }
 }
