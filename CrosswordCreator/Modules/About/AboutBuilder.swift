@@ -11,7 +11,8 @@ import UIKit
 final class AboutBuilder {
     
     static func viewController(transitionHandler: ViewTransitionHandler?) -> AboutViewController {
-        let vc = AboutViewController()
+        let presenter = AboutPresenter()
+        let vc = AboutViewController(presenter: presenter)
         let router = AboutRouter(transitionHandler: transitionHandler)
         vc.router = router
         return vc

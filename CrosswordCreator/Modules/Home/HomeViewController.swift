@@ -71,10 +71,8 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        registerForPreviewing(with: self, sourceView: tableView)
         NotificationCenter.default.addObserver(self, selector: #selector(refresh), name: Notification.Name(rawValue: "reloadTheTable"), object: nil)
         setupView()
-        interactor.setupSearchableContent()
         
         if let spotlightIndex = spotlightIndex {
             tableView(tableView, didSelectRowAt: IndexPath(row: 0, section: spotlightIndex))
@@ -102,6 +100,13 @@ final class HomeViewController: UIViewController {
         
         switch mode {
         case .standard:
+            let aboutButton = UIBarButtonItem(title: "about".localized,
+                                              style: .plain,
+                                              target: self,
+                                              action: #selector(about))
+            
+            navigationItem.leftBarButtonItem = aboutButton
+            
             let addButton = UIBarButtonItem(barButtonSystemItem: .add,
                                             target: self,
                                             action: #selector(willAdd))
@@ -159,13 +164,12 @@ final class HomeViewController: UIViewController {
         router?.wantsToGoBack()
     }
     
-    @objc private func willOpenHelp() {
+    @objc private func about() {
         router?.wantsToOpenHelp()
     }
     
     @objc private func refresh() {
         tableView.reloadData()
-        interactor.setupSearchableContent()
     }
     
     private func filterContent(for searchText: String) {
@@ -295,69 +299,6 @@ extension HomeViewController: UITableViewDelegate {
         persistanceManager.save()
         
         tableView.reloadData()
-    }
-}
-
-
-
-
-// MARK: - UIViewControllerPreviewingDelegate
-
-extension HomeViewController: UIViewControllerPreviewingDelegate {
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
-                           commit viewControllerToCommit: UIViewController) {
-        present(viewControllerToCommit)
-        
-        (viewControllerToCommit as? UINavigationController)?.setToolbarHidden(false, animated: true)
-        (viewControllerToCommit as? UINavigationController)?.setNavigationBarHidden(false, animated: true)
-    }
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
-                           viewControllerForLocation location: CGPoint) -> UIViewController? {
-        if let indexPath = tableView.indexPathForRow(at: location) {
-            previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
-            
-            let cell = tableView.cellForRow(at: indexPath)
-            
-            switch cell {
-            case is SubtitleCell:
-                break
-                
-            case is HomeCell:
-                if (cell as? HomeCell)?.secondSubtitle?.text == "Dictionary",
-                    let title = (cell as? HomeCell)?.titleLabel?.text {
-                    let words = interactor.getWords(at: indexPath.section)
-                    let index = indexPath.section
-                    
-                    let vc = ListBuilder.viewController(with: title, words: words)
-                    vc.index = index
-                    let nvc = vc.navigationController
-                    
-                    nvc?.setToolbarHidden(true, animated: true)
-                    nvc?.setNavigationBarHidden(true, animated: true)
-                    
-                    return nvc
-                } else if let title = (cell as? HomeCell)?.titleLabel?.text {
-                    let words = interactor.getLayoutWords(at: indexPath.section)
-                    let index = indexPath.section
-                    
-                    let vc = FillBuilder.viewController(with: title, words: words)
-                    vc.index = index
-                    let nvc = vc.navigationController
-                    
-                    nvc?.setToolbarHidden(true, animated: true)
-                    nvc?.setNavigationBarHidden(true, animated: true)
-                    
-                    return nvc
-                }
-                
-            default:
-                break
-            }
-        }
-        
-        return nil
     }
 }
 

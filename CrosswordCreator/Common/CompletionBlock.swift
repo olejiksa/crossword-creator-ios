@@ -6,4 +6,4 @@
 //  Copyright © 2019 Oleg Samoylov. All rights reserved.
 //
 
-typealias CompletionBlock = (() -> ())
+typealias CompletionBlock = () -> ()

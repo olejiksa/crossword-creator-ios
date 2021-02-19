@@ -13,10 +13,6 @@ final class PersistanceManager {
     private lazy var container: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")
         
-        container.persistentStoreDescriptions.forEach {
-            $0.setOption(NSCoreDataCoreSpotlightDelegate(forStoreWith: $0, model: container.managedObjectModel), forKey: NSCoreDataCoreSpotlightExporter)
-        }
-        
         container.loadPersistentStores { _, error in
             if let error = error {
                 fatalError("Unresolved error: \(error)")

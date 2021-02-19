@@ -58,8 +58,6 @@ final class TermsViewController: UIViewController {
         tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
         
         setupNavigationBar()
-        
-        registerForPreviewing(with: self, sourceView: tableView)
     }
     
     private func setupNavigationBar() {
@@ -149,32 +147,5 @@ extension TermsViewController: HomeModuleOutput {
         self.words = words
         
         tableView.reloadData()
-    }
-}
-
-
-
-
-// MARK: - UIViewControllerPreviewingDelegate
-
-extension TermsViewController: UIViewControllerPreviewingDelegate {
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
-                           commit viewControllerToCommit: UIViewController) {
-        // unused
-    }
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
-                           viewControllerForLocation location: CGPoint) -> UIViewController? {
-        if let indexPath = tableView.indexPathForRow(at: location) {
-            previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
-            
-            if let cell = tableView.cellForRow(at: indexPath) as? ListViewCell,
-                let word = cell.word {
-                return WordBuilder.viewController(with: .edit(word, indexPath.section))
-            } else { return nil }
-        }
-        
-        return nil
     }
 }

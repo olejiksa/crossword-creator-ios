@@ -6,6 +6,7 @@
   Copyright © 2019 Oleg Samoylov. All rights reserved.
 */
 
+"about" = "About";
 "cancel" = "Cancel";
 "check" = "Check";
 "delete" = "Delete";

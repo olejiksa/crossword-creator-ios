@@ -14,7 +14,6 @@ protocol HomeInteractorProtocol: class {
     
     func getCrosswords() -> [String]
     func getCrosswordWithDates() -> [(String, Date, Bool)]
-    func setupSearchableContent()
     
     func isTermsList(at index: Int) -> Bool
     func getLayoutWords(at index: Int) -> [LayoutWord]
@@ -73,13 +72,6 @@ final class HomeInteractor: HomeInteractorProtocol {
         guard let array = casted.array as? [ListWord] else { return [] }
         
         return array.map { Word(question: $0.question!, answer: $0.answer!) }
-    }
-    
-    func setupSearchableContent() {
-        let crosswords: [Crossword] = persistanceManager.fetch(entityName: crosswordName)
-        guard !crosswords.isEmpty else { return }
-        
-        SpotlightService().setupSpotlight(with: crosswords, domainID: "crosswords")
     }
     
     func removeCrossword(at index: Int) {
