@@ -1,5 +1,5 @@
 # Crossword Creator
-The Cocoa program to research the degrees of freedom distribution of particles
+The iOS entertaining app that helps to spend time creating or solving crosswords
 
 - AirPrint support
 - Algorithmic crossword generation
